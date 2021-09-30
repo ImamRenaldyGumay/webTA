@@ -1,48 +1,40 @@
 <body class="hold-transition register-page">
   <div class="register-box">
-    <div class="card card-outline card-primary">
-      <div class="card-header text-center">
-        <p class="h1"><b>Beasiswa</b> UNSRI</p>
-      </div>
-      <div class="card-body">
+    <div class="register-logo">
+      <p class="h1"><b>Beasiswa</b> UNSRI</p>
+    </div>
+    <div class="card">
+      <div class="card-body register-card-body">
         <p class="login-box-msg">Selamat Datang para calon penerima Beasiswa</p>
 
-        <form action="../../index.html" method="post">
-          <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Full name">
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-user"></span>
-              </div>
-            </div>
+        <form action="<?= base_url('Auth/Register') ?>" method="post">
+          <div class="form-group mb-3">
+            <label for="nama">Full name</label>
+            <input type="text" class="form-control" id="nama" name="nama" value="<?= set_value('nama') ?>">
+            <?= form_error('nama', '<small class="text-danger pl-3">', '</small>') ?>
           </div>
-          <div class="input-group mb-3">
-            <input type="email" class="form-control" placeholder="Email">
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-envelope"></span>
-              </div>
-            </div>
+
+          <div class="form-group mb-3">
+            <label for="email">Email</label>
+            <input type="text" class="form-control" id="email" name="email" value="<?= set_value('email') ?>">
+            <?= form_error('email', '<small class="text-danger pl-3">', '</small>') ?>
           </div>
-          <div class="input-group mb-3">
-            <input type="password" class="form-control" placeholder="Password">
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-lock"></span>
-              </div>
-            </div>
+
+          <div class="form-group mb-3">
+            <label for="password1">Password</label>
+            <input type="password" class="form-control" id="password1" name="password1">
+            <?= form_error('password1', '<small class="text-danger pl-3">', '</small>') ?>
           </div>
-          <div class="input-group mb-3">
-            <input type="password" class="form-control" placeholder="Retype password">
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-lock"></span>
-              </div>
-            </div>
+
+          <!-- Form utk Retype Password -->
+          <div class="form-group mb-3">
+            <label for="password2">Retype password</label>
+            <input type="password" class="form-control" id="password2" name="password2">
+            <?= form_error('password2', '<small class="text-danger pl-3">', '</small>') ?>
           </div>
+
           <div class="row">
             <div class="col-8">
-
             </div>
             <!-- /.col -->
             <div class="col-4">
@@ -52,9 +44,7 @@
           </div>
         </form>
 
-        <a href="<?= base_url('Auth/Login') ?>" class="text-center mt-2">Sudah Punya Akun</a>
+        <a href="<?= base_url('Auth/Login') ?>" class="text-center">Sudah Punya Akun</a>
       </div>
       <!-- /.form-box -->
     </div><!-- /.card -->
-  </div>
-  <!-- /.register-box -->
