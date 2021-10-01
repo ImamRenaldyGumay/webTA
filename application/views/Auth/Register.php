@@ -44,7 +44,8 @@
           </div>
         </form>
 
-        <a href="<?= base_url('Auth/Login') ?>" class="text-center">Sudah Punya Akun</a>
+        <a href="<?= base_url('Auth/Login') ?>" onclick="return confirm ('Yakin?');" class="text-center">Sudah Punya Akun</a>
+        <a href="" onclick="AlertRegister()">aaa</a>
       </div>
       <!-- /.form-box -->
     </div><!-- /.card -->

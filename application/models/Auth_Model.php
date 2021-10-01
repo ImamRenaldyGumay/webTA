@@ -6,4 +6,10 @@ class Auth_Model extends CI_Model
   {
     $this->db->insert('user', $data);
   }
+
+  public function cek_login($where)
+  {
+    $query = $this->db->get_where('user', $where);
+    return $query;
+  }
 }

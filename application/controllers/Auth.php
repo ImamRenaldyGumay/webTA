@@ -9,10 +9,51 @@ class Auth extends CI_Controller
   }
   public function Login()
   {
-    $data['title'] = 'Halaman Login';
-    $this->load->view('templates/Auth_Header', $data);
-    $this->load->view('Auth/Login');
-    $this->load->view('templates/Auth_Footer');
+    $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
+    $this->form_validation->set_rules('password', 'Password', 'trim|required');
+    $this->form_validation->set_message('valid_email', 'Harus berupa {field}!.');
+    $this->form_validation->set_message('required', '{field} harus di isi!.');
+
+    if ($this->form_validation->run() == false) {
+      $data['title'] = 'Halaman Login';
+      $this->load->view('templates/Auth_Header', $data);
+      $this->load->view('Auth/Login');
+      $this->load->view('templates/Auth_Footer');
+    } else {
+      $this->ProsesLogin();
+    }
+  }
+  private function ProsesLogin()
+  {
+    $email = $this->input->post('email');
+    $password = md5($this->input->post('password'));
+    $data = array(
+      'email' => $email,
+      'password' => $password
+    );
+    if ($this->Auth->cek_login($data)->num_rows() > 0) {
+      $user = $this->Auth->cek_login($data)->result();
+      foreach ($user as $userakun) {
+        $userakun = array(
+          'idakun' => $userakun->id,
+          'status' => 'SUKSES',
+          'nama' => $userakun->nama,
+          'role' => $userakun->role
+        );
+        $this->session->set_userdata($userakun);
+
+        if ($userakun['role'] == '1') {
+          redirect('Admin');
+        } else if ($userakun['role'] == '2') {
+          redirect('User');
+        } else {
+          echo "hai";
+        }
+      }
+    } else {
+      // $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Username & Password salah</div>');
+      redirect('Home');
+    }
   }
   public function Register()
   {
@@ -39,11 +80,14 @@ class Auth extends CI_Controller
         'role' => 2
       ];
       $this->Auth->prosesRegistrasi($data);
+      $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible show fade"><div class="alert-body"><button class="close" data-dismiss="alert"><span>&times;</span></button>Your account was active, please Login</div></div>');
       redirect('Auth/Login', 'refresh');
     }
   }
 
   public function Logout()
   {
+    $this->session->sess_destroy();
+    redirect('Home');
   }
 }
