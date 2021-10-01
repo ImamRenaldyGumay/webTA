@@ -8,12 +8,6 @@
         <li class="nav-item">
           <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
-        <li class="nav-item d-none d-sm-inline-block">
-          <a href="../../index3.html" class="nav-link">Home</a>
-        </li>
-        <li class="nav-item d-none d-sm-inline-block">
-          <a href="<?= base_url('Auth/Logout') ?>" class="nav-link">Logout</a>
-        </li>
       </ul>
 
       <!-- Right navbar links -->
@@ -53,7 +47,7 @@
             <!-- Menu Footer-->
             <li class="user-footer">
               <a href="#" class="btn btn-default btn-flat">Profile</a>
-              <a href="#" class="btn btn-default btn-flat float-right">Sign out</a>
+              <a href="<?= base_url('Auth/Logout') ?>" class="btn btn-default btn-flat float-right">Sign out</a>
             </li>
           </ul>
         </li>
