@@ -14,20 +14,14 @@ class Admin extends CI_Controller
     }
     public function index()
     {
-        // $data['user'] = $this->Admin->getNama()->row_array();
         $data = array(
             'user' => $this->Admin->getNama()->row_array(),
-            'title' => 'Halaman Admin'
+            'title' => 'Admin'
         );
         $this->load->view('templates/Header', $data);
         $this->load->view('templates/Navbar', $data);
         $this->load->view('templates/Sidebar', $data);
         $this->load->view('Admin/Index', $data);
         $this->load->view('templates/Footer', $data);
-    }
-
-    public function regis()
-    {
-        $this->load->view('regis');
     }
 }
