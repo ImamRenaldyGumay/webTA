@@ -27,7 +27,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link <?= ($this->uri->uri_string() == 'DataFakultas') ? 'active' : '' ?> ">
+            <a href="#" class="nav-link <?= ($this->uri->uri_string() == 'DataFakultas') || ($this->uri->uri_string() == 'DataProdi') ? 'active' : '' ?> ">
               <i class="nav-icon fas fa-folder"></i>
               <p>
                 Data Master
@@ -42,9 +42,9 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../../index2.html" class="nav-link">
+                <a href="<?= base_url('DataProdi') ?>" class="nav-link <?= ($this->uri->uri_string() == 'DataProdi') ? 'active' : '' ?>">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v2</p>
+                  <p>Data Prodi</p>
                 </a>
               </li>
               <li class="nav-item">

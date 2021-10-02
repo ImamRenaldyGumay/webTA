@@ -23,7 +23,7 @@
     <!-- Default box -->
     <div class="card">
       <div class="card-header">
-        <button class="btn btn-primary card-title" data-toggle="modal" data-target="#TambahFakultas">Tambah <?= $title ?></button>
+        <button class="btn btn-primary card-title" data-toggle="modal" data-target="#TambahProdi">Tambah <?= $title ?></button>
         <!-- <h3 class="card-title">Title</h3> -->
 
         <div class="card-tools">
@@ -41,20 +41,21 @@
             <tr>
               <th>No.</th>
               <th>Nama Fakultas</th>
+              <th>Nama Prodi</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
             <?php
             $no = 1;
-            foreach ($fakultas as $f) : ?>
+            foreach ($prodi as $p) : ?>
               <tr>
                 <td><?= $no++ ?></td>
-                <td><?= $f['nama_fakultas'] ?></td>
+                <td><?= $p['nama_fakultas'] ?></td>
+                <td><?= $p['nama_prodi'] ?></td>
                 <td>
-                  <a href="<?= base_url('') ?>" class="btn btn-warning" data-toggle="modal" title="Edit" data-target="#EditFakultas<?= $f['id'] ?>"><i class="fas fa-pencil-alt"></i> Edit</a>
-                  <!-- <a href="<?= base_url('') ?>" class="btn btn-warning" data-toggle="modal" title="Edit" data-target="#EditFakultas"><i class="fas fa-pencil-alt"></i> Edit</a> -->
-                  <a href="<?= base_url('DataFakultas/Hapus/' . $f['id']) ?>" class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete" data-confirm="Are You Sure?|This action can not be undone. Do you want to continue?" data-confirm-yes="alert('Deleted')"><i class="fas fa-trash"></i> Hapus</a>
+                  <a href="<?= base_url('') ?>" class="btn btn-warning" data-toggle="modal" title="Edit" data-target="#EditProdi<?= $p['id'] ?>"><i class="fas fa-pencil-alt"></i> Edit</a>
+                  <a href="<?= base_url('DataProdi/Hapus/' . $p['id']) ?>" class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete" data-confirm="Are You Sure?|This action can not be undone. Do you want to continue?" data-confirm-yes="alert('Deleted')"><i class="fas fa-trash"></i> Hapus</a>
                 </td>
               </tr>
             <?php endforeach ?>
@@ -63,6 +64,7 @@
             <tr>
               <th>No. </th>
               <th>Nama Fakultas</th>
+              <th>Nama Prodi</th>
               <th>Action</th>
             </tr>
           </tfoot>
@@ -82,7 +84,7 @@
 <!-- /.content-wrapper -->
 <!-- ========================================================================================================== -->
 <!-- Start Modal Tambah Fakultas-->
-<div class="modal fade" id="TambahFakultas">
+<div class="modal fade" id="TambahProdi">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -91,12 +93,21 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="<?= base_url('DataFakultas') ?>" method="POST">
+      <form action="<?= base_url('DataProdi') ?>" method="POST">
         <div class="modal-body">
           <div class="form-group">
-            <label for="nama_fakultas">Nama Fakultas</label>
-            <input type="text" class="form-control" id="nama_fakultas" name="nama_fakultas">
-            <?= form_error('nama_fakultas', '<small class="text-danger pl-3">', '</small>') ?>
+            <label for="fakultas_id">Nama Fakultas</label>
+            <select name="fakultas_id" id="fakultas_id" class="form-control">
+              <option value="">Select Menu</option>
+              <?php foreach ($fakultas as $f) : ?>
+                <option value="<?= $f['id']; ?>"><?= $f['nama_fakultas']; ?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="nama_fakultas">Nama Prodi</label>
+            <input type="text" class="form-control" id="nama_prodi" name="nama_prodi">
+            <?= form_error('nama_prodi', '<small class="text-danger pl-3">', '</small>') ?>
           </div>
         </div>
         <div class="modal-footer justify-content-between">
@@ -114,8 +125,8 @@
 <!-- ========================================================================================================== -->
 <!-- ========================================================================================================== -->
 <!-- Start Modal Edit Fakultas -->
-<?php foreach ($fakultas as $f) : ?>
-  <div class="modal fade" id="EditFakultas<?= $f['id'] ?>">
+<?php foreach ($prodi as $p) : ?>
+  <div class="modal fade" id="EditProdi<?= $p['id'] ?>">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -124,15 +135,19 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form action="<?= base_url('DataFakultas/Edit') ?>" method="POST">
+        <form action="<?= base_url('DataProdi/Edit') ?>" method="POST">
           <div class="modal-body">
             <div class="form-group">
-              <label for="id">Id Fakultas</label>
-              <input name="id" id="id" type="text" class="form-control" value="<?= $f['id'] ?>" readonly='readonly'>
+              <label for="id">Id Prodi</label>
+              <input name="id" id="id" type="text" class="form-control" value="<?= $p['id'] ?>" readonly='readonly'>
             </div>
             <div class="form-group">
-              <label for="nama_fakultas">Nama Fakultas</label>
-              <input type="text" class="form-control" id="nama_fakultas" name="nama_fakultas" value="<?= $f['nama_fakultas'] ?>">
+              <label for="id">Nama Fakultas</label>
+              <input name="fakultas_id" id="fakultas_id" type="text" class="form-control" value="<?= $p['nama_fakultas'] ?>" readonly='readonly'>
+            </div>
+            <div class="form-group">
+              <label for="nama_fakultas">Nama Prodi</label>
+              <input type="text" class="form-control" id="nama_prodi" name="nama_prodi" value="<?= $p['nama_prodi'] ?>">
               <?= form_error('nama_fakultas', '<small class="text-danger pl-3">', '</small>') ?>
             </div>
           </div>

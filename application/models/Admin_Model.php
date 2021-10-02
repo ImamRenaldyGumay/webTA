@@ -7,4 +7,12 @@ class Admin_Model extends CI_Model
     $query = $this->db->get_where('user', ['nama' => $this->session->userdata('nama')]);
     return $query;
   }
+
+  public function getProdi()
+  {
+    $query = "SELECT `tb_prodi`.*, `tb_fakultas`.`nama_fakultas`
+    FROM `tb_prodi` JOIN `tb_fakultas`
+    ON `tb_prodi`.`fakultas_id` = `tb_fakultas`.`id`";
+    return $this->db->query($query)->result_array();
+  }
 }
