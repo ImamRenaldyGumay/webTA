@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-class DataBeasiswa extends CI_Controller
+class Data extends CI_Controller
 {
   public function __construct()
   {
@@ -16,30 +16,29 @@ class DataBeasiswa extends CI_Controller
   public function index()
   {
     $data = array(
-      'user' => $this->Admin->getNama()->row_array(),
+      'user' => $this->db->get_where('user', ['nama' => $this->session->userdata('nama')])->row_array(),
       'title' => 'Data Beasiswa',
       'beasiswa' => $this->db->get('tb_beasiswa')->result_array()
     );
+    $this->load->view('templates/Header', $data);
+    $this->load->view('templates/Navbar', $data);
+    $this->load->view('templates/Sidebar', $data);
+    $this->load->view('Admin/DataBeasiswa/DataBeasiswa_index', $data);
+    $this->load->view('templates/Footer', $data);
+  }
 
-    // $this->form_validation->set_rules('nama_beasiwa', 'Nama Beasiswa', 'required');
-    // $this->form_validation->set_rules('nama_prodi', 'Nama Program Studi', 'required');
-
-    if ($this->form_validation->run() == false) {
-      $this->load->view('templates/Header', $data);
-      $this->load->view('templates/Navbar', $data);
-      $this->load->view('templates/Sidebar', $data);
-      $this->load->view('Admin/DataBeasiswa', $data);
-      $this->load->view('templates/Footer', $data);
-    } else {
-      $data = [
-        'nama_beasiswa' => $this->input->post('nama_beasiswa'),
-        // 'start_date' => $this->input->post('start_date'),
-        // 'end_date' => $this->input->post('end_date'),
-        'is_active' => $this->input->post('is_active')
-      ];
-      $this->db->insert('tb_beasiswa', $data);
-      redirect('DataBeasiswa', 'refresh');
-    }
+  public function TambahDataBeasiswa()
+  {
+    $data = array(
+      'user' => $this->db->get_where('user', ['nama' => $this->session->userdata('nama')])->row_array(),
+      'title' => 'Data Beasiswa',
+      'beasiswa' => $this->db->get('tb_beasiswa')->result_array()
+    );
+    $this->load->view('templates/Header', $data);
+    $this->load->view('templates/Navbar', $data);
+    $this->load->view('templates/Sidebar', $data);
+    $this->load->view('Admin/DataBeasiswa/TambahDataBeasiswa', $data);
+    $this->load->view('templates/Footer', $data);
   }
 
   public function Hapus($id)
@@ -53,8 +52,6 @@ class DataBeasiswa extends CI_Controller
   {
     $id_beasiswa = $this->input->post('id_beasiswa');
     $nama_beasiswa = $this->input->post('nama_beasiswa');
-    // $start_date = $this->input->post('start_date');
-    // $end_date = $this->input->post('end_date');
     $is_active = $this->input->post('is_active');
     $data = [
       'nama_beasiswa' => $nama_beasiswa,
