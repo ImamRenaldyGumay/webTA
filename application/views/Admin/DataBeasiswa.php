@@ -23,7 +23,7 @@
     <!-- Default box -->
     <div class="card">
       <div class="card-header">
-        <button class="btn btn-primary card-title" data-toggle="modal" data-target="#TambahProdi">Tambah <?= $title ?></button>
+        <button class="btn btn-primary card-title" data-toggle="modal" data-target="#TambahBeasiswa">Tambah <?= $title ?></button>
         <!-- <h3 class="card-title">Title</h3> -->
 
         <div class="card-tools">
@@ -40,22 +40,30 @@
           <thead>
             <tr>
               <th>No.</th>
-              <th>Nama Fakultas</th>
-              <th>Nama Prodi</th>
+              <th>Nama Beasiswa</th>
+              <!-- <th>Tanggal Pendaftaran</th>
+              <th>Tanggal di Tutup</th> -->
+              <th>Apakah Aktif</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
             <?php
             $no = 1;
-            foreach ($prodi as $p) : ?>
+            foreach ($beasiswa as $b) : ?>
               <tr>
                 <td><?= $no++ ?></td>
-                <td><?= $p['nama_fakultas'] ?></td>
-                <td><?= $p['nama_prodi'] ?></td>
+                <td><?= $b['nama_beasiswa'] ?></td>
+                <!-- <td><?= date('d-m-Y', strtotime($b['start_date'])) ?></td>
+                <td><?= date('d-m-Y', strtotime($b['end_date'])) ?></td> -->
+                <?php if ($b['is_active'] == 1) : ?>
+                  <td>ya</td>
+                <?php else : ?>
+                  <td>tidak</td>
+                <?php endif ?>
                 <td>
-                  <a href="<?= base_url('') ?>" class="btn btn-warning" data-toggle="modal" title="Edit" data-target="#EditProdi<?= $p['id'] ?>"><i class="fas fa-pencil-alt"></i> Edit</a>
-                  <a href="<?= base_url('DataProdi/Hapus/' . $p['id']) ?>" class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete" data-confirm="Are You Sure?|This action can not be undone. Do you want to continue?" data-confirm-yes="alert('Deleted')"><i class="fas fa-trash"></i> Hapus</a>
+                  <a href="<?= base_url('') ?>" class="btn btn-warning" data-toggle="modal" title="Edit" data-target="#EditBeasiswa<?= $b['id_beasiswa'] ?>"><i class="fas fa-pencil-alt"></i> Edit</a>
+                  <a href="<?= base_url('DataBeasiswa/Hapus/' . $b['id_beasiswa']) ?>" class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete" data-confirm="Are You Sure?|This action can not be undone. Do you want to continue?" data-confirm-yes="alert('Deleted')"><i class="fas fa-trash"></i> Hapus</a>
                 </td>
               </tr>
             <?php endforeach ?>
@@ -63,8 +71,10 @@
           <tfoot>
             <tr>
               <th>No. </th>
-              <th>Nama Fakultas</th>
-              <th>Nama Prodi</th>
+              <th>Nama Beasiswa</th>
+              <!-- <th>Tanggal Pendaftaran</th>
+              <th>Tanggal di Tutup</th> -->
+              <th>Apakah Aktif</th>
               <th>Action</th>
             </tr>
           </tfoot>
@@ -84,7 +94,7 @@
 <!-- /.content-wrapper -->
 <!-- ========================================================================================================== -->
 <!-- Start Modal Tambah Program Studi-->
-<div class="modal fade" id="TambahProdi">
+<div class="modal fade" id="TambahBeasiswa">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -93,21 +103,19 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="<?= base_url('DataProdi') ?>" method="POST">
+      <form action="<?= base_url('DataBeasiswa') ?>" method="POST">
         <div class="modal-body">
           <div class="form-group">
-            <label for="fakultas_id">Nama Fakultas</label>
-            <select name="fakultas_id" id="fakultas_id" class="form-control">
-              <option value="">Select Menu</option>
-              <?php foreach ($fakultas as $f) : ?>
-                <option value="<?= $f['id']; ?>"><?= $f['nama_fakultas']; ?></option>
-              <?php endforeach; ?>
-            </select>
+            <label>Nama Beasiswa</label>
+            <input name="nama_beasiswa" id="nama_beasiswa" type="text" class="form-control" placeholder="Masukkan nama Beasiswa">
           </div>
           <div class="form-group">
-            <label for="nama_fakultas">Nama Prodi</label>
-            <input type="text" class="form-control" id="nama_prodi" name="nama_prodi">
-            <?= form_error('nama_prodi', '<small class="text-danger pl-3">', '</small>') ?>
+            <label>Apakah Aktif</label>
+            <select name="is_active" id="is_active" class="form-control">
+              <option value="">Select Menu</option>
+              <option value="1">Aktif</option>
+              <option value="0">Tidak Aktif</option>
+            </select>
           </div>
         </div>
         <div class="modal-footer justify-content-between">
@@ -124,9 +132,9 @@
 <!-- End Modal Tambah Program Studi -->
 <!-- ========================================================================================================== -->
 <!-- ========================================================================================================== -->
-<!-- Start Modal Edit Fakultas -->
-<?php foreach ($prodi as $p) : ?>
-  <div class="modal fade" id="EditProdi<?= $p['id'] ?>">
+<!-- Start Modal Edit Beasiswa -->
+<?php foreach ($beasiswa as $b) : ?>
+  <div class="modal fade" id="EditBeasiswa<?= $b['id_beasiswa'] ?>">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -135,20 +143,31 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form action="<?= base_url('DataProdi/Edit') ?>" method="POST">
+        <form action="<?= base_url('DataBeasiswa/Edit') ?>" method="POST">
           <div class="modal-body">
             <div class="form-group">
-              <label for="id">Id Prodi</label>
-              <input name="id" id="id" type="text" class="form-control" value="<?= $p['id'] ?>" readonly='readonly'>
+              <label for="id_beasiswa">Id Beasiswa</label>
+              <input name="id_beasiswa" id="id_beasiswa" type="text" class="form-control" value="<?= $b['id_beasiswa'] ?>" readonly='readonly'>
             </div>
             <div class="form-group">
-              <label for="id">Nama Fakultas</label>
-              <input name="fakultas_id" id="fakultas_id" type="text" class="form-control" value="<?= $p['nama_fakultas'] ?>" readonly='readonly'>
+              <label>Nama Beasiswa</label>
+              <input name="nama_beasiswa" id="nama_beasiswa" type="text" class="form-control" placeholder="Masukkan nama Beasiswa" value="<?= $b['nama_beasiswa'] ?>">
+            </div>
+            <!-- <div class="form-group">
+              <label>Tanggal Daftar</label>
+              <input name="start_date" id="start_date" type="date" class="form-control" value="<?= $b['start_date'] ?>">
             </div>
             <div class="form-group">
-              <label for="nama_fakultas">Nama Prodi</label>
-              <input type="text" class="form-control" id="nama_prodi" name="nama_prodi" value="<?= $p['nama_prodi'] ?>">
-              <?= form_error('nama_fakultas', '<small class="text-danger pl-3">', '</small>') ?>
+              <label>Tanggal Tutup</label>
+              <input name="end_date" id="end_date" type="date" class="form-control" value="<?= $b['end_date'] ?>">
+            </div> -->
+            <div class="form-group">
+              <label>Apakah Aktif</label>
+              <select name="is_active" id="is_active" class="form-control" value="<?= $b['is_ative'] ?>">
+                <option value="">Select Menu</option>
+                <option value="1">Aktif</option>
+                <option value="0">Tidak Aktif</option>
+              </select>
             </div>
           </div>
           <div class="modal-footer justify-content-between">

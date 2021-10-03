@@ -13,8 +13,8 @@
     <div class="sidebar mb-2">
 
       <!-- Sidebar Menu -->
-      <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+      <nav class="mt-2 ">
+        <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-header">Dashboard</li>
@@ -26,8 +26,8 @@
               </p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link <?= ($this->uri->uri_string() == 'DataFakultas') || ($this->uri->uri_string() == 'DataProdi') ? 'active' : '' ?> ">
+          <li class="nav-item <?= ($this->uri->uri_string() == 'DataFakultas') || ($this->uri->uri_string() == 'DataProdi') || ($this->uri->uri_string() == 'DataBeasiswa') ? 'menu-open' : '' ?>">
+            <a href="#" class="nav-link <?= ($this->uri->uri_string() == 'DataFakultas') || ($this->uri->uri_string() == 'DataProdi') || ($this->uri->uri_string() == 'DataBeasiswa') ? 'active' : '' ?> ">
               <i class="nav-icon fas fa-folder"></i>
               <p>
                 Data Master
@@ -48,9 +48,9 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../../index3.html" class="nav-link">
+                <a href="<?= base_url('DataBeasiswa') ?>" class="nav-link <?= ($this->uri->uri_string() == 'DataBeasiswa') ? 'active' : '' ?>">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v3</p>
+                  <p>Data Beasiswa</p>
                 </a>
               </li>
             </ul>

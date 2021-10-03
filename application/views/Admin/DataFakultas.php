@@ -53,7 +53,6 @@
                 <td><?= $f['nama_fakultas'] ?></td>
                 <td>
                   <a href="<?= base_url('') ?>" class="btn btn-warning" data-toggle="modal" title="Edit" data-target="#EditFakultas<?= $f['id'] ?>"><i class="fas fa-pencil-alt"></i> Edit</a>
-                  <!-- <a href="<?= base_url('') ?>" class="btn btn-warning" data-toggle="modal" title="Edit" data-target="#EditFakultas"><i class="fas fa-pencil-alt"></i> Edit</a> -->
                   <a href="<?= base_url('DataFakultas/Hapus/' . $f['id']) ?>" class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete" data-confirm="Are You Sure?|This action can not be undone. Do you want to continue?" data-confirm-yes="alert('Deleted')"><i class="fas fa-trash"></i> Hapus</a>
                 </td>
               </tr>
