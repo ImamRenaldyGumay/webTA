@@ -23,7 +23,7 @@
     <!-- Default box -->
     <div class="card">
       <div class="card-header">
-        <button class="btn btn-primary card-title" data-toggle="modal" data-target="#TambahFakultas">Tambah <?= $title ?></button>
+        <button class="btn btn-primary card-title" data-toggle="modal" data-target="#TK">Tambah <?= $title ?></button>
         <!-- <h3 class="card-title">Title</h3> -->
 
         <div class="card-tools">
@@ -40,20 +40,22 @@
           <thead>
             <tr>
               <th>No.</th>
-              <th>Nama Fakultas</th>
+              <th>NAMA BEASISWA</th>
+              <th>NAMA KRITERIA</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
             <?php
             $no = 1;
-            foreach ($fakultas as $f) : ?>
+            foreach ($kriteria as $k) : ?>
               <tr>
                 <td><?= $no++ ?></td>
-                <td><?= $f['nama_fakultas'] ?></td>
+                <td><?= $k['nama_beasiswa'] ?></td>
+                <td><?= $k['nama_kriteria'] ?></td>
                 <td>
-                  <a href="<?= base_url('') ?>" class="btn btn-warning" data-toggle="modal" data-target="#EditFakultas<?= $f['id'] ?>"><i class="fas fa-pencil-alt"></i> Edit</a>
-                  <a href="<?= base_url('DataFakultas/Hapus/' . $f['id']) ?>" class="btn btn-danger btn-action" data-toggle="tooltip" onclick="return confirm('Yakin?')"><i class="fas fa-trash"></i> Hapus</a>
+                  <a href="<?= base_url('') ?>" class="btn btn-warning" data-toggle="modal" data-target="#EK<?= $k['id_kriteria'] ?>"><i class="fas fa-pencil-alt"></i> Edit</a>
+                  <a href="<?= base_url('DataKriteria/Hapus/' . $k['id_kriteria']) ?>" class="btn btn-danger" onclick="return confirm('Yakin?')"><i class="fas fa-trash"></i> Hapus</a>
                 </td>
               </tr>
             <?php endforeach ?>
@@ -61,7 +63,8 @@
           <tfoot>
             <tr>
               <th>No. </th>
-              <th>Nama Fakultas</th>
+              <th>NAMA BEASISWA</th>
+              <th>NAMA KRITERIA</th>
               <th>Action</th>
             </tr>
           </tfoot>
@@ -80,8 +83,8 @@
 </div>
 <!-- /.content-wrapper -->
 <!-- ========================================================================================================== -->
-<!-- Start Modal Tambah Fakultas-->
-<div class="modal fade" id="TambahFakultas">
+<!-- Start Modal Tambah Kriteria -->
+<div class="modal fade" id="TK">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -90,16 +93,23 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="<?= base_url('DataFakultas') ?>" method="POST">
+      <form action="<?= base_url('DataKriteria/TambahDataKriteria') ?>" method="POST">
         <div class="modal-body">
           <div class="form-group">
-            <label for="nama_fakultas">Nama Fakultas</label>
-            <input type="text" class="form-control" id="nama_fakultas" name="nama_fakultas">
-            <?= form_error('nama_fakultas', '<small class="text-danger pl-3">', '</small>') ?>
+            <select class="form-control" name="kd_beasiswa" id="kd_beasiswa">
+              <option value="">Select Option</option>
+              <?php foreach ($beasiswa as $b) : ?>
+                <option value="<?= $b['id_beasiswa']; ?>"><?= $b['nama_beasiswa']; ?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="nama_kriteria">Nama Kriteria</label>
+            <input type="text" class="form-control" id="nama_kriteria" name="nama_kriteria">
           </div>
         </div>
         <div class="modal-footer justify-content-between">
-          <button type="submit" class="btn btn-primary">Tambah</button>
+          <button type="submit" class="btn btn-primary">Save changes</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </form>
@@ -109,12 +119,12 @@
   <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
-<!-- End Modal Tambah Fakultas -->
+<!-- End Modal Tambah Kriteria -->
 <!-- ========================================================================================================== -->
 <!-- ========================================================================================================== -->
-<!-- Start Modal Edit Fakultas -->
-<?php foreach ($fakultas as $f) : ?>
-  <div class="modal fade" id="EditFakultas<?= $f['id'] ?>">
+<!-- Start Modal Edit Kriteria -->
+<?php foreach ($kriteria as $k) : ?>
+  <div class="modal fade" id="EK<?= $k['id_kriteria'] ?>">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -123,16 +133,20 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form action="<?= base_url('DataFakultas/Edit') ?>" method="POST">
+        <form action="<?= base_url('DataKriteria/Edit') ?>" method="POST">
           <div class="modal-body">
             <div class="form-group">
-              <label for="id">Id Fakultas</label>
-              <input name="id" id="id" type="text" class="form-control" value="<?= $f['id'] ?>" readonly='readonly'>
+              <label for="id_kriteria">Id Kriteria</label>
+              <input type="text" class="form-control" name="id_kriteria" id="id_kriteria" value="<?= $k['id_kriteria'] ?>" readonly='readonly'>
             </div>
             <div class="form-group">
-              <label for="nama_fakultas">Nama Fakultas</label>
-              <input type="text" class="form-control" id="nama_fakultas" name="nama_fakultas" value="<?= $f['nama_fakultas'] ?>">
-              <?= form_error('nama_fakultas', '<small class="text-danger pl-3">', '</small>') ?>
+              <label for="kd_beasiswa">Nama Beasiswa</label>
+              <input type="text" class="form-control" id="kd_beasiswa" name="kd_beasiswa" value="<?= $k['nama_beasiswa'] ?>" readonly='readonly'>
+            </div>
+            <div class="form-group">
+              <label for="">Nama Kriteria</label>
+              <input type="text" class="form-control" id="nama_kriteria" name="nama_kriteria" value="<?= $k['nama_kriteria'] ?>">
+              <?= form_error('nama_kriteria', '<small class="text-danger pl-3">', '</small>') ?>
             </div>
           </div>
           <div class="modal-footer justify-content-between">
@@ -147,6 +161,5 @@
   </div>
   <!-- /.modal -->
 <?php endforeach ?>
-
-<!-- End Modal Edit Fakultas -->
+<!-- End Modal Edit Kriteria -->
 <!-- ========================================================================================================== -->

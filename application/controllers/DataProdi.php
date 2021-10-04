@@ -25,6 +25,8 @@ class DataProdi extends CI_Controller
     $this->form_validation->set_rules('fakultas_id', 'Nama Fakultas', 'required');
     $this->form_validation->set_rules('nama_prodi', 'Nama Program Studi', 'required');
 
+    $this->form_validation->set_message('required', '{field} harus di isi!.');
+
     if ($this->form_validation->run() == false) {
       $this->load->view('templates/Header', $data);
       $this->load->view('templates/Navbar', $data);

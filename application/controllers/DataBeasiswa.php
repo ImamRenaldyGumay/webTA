@@ -23,6 +23,8 @@ class DataBeasiswa extends CI_Controller
 
     $this->form_validation->set_rules('nama_beasiswa', 'Nama Beasiswa', 'required');
 
+    $this->form_validation->set_message('required', '{field} harus di isi!.');
+
     if ($this->form_validation->run() == false) {
       $this->load->view('templates/Header', $data);
       $this->load->view('templates/Navbar', $data);
