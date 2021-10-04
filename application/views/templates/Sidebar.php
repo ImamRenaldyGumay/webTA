@@ -26,8 +26,8 @@
               </p>
             </a>
           </li>
-          <li class="nav-item <?= ($this->uri->uri_string() == 'DataFakultas') || ($this->uri->uri_string() == 'DataProdi') || ($this->uri->uri_string() == 'DataBeasiswa') || ($this->uri->uri_string() == 'DataKriteria') || ($this->uri->uri_string() == 'DataAtribut') ? 'menu-open' : '' ?>">
-            <a href="#" class="nav-link <?= ($this->uri->uri_string() == 'DataFakultas') || ($this->uri->uri_string() == 'DataProdi') || ($this->uri->uri_string() == 'DataBeasiswa') || ($this->uri->uri_string() == 'DataKriteria') || ($this->uri->uri_string() == 'DataAtribut') ? 'active' : '' ?> ">
+          <li class="nav-item <?= ($this->uri->uri_string() == 'DataFakultas') || ($this->uri->uri_string() == 'DataProdi') || ($this->uri->uri_string() == 'DataBeasiswa') || ($this->uri->uri_string() == 'DataKriteria') || ($this->uri->uri_string() == 'DataAtribut') || ($this->uri->uri_string() == 'DataParameter') ? 'menu-open' : '' ?>">
+            <a href="#" class="nav-link <?= ($this->uri->uri_string() == 'DataFakultas') || ($this->uri->uri_string() == 'DataProdi') || ($this->uri->uri_string() == 'DataBeasiswa') || ($this->uri->uri_string() == 'DataKriteria') || ($this->uri->uri_string() == 'DataAtribut') || ($this->uri->uri_string() == 'DataParameter') ? 'active' : '' ?> ">
               <i class="nav-icon fas fa-folder"></i>
               <p>
                 Data Master
@@ -63,6 +63,12 @@
                 <a href="<?= base_url('DataAtribut') ?>" class="nav-link <?= ($this->uri->uri_string() == 'DataAtribut') ? 'active' : '' ?>">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Data Atribut</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url('DataParameter') ?>" class="nav-link <?= ($this->uri->uri_string() == 'DataParameter') ? 'active' : '' ?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Data Parameter</p>
                 </a>
               </li>
             </ul>

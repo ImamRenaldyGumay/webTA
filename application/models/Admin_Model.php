@@ -23,4 +23,12 @@ class Admin_Model extends CI_Model
     ON `tb_kriteria`.`kd_beasiswa` = `tb_beasiswa`.`id_beasiswa`";
     return $this->db->query($query)->result_array();
   }
+
+  public function getParameter()
+  {
+    $query = "SELECT `tb_parameter`.*, `tb_atribut`.`nama_atribut`
+    FROM `tb_parameter` JOIN `tb_atribut`
+    ON `tb_parameter`.`id_atribut` = `tb_atribut`.`id_atribut`";
+    return $this->db->query($query)->result_array();
+  }
 }
