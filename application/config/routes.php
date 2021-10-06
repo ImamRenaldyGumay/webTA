@@ -57,6 +57,7 @@ $route['translate_uri_dashes'] = FALSE;
 $route['Admin'] = 'Admin/index';
 $route['DataFakultas'] = 'DataFakultas/index';
 $route['DataProdi'] = 'DataProdi/index';
+$route['DataMahasiswa'] = 'DataMahasiswa/index';
 $route['DataBeasiswa'] = 'DataBeasiswa/index';
 $route['DataKriteria'] = 'DataKriteria/index';
 $route['DataAtribut'] = 'DataAtribut/index';

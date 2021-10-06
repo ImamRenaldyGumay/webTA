@@ -8,6 +8,8 @@ class DataLatih extends CI_Controller
     if ($this->session->userdata('idakun') == '' or $this->session->userdata('role') != '1' or $this->session->userdata('status') == '') {
       $this->session->sess_destroy();
       redirect('Home', 'refresh');
+    } else {
+      $this->load->model('Admin_Model', 'Admin');
     }
   }
 

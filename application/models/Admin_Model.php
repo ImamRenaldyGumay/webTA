@@ -35,4 +35,16 @@ class Admin_Model extends CI_Model
     ";
     return $this->db->query($query)->result_array();
   }
+
+  public function getMahasiswa()
+  {
+    $query = "SELECT `tb_mahasiswa`.*, `tb_fakultas`.`nama_fakultas`, `tb_prodi`.`nama_prodi`
+    FROM `tb_prodi` 
+    JOIN `tb_mahasiswa`
+    ON `tb_mahasiswa`.`id_prodi` = `tb_prodi`.`id`
+    JOIN `tb_fakultas`
+    ON `tb_mahasiswa`.`id_fakultas` = `tb_fakultas`.`id`
+    ";
+    return $this->db->query($query)->result_array();
+  }
 }
