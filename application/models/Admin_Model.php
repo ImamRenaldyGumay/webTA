@@ -47,4 +47,20 @@ class Admin_Model extends CI_Model
     ";
     return $this->db->query($query)->result_array();
   }
+
+  public function getLatih()
+  {
+    $query = "SELECT `tb_latih`.*, `beasiswa`.`nama_beasiswa`, `tb_kriteria`.`nama_kriteria`, `tb_parameter`.`nilai`,  `tb_mahasiswa`.`nama`
+    FROM `tb_parameter` 
+    JOIN `tb_latih`
+    ON `tb_latih`.`id_parameter` = `tb_parameter`.`id_parameter`
+    JOIN `tb_kriteria`
+    ON `tb_latih`.`id_kriteria` = `tb_kriteria`.`id_kriteria`
+    JOIN `beasiswa`
+    ON `tb_latih`.`id_beasiswa` = `beasiswa`.`id`
+    JOIN `tb_mahasiswa`
+    ON `tb_latih`.`id_mahasiswa` = `tb_mahasiswa`.`id_mahasiswa`
+    ";
+    return $this->db->query($query)->result_array();
+  }
 }

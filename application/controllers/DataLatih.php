@@ -17,7 +17,8 @@ class DataLatih extends CI_Controller
   {
     $data = array(
       'user' => $this->db->get_where('user', ['nama' => $this->session->userdata('nama')])->row_array(),
-      'title' => 'Halaman Data Latih'
+      'title' => 'Data Latih',
+      'latih' => $this->Admin->getLatih()
     );
     $this->load->view('templates/Header', $data);
     $this->load->view('templates/Navbar', $data);
