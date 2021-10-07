@@ -63,4 +63,12 @@ class Admin_Model extends CI_Model
     ";
     return $this->db->query($query)->result_array();
   }
+
+  public function get_param()
+  {
+    $query = "SELECT `parameter`.*, `atribut`.`nama_atribut`
+    FROM `parameter` JOIN `atribut`
+    ON `parameter`.`id_atribut` = `atribut`.`id_atribut`";
+    return $this->db->query($query)->result_array();
+  }
 }

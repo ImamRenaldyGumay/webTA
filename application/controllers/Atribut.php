@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-class DataAtribut extends CI_Controller
+class Atribut extends CI_Controller
 {
   public function __construct()
   {
@@ -18,7 +18,7 @@ class DataAtribut extends CI_Controller
     $data = array(
       'user' => $this->Admin->getNama()->row_array(),
       'title' => 'Data Atribut',
-      'atribut' => $this->db->get('tb_atribut')->result_array()
+      'atribut' => $this->db->get('atribut')->result_array()
     );
 
     $this->form_validation->set_rules('nama_atribut', 'Nama Atribut', 'required');
@@ -29,19 +29,19 @@ class DataAtribut extends CI_Controller
       $this->load->view('templates/Header', $data);
       $this->load->view('templates/Navbar', $data);
       $this->load->view('templates/Sidebar', $data);
-      $this->load->view('Admin/DataAtribut', $data);
+      $this->load->view('Admin/Atribut', $data);
       $this->load->view('templates/Footer', $data);
     } else {
-      $this->db->insert('tb_atribut', ['nama_atribut' => $this->input->post('nama_atribut')]);
-      redirect('DataAtribut', 'refresh');
+      $this->db->insert('Atribut', ['nama_atribut' => $this->input->post('nama_atribut')]);
+      redirect('Atribut', 'refresh');
     }
   }
 
   public function Hapus($id_atribut)
   {
     $where = array('id_atribut' => $id_atribut);
-    $this->db->delete('tb_atribut', $where);
-    redirect('DataAtribut', 'refresh');
+    $this->db->delete('Atribut', $where);
+    redirect('Atribut', 'refresh');
   }
 
   public function Edit()
@@ -51,7 +51,7 @@ class DataAtribut extends CI_Controller
     $data = ['nama_atribut' => $nama_atribut];
     $where = ['id_atribut' => $id_atribut];
     $this->db->where($where);
-    $this->db->update('tb_atribut', $data);
-    redirect('DataAtribut', 'refresh');
+    $this->db->update('Atribut', $data);
+    redirect('Atribut', 'refresh');
   }
 }

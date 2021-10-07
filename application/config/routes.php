@@ -60,5 +60,7 @@ $route['DataProdi'] = 'DataProdi/index';
 $route['DataMahasiswa'] = 'DataMahasiswa/index';
 $route['DataBeasiswa'] = 'DataBeasiswa/index';
 $route['DataKriteria'] = 'DataKriteria/index';
-$route['DataAtribut'] = 'DataAtribut/index';
 $route['DataLatih'] = 'DataLatih/index';
+
+$route['Atribut'] = 'Atribut/index';
+$route['Parameter'] = 'Parameter/index';

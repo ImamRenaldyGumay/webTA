@@ -90,8 +90,8 @@
             </a>
           </li>
           <li class="nav-header">Uji Coba</li>
-          <li class="nav-item <?= ($this->uri->uri_string() == 'DataAtribut')  ? 'menu-open' : '' ?>">
-            <a href="#" class="nav-link <?= ($this->uri->uri_string() == 'DataAtribut')   ? 'active' : '' ?>">
+          <li class="nav-item <?= ($this->uri->uri_string() == 'Atribut') || ($this->uri->uri_string() == 'Parameter')  ? 'menu-open' : '' ?>">
+            <a href="#" class="nav-link <?= ($this->uri->uri_string() == 'Atribut') || ($this->uri->uri_string() == 'Parameter')   ? 'active' : '' ?>">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Data Uji Coba
@@ -100,9 +100,15 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="<?= base_url('DataAtribut') ?>" class="nav-link <?= ($this->uri->uri_string() == 'DataAtribut') ? 'active' : '' ?>">
+                <a href="<?= base_url('Atribut') ?>" class="nav-link <?= ($this->uri->uri_string() == 'Atribut') ? 'active' : '' ?>">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Data Atribut</p>
+                  <p>Atribut</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url('Parameter') ?>" class="nav-link <?= ($this->uri->uri_string() == 'Parameter') ? 'active' : '' ?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Parameter</p>
                 </a>
               </li>
             </ul>
