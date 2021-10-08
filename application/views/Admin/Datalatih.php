@@ -34,8 +34,10 @@
               <th>No.</th>
               <th>Nama Mahasiswa</th>
               <th>Beasiswa</th>
-              <th>Kriteria</th>
-              <th>Parameter</th>
+              <th>C1</th>
+              <th>C2</th>
+              <th>C3</th>
+              <th>C4</th>
               <th>Status Beasiswa</th>
               <th>Action</th>
             </tr>
@@ -46,10 +48,12 @@
             foreach ($latih as $l) : ?>
               <tr>
                 <td><?= $no++ ?></td>
-                <td><?= $l['nama'] ?></td>
-                <td><?= $l['nama_beasiswa'] ?></td>
-                <td><?= $l['nama_kriteria'] ?></td>
-                <td><?= $l['nilai'] ?></td>
+                <td><?= $l['id_mahasiswa'] ?></td>
+                <td><?= $l['id_beasiswa'] ?></td>
+                <td><?= $l['c1'] ?></td>
+                <td><?= $l['c2'] ?></td>
+                <td><?= $l['c3'] ?></td>
+                <td><?= $l['c4'] ?></td>
                 <?php if ($l['hasil'] == '1') : ?>
                   <td>Lolos</td>
                 <?php else : ?>
@@ -57,23 +61,13 @@
                 <?php endif ?>
                 <!-- <td><?= $l['hasil'] ?></td> -->
                 <td>
-                  <a href="<?= base_url('') ?>" class="btn btn-warning" data-toggle="modal" data-target="#EditFakultas<?= $l['id_latih'] ?>"><i class="fas fa-pencil-alt"></i> Edit</a>
+                  <!-- <a href="<?= base_url('') ?>" class="btn btn-warning" data-toggle="modal" data-target="#EditFakultas<?= $l['id_latih'] ?>"><i class="fas fa-pencil-alt"></i> Edit</a> -->
                   <a href="<?= base_url('DataFakultas/Hapus/' . $l['id_latih']) ?>" class="btn btn-danger btn-action" data-toggle="tooltip" onclick="return confirm('Yakin?')"><i class="fas fa-trash"></i> Hapus</a>
                 </td>
               </tr>
             <?php endforeach ?>
           </tbody>
-          <tfoot>
-            <tr>
-              <th>No. </th>
-              <th>Nama Mahasiswa</th>
-              <th>Beasiswa</th>
-              <th>Kriteria</th>
-              <th>Parameter</th>
-              <th>Status Beasiswa</th>
-              <th>Action</th>
-            </tr>
-          </tfoot>
+
         </table>
       </div>
       <!-- /.card-body -->
@@ -96,15 +90,73 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="" method="POST">
+      <form action="<?= base_url('DataLatih/TambahLatih') ?>" method="POST">
         <div class="modal-body">
           <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+            <label for="id_mahasiswa">Nama Mahasiswa</label>
+            <select name="id_mahasiswa" id="id_mahasiswa" class="form-control">
+              <option value="">Select Menu</option>
+              <?php foreach ($mahasiswa as $m) : ?>
+                <option value="<?= $m['id_mahasiswa']; ?>"><?= $m['nama']; ?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="id_beasiswa">Nama Beasiswa</label>
+            <select name="id_beasiswa" id="id_beasiswa" class="form-control">
+              <option value="">Select Menu</option>
+              <?php foreach ($beasiswa as $b) : ?>
+                <option value="<?= $b['id']; ?>"><?= $b['nama_beasiswa']; ?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="c1">IPK</label>
+            <select name="c1" id="c1" class="form-control">
+              <option value="">Select Menu</option>
+              <?php foreach ($c1 as $c) : ?>
+                <option value="<?= $c['id_parameter']; ?>"><?= $c['nilai']; ?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="c2">Pekerjaan Orang Tua</label>
+            <select name="c2" id="c2" class="form-control">
+              <option value="">Select Menu</option>
+              <?php foreach ($c2 as $a) : ?>
+                <option value="<?= $a['id_parameter']; ?>"><?= $a['nilai']; ?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="c3">Gaji Orang Tua</label>
+            <select name="c3" id="c3" class="form-control">
+              <option value="">Select Menu</option>
+              <?php foreach ($c3 as $f) : ?>
+                <option value="<?= $f['id_parameter']; ?>"><?= $f['nilai']; ?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="c4">Tanggungan Orang Tua</label>
+            <select name="c4" id="c4" class="form-control">
+              <option value="">Select Menu</option>
+              <?php foreach ($c4 as $g) : ?>
+                <option value="<?= $g['id_parameter']; ?>"><?= $g['nilai']; ?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="hasil">Apakah Layak?</label>
+            <select name="hasil" id="hasil" class="form-control">
+              <option value="">Select Menu</option>
+              <option value="1">Layak</option>
+              <option value="2">Tidak Layak</option>
+            </select>
           </div>
         </div>
         <div class="modal-footer justify-content-between">
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="submit" class="btn btn-primary">Save changes</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </form>

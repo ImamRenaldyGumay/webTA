@@ -18,12 +18,32 @@ class DataLatih extends CI_Controller
     $data = array(
       'user' => $this->db->get_where('user', ['nama' => $this->session->userdata('nama')])->row_array(),
       'title' => 'Data Latih',
-      'latih' => $this->Admin->getLatih()
+      'latih' => $this->db->get('tb_latih')->result_array(),
+      'mahasiswa' => $this->db->get('tb_mahasiswa')->result_array(),
+      'beasiswa' => $this->Admin->getBeasiswa(),
+      'c1' => $this->Admin->getC1(),
+      'c2' => $this->Admin->getC2(),
+      'c3' => $this->Admin->getC3(),
+      'c4' => $this->Admin->getC4(),
     );
     $this->load->view('templates/Header', $data);
     $this->load->view('templates/Navbar', $data);
     $this->load->view('templates/Sidebar', $data);
     $this->load->view('Admin/Datalatih', $data);
     $this->load->view('templates/Footer', $data);
+  }
+
+  public function TambahLatih()
+  {
+    $data = [
+      'id_mahasiswa' => $this->input->post('id_mahasiswa'),
+      'id_beasiswa' => $this->input->post('id_beasiswa'),
+      'c1' => $this->input->post('c1'),
+      'c2' => $this->input->post('c2'),
+      'c3' => $this->input->post('c3'),
+      'c4' => $this->input->post('c4'),
+    ];
+    $this->db->insert('tb_latih', $data);
+    redirect('DataLatih', 'refresh');
   }
 }

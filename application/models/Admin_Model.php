@@ -7,6 +7,11 @@ class Admin_Model extends CI_Model
     $query = $this->db->get_where('user', ['nama' => $this->session->userdata('nama')]);
     return $query;
   }
+  public function getBeasiswa()
+  {
+    $query = $this->db->get('beasiswa')->result_array();
+    return $query;
+  }
 
   public function getProdi()
   {
@@ -70,5 +75,50 @@ class Admin_Model extends CI_Model
     FROM `parameter` JOIN `atribut`
     ON `parameter`.`id_atribut` = `atribut`.`id_atribut`";
     return $this->db->query($query)->result_array();
+  }
+
+  public function getLat()
+  {
+    $query = "SELECT `latih`.*, `parameter`.`parameter`, `tb_mahasiswa`.`nama`
+    FROM `latih` 
+    JOIN `parameter`
+    ON `latih`.`c1` = `parameter`.`nilai`
+    
+    JOIN `tb_mahasiswa`
+    ON `latih`.`id_mahasiswa` = `tb_mahasiswa`.`id_mahasiswa`
+    ";
+    return $this->db->query($query)->result_array();
+  }
+
+  public function getC1()
+  {
+    $this->db->select('*');
+    $this->db->from('tb_parameter');
+    $this->db->where('id_kriteria', '1');
+    return $this->db->get()->result_array();
+  }
+
+  public function getC2()
+  {
+    $this->db->select('*');
+    $this->db->from('tb_parameter');
+    $this->db->where('id_kriteria', '3');
+    return $this->db->get()->result_array();
+  }
+
+  public function getC3()
+  {
+    $this->db->select('*');
+    $this->db->from('tb_parameter');
+    $this->db->where('id_kriteria', '7');
+    return $this->db->get()->result_array();
+  }
+
+  public function getC4()
+  {
+    $this->db->select('*');
+    $this->db->from('tb_parameter');
+    $this->db->where('id_kriteria', '8');
+    return $this->db->get()->result_array();
   }
 }

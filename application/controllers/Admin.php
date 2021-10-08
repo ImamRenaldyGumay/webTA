@@ -24,4 +24,9 @@ class Admin extends CI_Controller
         $this->load->view('Admin/Index', $data);
         $this->load->view('templates/Footer', $data);
     }
+
+    public function fungsiPeringatan($isiPeringatan)
+    {
+        echo "<script>alert('" . $isiPeringatan . "');</script>";
+    }
 }

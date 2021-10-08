@@ -9,11 +9,19 @@ class User extends CI_Controller
       $this->session->sess_destroy();
       redirect('Home', 'refresh');
     } else {
-      // $this->load->model('User_Model', 'User');
+      $this->load->model('User_Model', 'User');
     }
   }
   public function index()
   {
-    $this->load->view('User/Index');
+    $data = array(
+      'user' =>  $this->db->get_where('user', ['nama' => $this->session->userdata('nama')])->row_array(),
+      'title' => 'User'
+    );
+    $this->load->view('templates/Header', $data);
+    $this->load->view('templates/Navbar', $data);
+    $this->load->view('templates/Sidebar', $data);
+    $this->load->view('User/Index', $data);
+    $this->load->view('templates/Footer', $data);
   }
 }

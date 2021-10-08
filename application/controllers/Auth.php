@@ -43,6 +43,7 @@ class Auth extends CI_Controller
         $this->session->set_userdata($userakun);
 
         if ($userakun['role'] == '1') {
+          $this->fungsiPeringatan("Selamat Datang");
           redirect('Admin');
         } else if ($userakun['role'] == '2') {
           redirect('User');
@@ -51,6 +52,7 @@ class Auth extends CI_Controller
         }
       }
     } else {
+      $this->fungsiPeringatan("Username & Password salah");
       // $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Username & Password salah</div>');
       redirect('Home');
     }
@@ -80,7 +82,8 @@ class Auth extends CI_Controller
         'role' => 2
       ];
       $this->Auth->prosesRegistrasi($data);
-      $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible show fade"><div class="alert-body"><button class="close" data-dismiss="alert"><span>&times;</span></button>Your account was active, please Login</div></div>');
+      $this->fungsiPeringatan("Your account was active, please Login");
+      // $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible show fade"><div class="alert-body"><button class="close" data-dismiss="alert"><span>&times;</span></button>Your account was active, please Login</div></div>');
       redirect('Auth/Login', 'refresh');
     }
   }
@@ -89,5 +92,10 @@ class Auth extends CI_Controller
   {
     $this->session->sess_destroy();
     redirect('Home');
+  }
+
+  public function fungsiPeringatan($isiPeringatan)
+  {
+    echo "<script>alert('" . $isiPeringatan . "');</script>";
   }
 }
