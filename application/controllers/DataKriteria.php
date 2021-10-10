@@ -29,12 +29,12 @@ class DataKriteria extends CI_Controller
   }
   public function TambahDataKriteria()
   {
-    $this->form_validation->set_rules('kd_beasiswa', 'Nama Beasiswa', 'required');
+    $this->form_validation->set_rules('id_beasiswa', 'Nama Beasiswa', 'required');
     $this->form_validation->set_rules('nama_kriteria', 'Nama Kriteria', 'required');
 
     $this->form_validation->set_message('required', '{field} harus di isi!.');
     $data = [
-      'kd_beasiswa' => $this->input->post('kd_beasiswa'),
+      'id_beasiswa' => $this->input->post('id_beasiswa'),
       'nama_kriteria' => $this->input->post('nama_kriteria')
     ];
     $this->db->insert('tb_kriteria', $data);
@@ -50,11 +50,7 @@ class DataKriteria extends CI_Controller
 
   public function Edit()
   {
-    // $id_kriteria = $this->input->post('id_kriteria');
-    // $nama_kriteria = $this->input->post('nama_kriteria');
     $data = ['nama_kriteria' => $this->input->post('nama_kriteria')];
-    // $data = ['nama_kriteria' => $nama_kriteria];
-    // $where = ['id_kriteria' => $id_kriteria];
     $where = ['id_kriteria' => $this->input->post('id_kriteria')];
     $this->db->where($where);
     $this->db->update('tb_kriteria', $data);

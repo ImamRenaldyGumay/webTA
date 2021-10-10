@@ -31,7 +31,7 @@ class Admin_Model extends CI_Model
   {
     $query = "SELECT `tb_kriteria`.*, `tb_beasiswa`.`nama_beasiswa`
     FROM `tb_kriteria` JOIN `tb_beasiswa`
-    ON `tb_kriteria`.`kd_beasiswa` = `tb_beasiswa`.`id_beasiswa`";
+    ON `tb_kriteria`.`id_beasiswa` = `tb_beasiswa`.`id_beasiswa`";
     return $this->db->query($query)->result_array();
   }
 

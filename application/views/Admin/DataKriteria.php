@@ -50,14 +50,6 @@
               </tr>
             <?php endforeach ?>
           </tbody>
-          <tfoot>
-            <tr>
-              <th>No. </th>
-              <th>NAMA BEASISWA</th>
-              <th>NAMA KRITERIA</th>
-              <th>Action</th>
-            </tr>
-          </tfoot>
         </table>
       </div>
       <!-- /.card-body -->
@@ -82,7 +74,7 @@
       <form action="<?= base_url('DataKriteria/TambahDataKriteria') ?>" method="POST">
         <div class="modal-body">
           <div class="form-group">
-            <select class="form-control" name="kd_beasiswa" id="kd_beasiswa">
+            <select class="form-control" name="id_beasiswa" id="id_beasiswa">
               <option value="">Select Option</option>
               <?php foreach ($beasiswa as $b) : ?>
                 <option value="<?= $b['id_beasiswa']; ?>"><?= $b['nama_beasiswa']; ?></option>
