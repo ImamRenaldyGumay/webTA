@@ -12,6 +12,11 @@
   <h1><?= $title ?></h1>
   <a href="<?= base_url('Auth/Login') ?>">Ke Login</a>
   <a href="<?= base_url('Auth/Register') ?>">Ke Register</a>
+  <br>
+  <br>
+
+
 </body>
+
 
 </html>

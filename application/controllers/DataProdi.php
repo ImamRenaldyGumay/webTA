@@ -35,7 +35,7 @@ class DataProdi extends CI_Controller
       $this->load->view('templates/Footer', $data);
     } else {
       $data = [
-        'fakultas_id' => $this->input->post('fakultas_id'),
+        'id_fakultas' => $this->input->post('id_fakultas'),
         'nama_prodi' => $this->input->post('nama_prodi')
       ];
       $this->db->insert('tb_prodi', $data);
@@ -43,23 +43,21 @@ class DataProdi extends CI_Controller
     }
   }
 
-  public function Hapus($id)
+  public function Hapus($id_prodi)
   {
-    $where = array('id' => $id);
+    $where = array('id_prodi' => $id_prodi);
     $this->db->delete('tb_prodi', $where);
     redirect('DataProdi', 'refresh');
   }
 
   public function Edit()
   {
-    $id = $this->input->post('id');
-    // $nama_fakultas = $this->input->post('nama_fakultas');
+    $id_prodi = $this->input->post('id_prodi');
     $nama_prodi = $this->input->post('nama_prodi');
     $data = [
-      // 'nama_fakultas' => $nama_fakultas,
       'nama_prodi' => $nama_prodi
     ];
-    $where = ['id' => $id];
+    $where = ['id_prodi' => $id_prodi];
     $this->db->where($where);
     $this->db->update('tb_prodi', $data);
     redirect('DataProdi', 'refresh');

@@ -44,8 +44,8 @@
                 <td><?= $p['nama_fakultas'] ?></td>
                 <td><?= $p['nama_prodi'] ?></td>
                 <td>
-                  <a href="<?= base_url('') ?>" class="btn btn-warning" data-toggle="modal" title="Edit" data-target="#EditProdi<?= $p['id'] ?>"><i class="fas fa-pencil-alt"></i> Edit</a>
-                  <a href="<?= base_url('DataProdi/Hapus/' . $p['id']) ?>" class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete" data-confirm="Are You Sure?|This action can not be undone. Do you want to continue?" data-confirm-yes="alert('Deleted')"><i class="fas fa-trash"></i> Hapus</a>
+                  <a href="<?= base_url('') ?>" class="btn btn-warning" data-toggle="modal" title="Edit" data-target="#EditProdi<?= $p['id_prodi'] ?>"><i class="fas fa-pencil-alt"></i> Edit</a>
+                  <a href="<?= base_url('DataProdi/Hapus/' . $p['id_prodi']) ?>" class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete" data-confirm="Are You Sure?|This action can not be undone. Do you want to continue?" data-confirm-yes="alert('Deleted')"><i class="fas fa-trash"></i> Hapus</a>
                 </td>
               </tr>
             <?php endforeach ?>
@@ -82,16 +82,16 @@
       <form action="<?= base_url('DataProdi') ?>" method="POST">
         <div class="modal-body">
           <div class="form-group">
-            <label for="fakultas_id">Nama Fakultas</label>
-            <select name="fakultas_id" id="fakultas_id" class="form-control">
+            <label for="id_fakultas">Nama Fakultas</label>
+            <select name="id_fakultas" id="id_fakultas" class="form-control">
               <option value="">Select Menu</option>
               <?php foreach ($fakultas as $f) : ?>
-                <option value="<?= $f['id']; ?>"><?= $f['nama_fakultas']; ?></option>
+                <option value="<?= $f['id_fakultas']; ?>"><?= $f['nama_fakultas']; ?></option>
               <?php endforeach; ?>
             </select>
           </div>
           <div class="form-group">
-            <label for="nama_fakultas">Nama Prodi</label>
+            <label for="nama_prodi">Nama Prodi</label>
             <input type="text" class="form-control" id="nama_prodi" name="nama_prodi">
             <?= form_error('nama_prodi', '<small class="text-danger pl-3">', '</small>') ?>
           </div>
@@ -112,7 +112,7 @@
 <!-- ========================================================================================================== -->
 <!-- Start Modal Edit Fakultas -->
 <?php foreach ($prodi as $p) : ?>
-  <div class="modal fade" id="EditProdi<?= $p['id'] ?>">
+  <div class="modal fade" id="EditProdi<?= $p['id_prodi'] ?>">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -124,12 +124,12 @@
         <form action="<?= base_url('DataProdi/Edit') ?>" method="POST">
           <div class="modal-body">
             <div class="form-group">
-              <label for="id">Id Prodi</label>
-              <input name="id" id="id" type="text" class="form-control" value="<?= $p['id'] ?>" readonly='readonly'>
+              <label for="id_prodi">Id Prodi</label>
+              <input name="id_prodi" id="id_prodi" type="text" class="form-control" value="<?= $p['id_prodi'] ?>" readonly='readonly'>
             </div>
             <div class="form-group">
-              <label for="id">Nama Fakultas</label>
-              <input name="fakultas_id" id="fakultas_id" type="text" class="form-control" value="<?= $p['nama_fakultas'] ?>" readonly='readonly'>
+              <label for="id_fakultas">Nama Fakultas</label>
+              <input name="id_fakultas" id="id_fakultas" type="text" class="form-control" value="<?= $p['nama_fakultas'] ?>" readonly='readonly'>
             </div>
             <div class="form-group">
               <label for="nama_fakultas">Nama Prodi</label>

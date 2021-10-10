@@ -18,7 +18,7 @@ class DataBeasiswa extends CI_Controller
     $data = array(
       'user' => $this->db->get_where('user', ['nama' => $this->session->userdata('nama')])->row_array(),
       'title' => 'Data Beasiswa',
-      'beasiswa' => $this->db->get('beasiswa')->result_array()
+      'beasiswa' => $this->db->get('tb_beasiswa')->result_array()
     );
 
     $this->form_validation->set_rules('nama_beasiswa', 'Nama Beasiswa', 'required');
@@ -38,21 +38,21 @@ class DataBeasiswa extends CI_Controller
         'end_date' => $this->input->post('end_date'),
         'is_active' => $this->input->post('is_active')
       ];
-      $this->db->insert('beasiswa', $data);
+      $this->db->insert('tb_beasiswa', $data);
       redirect('DataBeasiswa', 'refresh');
     }
   }
 
-  public function Hapus($id)
+  public function Hapus($id_beasiswa)
   {
-    $where = array('id' => $id);
-    $this->db->delete('beasiswa', $where);
+    $where = array('id_beasiswa' => $id_beasiswa);
+    $this->db->delete('tb_beasiswa', $where);
     redirect('DataBeasiswa', 'refresh');
   }
 
   public function Edit()
   {
-    $id = $this->input->post('id');
+    $id_beasiswa = $this->input->post('id_beasiswa');
     $nama_beasiswa = $this->input->post('nama_beasiswa');
     $start_date = $this->input->post('start_date');
     $end_date = $this->input->post('end_date');
@@ -63,9 +63,9 @@ class DataBeasiswa extends CI_Controller
       'end_date' => $end_date,
       'is_active' => $is_active
     ];
-    $where = ['id' => $id];
+    $where = ['id_beasiswa' => $id_beasiswa];
     $this->db->where($where);
-    $this->db->update('beasiswa', $data);
+    $this->db->update('tb_beasiswa', $data);
     redirect('DataBeasiswa', 'refresh');
   }
 }

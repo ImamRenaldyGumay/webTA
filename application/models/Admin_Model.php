@@ -7,6 +7,12 @@ class Admin_Model extends CI_Model
     $query = $this->db->get_where('user', ['nama' => $this->session->userdata('nama')]);
     return $query;
   }
+
+  public function TambahFakultas($data)
+  {
+    $this->db->insert('tb_fakultas', $data);
+  }
+
   public function getBeasiswa()
   {
     $query = $this->db->get('beasiswa')->result_array();
@@ -17,7 +23,7 @@ class Admin_Model extends CI_Model
   {
     $query = "SELECT `tb_prodi`.*, `tb_fakultas`.`nama_fakultas`
     FROM `tb_prodi` JOIN `tb_fakultas`
-    ON `tb_prodi`.`fakultas_id` = `tb_fakultas`.`id`";
+    ON `tb_prodi`.`id_fakultas` = `tb_fakultas`.`id_fakultas`";
     return $this->db->query($query)->result_array();
   }
 
@@ -41,30 +47,14 @@ class Admin_Model extends CI_Model
     return $this->db->query($query)->result_array();
   }
 
-  public function getMahasiswa()
-  {
-    $query = "SELECT `tb_mahasiswa`.*, `tb_fakultas`.`nama_fakultas`, `tb_prodi`.`nama_prodi`
-    FROM `tb_prodi` 
-    JOIN `tb_mahasiswa`
-    ON `tb_mahasiswa`.`id_prodi` = `tb_prodi`.`id`
-    JOIN `tb_fakultas`
-    ON `tb_mahasiswa`.`id_fakultas` = `tb_fakultas`.`id`
-    ";
-    return $this->db->query($query)->result_array();
-  }
-
   public function getLatih()
   {
-    $query = "SELECT `tb_latih`.*, `beasiswa`.`nama_beasiswa`, `tb_kriteria`.`nama_kriteria`, `tb_parameter`.`nilai`,  `tb_mahasiswa`.`nama`
+    $query = "SELECT `tb_latih`.*, `beasiswa`.`nama_beasiswa`, `tb_parameter`.`nilai`
     FROM `tb_parameter` 
     JOIN `tb_latih`
-    ON `tb_latih`.`id_parameter` = `tb_parameter`.`id_parameter`
-    JOIN `tb_kriteria`
-    ON `tb_latih`.`id_kriteria` = `tb_kriteria`.`id_kriteria`
+    ON `tb_latih`.`c1` = `tb_parameter`.`id_parameter`
     JOIN `beasiswa`
-    ON `tb_latih`.`id_beasiswa` = `beasiswa`.`id`
-    JOIN `tb_mahasiswa`
-    ON `tb_latih`.`id_mahasiswa` = `tb_mahasiswa`.`id_mahasiswa`
+    ON `tb_latih`.`id_beasiswa` = `beasiswa`.`id_beasiswa`
     ";
     return $this->db->query($query)->result_array();
   }

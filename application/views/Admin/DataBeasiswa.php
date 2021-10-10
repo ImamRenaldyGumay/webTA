@@ -52,8 +52,8 @@
                   <td>tidak</td>
                 <?php endif ?>
                 <td>
-                  <a href="<?= base_url('') ?>" class="btn btn-warning" data-toggle="modal" title="Edit" data-target="#EB<?= $b['id'] ?>"><i class="fas fa-pencil-alt"></i> Edit</a>
-                  <a href="<?= base_url('DataBeasiswa/Hapus/' . $b['id']) ?>" class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete" onclick="return confirm('Yakin?')"><i class="fas fa-trash"></i> Hapus</a>
+                  <a href="<?= base_url('') ?>" class="btn btn-warning" data-toggle="modal" title="Edit" data-target="#EB<?= $b['id_beasiswa'] ?>"><i class="fas fa-pencil-alt"></i> Edit</a>
+                  <a href="<?= base_url('DataBeasiswa/Hapus/' . $b['id_beasiswa']) ?>" class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete" onclick="return confirm('Yakin?')"><i class="fas fa-trash"></i> Hapus</a>
                 </td>
               </tr>
             <?php endforeach ?>
@@ -127,7 +127,7 @@
 <!-- ========================================================================================================== -->
 <!-- Start Modal Edit Beasiswa -->
 <?php foreach ($beasiswa as $b) : ?>
-  <div class="modal fade" tabindex="-1" role="dialog" id="EB<?= $b['id'] ?>">
+  <div class="modal fade" tabindex="-1" role="dialog" id="EB<?= $b['id_beasiswa'] ?>">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -140,8 +140,8 @@
         <form action="<?= base_url('DataBeasiswa/Edit') ?>" method="POST">
           <div class="modal-body">
             <div class="form-group">
-              <label for="id">Id Beasiswa</label>
-              <input name="id" id="id" type="text" class="form-control" value="<?= $b['id'] ?>" readonly='readonly'>
+              <label for="id_beasiswa">Id Beasiswa</label>
+              <input type="text" class="form-control" name="id_beasiswa" id="id_beasiswa" value="<?= $b['id_beasiswa'] ?>" readonly='readonly'>
             </div>
             <div class="form-group">
               <label>Nama Beasiswa</label>

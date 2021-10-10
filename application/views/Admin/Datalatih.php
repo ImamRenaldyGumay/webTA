@@ -48,8 +48,8 @@
             foreach ($latih as $l) : ?>
               <tr>
                 <td><?= $no++ ?></td>
-                <td><?= $l['id_mahasiswa'] ?></td>
-                <td><?= $l['id_beasiswa'] ?></td>
+                <td><?= $l['nama'] ?></td>
+                <td><?= $l['nama_beasiswa'] ?></td>
                 <td><?= $l['c1'] ?></td>
                 <td><?= $l['c2'] ?></td>
                 <td><?= $l['c3'] ?></td>
@@ -62,7 +62,7 @@
                 <!-- <td><?= $l['hasil'] ?></td> -->
                 <td>
                   <!-- <a href="<?= base_url('') ?>" class="btn btn-warning" data-toggle="modal" data-target="#EditFakultas<?= $l['id_latih'] ?>"><i class="fas fa-pencil-alt"></i> Edit</a> -->
-                  <a href="<?= base_url('DataFakultas/Hapus/' . $l['id_latih']) ?>" class="btn btn-danger btn-action" data-toggle="tooltip" onclick="return confirm('Yakin?')"><i class="fas fa-trash"></i> Hapus</a>
+                  <a href="<?= base_url('DataLatih/Hapus/' . $l['id_latih']) ?>" class="btn btn-danger btn-action" data-toggle="tooltip" onclick="return confirm('Yakin?')"><i class="fas fa-trash"></i> Hapus</a>
                 </td>
               </tr>
             <?php endforeach ?>

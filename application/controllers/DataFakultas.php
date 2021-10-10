@@ -21,37 +21,45 @@ class DataFakultas extends CI_Controller
       'fakultas' => $this->db->get('tb_fakultas')->result_array()
     );
 
-    $this->form_validation->set_rules('nama_fakultas', 'Nama Fakultas', 'required');
-
-    $this->form_validation->set_message('required', '{field} harus di isi!.');
-
-    if ($this->form_validation->run() == false) {
-      $this->load->view('templates/Header', $data);
-      $this->load->view('templates/Navbar', $data);
-      $this->load->view('templates/Sidebar', $data);
-      $this->load->view('Admin/DataFakultas', $data);
-      $this->load->view('templates/Footer', $data);
-    } else {
-      $this->db->insert('tb_fakultas', ['nama_fakultas' => $this->input->post('nama_fakultas')]);
-      redirect('DataFakultas', 'refresh');
-    }
+    $this->load->view('templates/Header', $data);
+    $this->load->view('templates/Navbar', $data);
+    $this->load->view('templates/Sidebar', $data);
+    $this->load->view('Admin/DataFakultas', $data);
+    $this->load->view('templates/Footer', $data);
   }
 
-  public function Hapus($id)
+  public function TambahFakultas()
   {
-    $where = array('id' => $id);
+    $this->form_validation->set_rules('nama_fakultas', 'Nama Fakultas', 'trim|required');
+    $this->form_validation->set_message('required', '{field} harus di isi!.');
+    $data = [
+      'nama_fakultas' => $this->input->post('nama_fakultas')
+    ];
+    $this->Admin->TambahFakultas($data);
+    // $this->fungsiPeringatan("Data Berhasil di Tambahkan ");
+    redirect('DataFakultas', 'refresh');
+  }
+
+  public function Hapus($id_fakultas)
+  {
+    $where = array('id_fakultas' => $id_fakultas);
     $this->db->delete('tb_fakultas', $where);
     redirect('DataFakultas', 'refresh');
   }
 
   public function Edit()
   {
-    $id = $this->input->post('id');
+    $id_fakultas = $this->input->post('id_fakultas');
     $nama_fakultas = $this->input->post('nama_fakultas');
     $data = ['nama_fakultas' => $nama_fakultas];
-    $where = ['id' => $id];
+    $where = ['id_fakultas' => $id_fakultas];
     $this->db->where($where);
     $this->db->update('tb_fakultas', $data);
     redirect('DataFakultas', 'refresh');
+  }
+
+  public function fungsiPeringatan($isiPeringatan)
+  {
+    echo "<script>alert('" . $isiPeringatan . "');</script>";
   }
 }

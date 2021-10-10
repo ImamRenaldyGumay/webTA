@@ -19,7 +19,6 @@
 
   <!-- Main content -->
   <section class="content">
-
     <!-- Default box -->
     <div class="card">
       <div class="card-header">
@@ -42,8 +41,8 @@
                 <td><?= $no++ ?></td>
                 <td><?= $f['nama_fakultas'] ?></td>
                 <td>
-                  <a href="<?= base_url('') ?>" class="btn btn-warning" data-toggle="modal" data-target="#EditFakultas<?= $f['id'] ?>"><i class="fas fa-pencil-alt"></i> Edit</a>
-                  <a href="<?= base_url('DataFakultas/Hapus/' . $f['id']) ?>" class="btn btn-danger btn-action" data-toggle="tooltip" onclick="return confirm('Yakin?')"><i class="fas fa-trash"></i> Hapus</a>
+                  <a href="<?= base_url('') ?>" class="btn btn-warning" data-toggle="modal" data-target="#EditFakultas<?= $f['id_fakultas'] ?>"><i class="fas fa-pencil-alt"></i> Edit</a>
+                  <a href="<?= base_url('DataFakultas/Hapus/' . $f['id_fakultas']) ?>" class="btn btn-danger btn-action" data-toggle="tooltip" onclick="Konfirm()"><i class="fas fa-trash"></i> Hapus</a>
                 </td>
               </tr>
             <?php endforeach ?>
@@ -76,16 +75,15 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="<?= base_url('DataFakultas') ?>" method="POST">
+      <form action="<?= base_url('DataFakultas/TambahFakultas') ?>" method="POST">
         <div class="modal-body">
           <div class="form-group">
             <label for="nama_fakultas">Nama Fakultas</label>
             <input type="text" class="form-control" id="nama_fakultas" name="nama_fakultas">
-            <?= form_error('nama_fakultas', '<small class="text-danger pl-3">', '</small>') ?>
           </div>
         </div>
         <div class="modal-footer justify-content-between">
-          <button type="submit" class="btn btn-primary">Tambah</button>
+          <button type="submit" class="btn btn-primary" onclick="Submit()">Tambah</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </form>
@@ -100,7 +98,7 @@
 <!-- ========================================================================================================== -->
 <!-- Start Modal Edit Fakultas -->
 <?php foreach ($fakultas as $f) : ?>
-  <div class="modal fade" id="EditFakultas<?= $f['id'] ?>">
+  <div class="modal fade" id="EditFakultas<?= $f['id_fakultas'] ?>">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -112,8 +110,8 @@
         <form action="<?= base_url('DataFakultas/Edit') ?>" method="POST">
           <div class="modal-body">
             <div class="form-group">
-              <label for="id">Id Fakultas</label>
-              <input name="id" id="id" type="text" class="form-control" value="<?= $f['id'] ?>" readonly='readonly'>
+              <label for="id_fakultas">Id Fakultas</label>
+              <input name="id_fakultas" id="id_fakultas" type="text" class="form-control" value="<?= $f['id_fakultas'] ?>" readonly='readonly'>
             </div>
             <div class="form-group">
               <label for="nama_fakultas">Nama Fakultas</label>

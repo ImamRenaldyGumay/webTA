@@ -48,12 +48,7 @@
                   <p>Data Prodi</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="<?= base_url('DataMahasiswa') ?>" class="nav-link <?= ($this->uri->uri_string() == 'DataMahasiswa') ? 'active' : '' ?>">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Data Mahasiswa</p>
-                </a>
-              </li>
+
               <li class="nav-item">
                 <a href="<?= base_url('DataBeasiswa') ?>" class="nav-link <?= ($this->uri->uri_string() == 'DataBeasiswa') ? 'active' : '' ?>">
                   <i class="far fa-circle nav-icon"></i>
