@@ -32,13 +32,15 @@ class DataParameter extends CI_Controller
   {
     $this->form_validation->set_rules('id_beasiswa', 'Nama Beasiswa', 'required');
     $this->form_validation->set_rules('id_kriteria', 'Nama Kriteria', 'required');
-    $this->form_validation->set_rules('nilai', 'Nilai', 'required');
+    $this->form_validation->set_rules('keterangan', 'keterangan', 'required');
+    $this->form_validation->set_rules('bobot', 'bobot', 'required');
 
     $this->form_validation->set_message('required', '{field} harus di isi!.');
     $data = [
       'id_beasiswa' => $this->input->post('id_beasiswa'),
       'id_kriteria' => $this->input->post('id_kriteria'),
-      'nilai' => $this->input->post('nilai'),
+      'keterangan' => $this->input->post('keterangan'),
+      'bobot' => $this->input->post('bobot'),
     ];
     $this->db->insert('tb_parameter', $data);
     redirect('DataParameter', 'refresh');
@@ -54,8 +56,12 @@ class DataParameter extends CI_Controller
   public function Edit()
   {
     $id_parameter = $this->input->post('id_parameter');
-    $nilai = $this->input->post('nilai');
-    $data = ['nilai' => $nilai];
+    $keterangan = $this->input->post('keterangan');
+    $bobot = $this->input->post('bobot');
+    $data = [
+      'keterangan' => $keterangan,
+      'bobot' => $bobot
+    ];
     $where = ['id_parameter' => $id_parameter];
     $this->db->where($where);
     $this->db->update('tb_parameter', $data);

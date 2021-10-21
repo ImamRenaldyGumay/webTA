@@ -33,7 +33,8 @@
               <th>No.</th>
               <th>Beasiswa</th>
               <th>Kriteria</th>
-              <th>Nilai</th>
+              <th>Keterangan</th>
+              <th>Bobot</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -45,7 +46,8 @@
                 <td><?= $no++ ?></td>
                 <td><?= $p['nama_beasiswa'] ?></td>
                 <td><?= $p['nama_kriteria'] ?></td>
-                <td><?= $p['nilai'] ?></td>
+                <td><?= $p['keterangan'] ?></td>
+                <td><?= $p['bobot'] ?></td>
                 <td>
                   <a href="<?= base_url('') ?>" class="btn btn-warning" data-toggle="modal" data-target="#EP<?= $p['id_parameter'] ?>"><i class="fas fa-pencil-alt"></i> Edit</a>
                   <a href="<?= base_url('DataParameter/Hapus/' . $p['id_parameter']) ?>" class="btn btn-danger btn-action" data-toggle="tooltip" onclick="return confirm('Yakin?')"><i class="fas fa-trash"></i> Hapus</a>
@@ -53,15 +55,6 @@
               </tr>
             <?php endforeach ?>
           </tbody>
-          <tfoot>
-            <tr>
-              <th>No. </th>
-              <th>Beasiswa</th>
-              <th>Kriteria</th>
-              <th>Nilai</th>
-              <th>Action</th>
-            </tr>
-          </tfoot>
         </table>
       </div>
       <!-- /.card-body -->
@@ -105,8 +98,12 @@
             </select>
           </div>
           <div class="form-group">
-            <label for="nilai">Nilai</label>
-            <input type="text" class="form-control" id="nilai" name="nilai">
+            <label for="keterangan">Keterangan</label>
+            <input type="text" class="form-control" id="keterangan" name="keterangan">
+          </div>
+          <div class="form-group">
+            <label for="bobot">Bobot</label>
+            <input type="text" class="form-control" id="bobot" name="bobot">
           </div>
         </div>
         <div class="modal-footer justify-content-between">
@@ -149,8 +146,12 @@
               <input type="text" class="form-control" id="id_kriteria" name="id_kriteria" value="<?= $p['nama_kriteria'] ?>" readonly>
             </div>
             <div class="form-group">
-              <label for="nilai">Nilai</label>
-              <input type="text" class="form-control" id="nilai" name="nilai" value="<?= $p['nilai'] ?>">
+              <label for="keterangan">keterangan</label>
+              <input type="text" class="form-control" id="keterangan" name="keterangan" value="<?= $p['keterangan'] ?>">
+            </div>
+            <div class="form-group">
+              <label for="bobot">bobot</label>
+              <input type="text" class="form-control" id="bobot" name="bobot" value="<?= $p['bobot'] ?>">
             </div>
           </div>
           <div class="modal-footer justify-content-between">

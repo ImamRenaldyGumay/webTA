@@ -65,6 +65,7 @@ $route['DataLatih'] = 'DataLatih/index';
 $route['Atribut'] = 'Atribut/index';
 $route['Parameter'] = 'Parameter/index';
 $route['Latih'] = 'Latih/index';
+$route['Coba'] = 'Coba/index';
 
 // Untuk User
 $route['User'] = 'User/index';

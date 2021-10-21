@@ -19,8 +19,9 @@ class DataLatih extends CI_Controller
       'user' => $this->db->get_where('user', ['nama' => $this->session->userdata('nama')])->row_array(),
       'title' => 'Data Latih',
       'latih' => $this->Admin->getLatih(),
-      'mahasiswa' => $this->db->get('tb_mahasiswa')->result_array(),
-      'beasiswa' => $this->Admin->getBeasiswa(),
+      'fakultas' => $this->db->get('tb_fakultas')->result_array(),
+      'prodi' => $this->db->get('tb_prodi')->result_array(),
+      'beasiswa' => $this->db->get('tb_beasiswa')->result_array(),
       'c1' => $this->Admin->getC1(),
       'c2' => $this->Admin->getC2(),
       'c3' => $this->Admin->getC3(),
@@ -36,7 +37,11 @@ class DataLatih extends CI_Controller
   public function TambahLatih()
   {
     $data = [
-      'id_mahasiswa' => $this->input->post('id_mahasiswa'),
+      'nama_mahasiswa' => $this->input->post('nama_mahasiswa'),
+      'nim' => $this->input->post('nim'),
+      'jenis_kelamin' => $this->input->post('jenis_kelamin'),
+      'id_fakultas' => $this->input->post('id_fakultas'),
+      'id_prodi' => $this->input->post('id_prodi'),
       'id_beasiswa' => $this->input->post('id_beasiswa'),
       'c1' => $this->input->post('c1'),
       'c2' => $this->input->post('c2'),
@@ -51,6 +56,21 @@ class DataLatih extends CI_Controller
   {
     $where = array('id_latih' => $id_latih);
     $this->db->delete('tb_latih', $where);
+    redirect('DataLatih', 'refresh');
+  }
+
+  public function Edit()
+  {
+    $data = [
+      'c1' => $this->input->post('c1'),
+      'c2' => $this->input->post('c2'),
+      'c3' => $this->input->post('c3'),
+      'c4' => $this->input->post('c4'),
+      'hasil' => $this->input->post('hasil'),
+    ];
+    $where = ['id_latih' => $this->input->post('id_latih')];
+    $this->db->where($where);
+    $this->db->update('tb_latih', $data);
     redirect('DataLatih', 'refresh');
   }
 }

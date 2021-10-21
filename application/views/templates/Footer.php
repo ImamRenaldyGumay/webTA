@@ -64,6 +64,13 @@
       $(this).remove();
     });
   }, 5000);
+
+  $('.swalDefaultSuccess').click(function() {
+    Swal.fire({
+      icon: 'success',
+      title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+    })
+  });
 </script>
 </body>
 

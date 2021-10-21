@@ -14,6 +14,7 @@
   <a href="<?= base_url('Auth/Register') ?>">Ke Register</a>
   <br>
   <br>
+  <a href="<?= base_url('Home/Baru') ?>">Baru</a>
 
 
 </body>

@@ -69,7 +69,8 @@
       <div class="card-body">
         Check the Header part you can find Legacy vesion of style.
         <br>
-        Start creating your amazing application!
+        Start creating your amazing application! <br>
+        <button class="btn btn-primary swalDefaultSuccess">Hello World!</button>
       </div>
       <!-- /.card-body -->
       <div class="card-footer">

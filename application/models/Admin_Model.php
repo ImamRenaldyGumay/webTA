@@ -49,12 +49,14 @@ class Admin_Model extends CI_Model
 
   public function getLatih()
   {
-    $query = "SELECT `tb_latih`.*, `beasiswa`.`nama_beasiswa`, `tb_parameter`.`nilai`
-    FROM `tb_parameter` 
-    JOIN `tb_latih`
-    ON `tb_latih`.`c1` = `tb_parameter`.`id_parameter`
-    JOIN `beasiswa`
-    ON `tb_latih`.`id_beasiswa` = `beasiswa`.`id_beasiswa`
+    $query = "SELECT `tb_latih`.*, `tb_beasiswa`.`nama_beasiswa`, `tb_fakultas`.`nama_fakultas`, `tb_prodi`.`nama_prodi`
+    FROM `tb_latih` 
+    JOIN `tb_beasiswa`
+    ON `tb_latih`.`id_beasiswa` = `tb_beasiswa`.`id_beasiswa`
+    JOIN `tb_prodi`
+    ON `tb_latih`.`id_prodi` = `tb_prodi`.`id_prodi`
+    JOIN `tb_fakultas`
+    ON `tb_latih`.`id_fakultas` = `tb_fakultas`.`id_fakultas`
     ";
     return $this->db->query($query)->result_array();
   }
@@ -110,5 +112,34 @@ class Admin_Model extends CI_Model
     $this->db->from('tb_parameter');
     $this->db->where('id_kriteria', '8');
     return $this->db->get()->result_array();
+  }
+
+  // public function countTotalDataLatih()
+  // {
+  //   $query = $this->db->get('tb_latih');
+  //   if ($query->num_rows() > 0) {
+  //     return $query->num_rows();
+  //   } else {
+  //     return 0;
+  //   }
+  // }
+
+  public function countTotalDataLatih()
+  {
+    $query = $this->db->query("SELECT * FROM tb_latih");
+    $total = $query->num_rows();
+    return $total;
+  }
+
+  public function countTidakLayak()
+  {
+    $query = $this->db->query("SELECT * FROM tb_latih WHERE hasil = '0' ");
+    return $query->num_rows();
+  }
+
+  public function countLayak()
+  {
+    $query = $this->db->query("SELECT * FROM tb_latih WHERE hasil = '1' ");
+    return $query->num_rows();
   }
 }

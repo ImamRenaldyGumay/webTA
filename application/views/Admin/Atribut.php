@@ -41,8 +41,8 @@
                 <td><?= $no++ ?></td>
                 <td><?= $a['nama_atribut'] ?></td>
                 <td>
-                  <a href="<?= base_url('') ?>" class="btn btn-warning" data-toggle="modal" title="Edit" data-target="#EditAtribut<?= $a['id_atribut'] ?>"><i class="fas fa-pencil-alt"></i> Edit</a>
-                  <a href="<?= base_url('Atribut/Hapus/' . $a['id_atribut']) ?>" class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete" onclick="Yakin?"><i class="fas fa-trash"></i> Hapus</a>
+                  <a href="<?= base_url('') ?>" class="btn btn-warning" data-toggle="modal" title="Edit" data-target="#EditAtribut<?= $a['id_atribut'] ?>"></i> Edit</a>
+                  <button type="submit" class="btn btn-danger remove"></i> Hapus</button>
                 </td>
               </tr>
             <?php endforeach ?>
@@ -133,3 +133,38 @@
 
 <!-- End Modal Edit Fakultas -->
 <!-- ========================================================================================================== -->
+<script>
+  $(".remove").click(function() {
+    var id = $(this).parents("tr").attr("id");
+
+    swal({
+        title: "Are you sure?",
+        text: "You will not be able to recover this imaginary file!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonClass: "btn-danger",
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel plx!",
+        closeOnConfirm: false,
+        closeOnCancel: false
+      },
+      function(isConfirm) {
+        if (isConfirm) {
+          $.ajax({
+            url: '/item-list/' + id,
+            type: 'DELETE',
+            error: function() {
+              alert('Something is wrong');
+            },
+            success: function(data) {
+              $("#" + id).remove();
+              swal("Deleted!", "Your imaginary file has been deleted.", "success");
+            }
+          });
+        } else {
+          swal("Cancelled", "Your imaginary file is safe :)", "error");
+        }
+      });
+
+  });
+</script>

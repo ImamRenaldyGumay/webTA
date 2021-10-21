@@ -26,7 +26,7 @@
         <button class="btn btn-primary" data-toggle="modal" data-target="#TK">Tambah <?= $title ?></button>
       </div>
       <div class="card-body">
-        <table class="table table-bordered table-hover" id="example3">
+        <table class="table table-bordered table-hover" id="tbfakultas">
           <thead>
             <tr>
               <th>No.</th>

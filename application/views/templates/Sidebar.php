@@ -85,6 +85,14 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="<?= base_url('Coba') ?>" class="nav-link <?= ($this->uri->uri_string() == 'Coba') ? 'active' : '' ?>">
+              <i class="nav-icon fas fa-database"></i>
+              <p>
+                Coba
+              </p>
+            </a>
+          </li>
           <li class="nav-header">Uji Coba</li>
           <li class="nav-item <?= ($this->uri->uri_string() == 'Atribut') || ($this->uri->uri_string() == 'Parameter') || ($this->uri->uri_string() == 'Latih')  ? 'menu-open' : '' ?>">
             <a href="#" class="nav-link <?= ($this->uri->uri_string() == 'Atribut') || ($this->uri->uri_string() == 'Parameter') || ($this->uri->uri_string() == 'Latih')   ? 'active' : '' ?>">
@@ -149,7 +157,7 @@
     <div class="sidebar">
       <!-- Sidebar Menu -->
       <nav class="mt-2">
-        <li class="nav-header">Dashboard</li>
+        <li class="nav-header my-3">Dashboard</li>
         <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
@@ -188,7 +196,7 @@
             </a>
           </li>
         </ul>
-        <li class="nav-header mt-3">Dashboard</li>
+        <li class="nav-header my-3">Dashboard</li>
         <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
             <a href="../widgets.html" class="nav-link">
