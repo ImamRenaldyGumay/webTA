@@ -22,8 +22,8 @@
 
     <!-- Default box -->
     <div class="card">
-      <div class="card-header">
-        <button class="btn btn-primary card-title" data-toggle="modal" data-target="#TambahProdi">Tambah <?= $title ?></button>
+      <div class="card-header border-0">
+        <button class="btn btn-primary col-12 mt-3" data-toggle="modal" data-target="#TambahProdi">Tambah <?= $title ?></button>
       </div>
       <div class="card-body">
         <table class="table table-bordered table-hover" id="example3">
@@ -44,20 +44,12 @@
                 <td><?= $p['nama_fakultas'] ?></td>
                 <td><?= $p['nama_prodi'] ?></td>
                 <td>
-                  <a href="<?= base_url('') ?>" class="btn btn-warning" data-toggle="modal" title="Edit" data-target="#EditProdi<?= $p['id_prodi'] ?>"><i class="fas fa-pencil-alt"></i> Edit</a>
-                  <a href="<?= base_url('DataProdi/Hapus/' . $p['id_prodi']) ?>" class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete" data-confirm="Are You Sure?|This action can not be undone. Do you want to continue?" data-confirm-yes="alert('Deleted')"><i class="fas fa-trash"></i> Hapus</a>
+                  <a href="<?= base_url('') ?>" class="btn btn-warning" data-toggle="modal" title="Edit" data-target="#EditProdi<?= $p['id_prodi'] ?>">Edit</a>
+                  <a href="<?= base_url('Admin/HapusDataProdi/' . $p['id_prodi']) ?>" class="btn btn-danger btn-action" onclick="return confirm('Yakin?')">Hapus</a>
                 </td>
               </tr>
             <?php endforeach ?>
           </tbody>
-          <tfoot>
-            <tr>
-              <th>No. </th>
-              <th>Nama Fakultas</th>
-              <th>Nama Prodi</th>
-              <th>Action</th>
-            </tr>
-          </tfoot>
         </table>
       </div>
       <!-- /.card-body -->
@@ -79,7 +71,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="<?= base_url('DataProdi') ?>" method="POST">
+      <form action="<?= base_url('TambahDataProdi') ?>" method="POST">
         <div class="modal-body">
           <div class="form-group">
             <label for="id_fakultas">Nama Fakultas</label>

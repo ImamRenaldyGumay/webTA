@@ -55,11 +55,18 @@ $route['translate_uri_dashes'] = FALSE;
 
 // Admin
 $route['Admin'] = 'Admin/index';
+
+// Route DataFakultas
 $route['DataFakultas'] = 'Admin/DataFakultas';
 $route['TambahDataFakultas'] = 'Admin/TambahDataFakultas';
-$route['HapusDataFakultas'] = 'Admin/HapusDataFakultas/';
 $route['EditDataFakultas'] = 'Admin/EditDataFakultas/';
-$route['DataProdi'] = 'DataProdi/index';
+
+// Route DataProdi
+$route['DataProdi'] = 'Admin/DataProdi';
+$route['TambahDataProdi'] = 'Admin/TambahDataProdi';
+
+
+
 $route['DataMahasiswa'] = 'DataMahasiswa/index';
 $route['DataBeasiswa'] = 'DataBeasiswa/index';
 $route['DataKriteria'] = 'DataKriteria/index';

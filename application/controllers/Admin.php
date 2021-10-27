@@ -64,7 +64,6 @@ class Admin extends CI_Controller
             $this->fungsiPeringatan("Data Gagal di Hapus");
             redirect('DataFakultas', 'refresh');
         }
-        redirect('DataFakultas', 'refresh');
     }
 
     public function EditDataFakultas($id_fakultas)
@@ -77,6 +76,72 @@ class Admin extends CI_Controller
         $this->db->update('tb_fakultas', $data);
         $this->fungsiPeringatan("Data Berhasil di Edit");
         redirect('DataFakultas', 'refresh');
+    }
+
+    public function DataProdi()
+    {
+        $data = array(
+            'user' => $this->Admin->getNama()->row_array(),
+            'title' => 'Data Prodi',
+            'prodi' => $this->Admin->getProdi(),
+            'fakultas' => $this->db->get('tb_fakultas')->result_array()
+        );
+        $this->load->view('templates/Header', $data);
+        $this->load->view('templates/Navbar', $data);
+        $this->load->view('templates/Sidebar', $data);
+        $this->load->view('Admin/DataProdi', $data);
+        $this->load->view('templates/Footer', $data);
+    }
+
+    public function TambahDataProdi()
+    {
+        $id_fakultas = $this->input->post('id_fakultas');
+        $nama_prodi = $this->input->post('nama_prodi');
+        $data = [
+            'id_fakultas' => $id_fakultas,
+            'nama_prodi' => $nama_prodi
+        ];
+        $tambahProdi =  $this->db->insert('tb_prodi', $data);
+        if ($tambahProdi) {
+            $this->fungsiPeringatan("Data Berhasil di Tambahkan");
+            redirect('DataProdi', 'refresh');
+        } else {
+            $this->fungsiPeringatan("Data Gagal di Tambahkan");
+            redirect('DataProdi', 'refresh');
+        }
+    }
+
+    public function HapusDataProdi($id_prodi)
+    {
+        $where = array('id_prodi' => $id_prodi);
+        $hapusProdi =  $this->db->delete('tb_prodi', $where);
+        if ($hapusProdi) {
+            $this->fungsiPeringatan("Data Berhasil di Hapus");
+            redirect('DataProdi', 'refresh');
+        } else {
+            $this->fungsiPeringatan("Data Gagal di Hapus");
+            redirect('DataProdi', 'refresh');
+        }
+    }
+
+    public function EditDataProdi()
+    {
+        $id_prodi = $this->input->post('id_prodi');
+        $nama_prodi = $this->input->post('nama_prodi');
+        $data = [
+            'nama_prodi' => $nama_prodi
+        ];
+        $where = ['id_prodi' => $id_prodi];
+        $this->db->where($where);
+        $editProdi = $this->db->update('tb_prodi', $data);
+        if ($editProdi) {
+            $this->fungsiPeringatan("Data Berhasil di Edit");
+            redirect('DataProdi', 'refresh');
+        } else {
+            $this->fungsiPeringatan("Data Gagal di Edit");
+            redirect('DataProdi', 'refresh');
+        }
+        redirect('DataProdi', 'refresh');
     }
 
     public function fungsiPeringatan($isiPeringatan)
