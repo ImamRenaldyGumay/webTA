@@ -4,8 +4,14 @@ class Admin_Model extends CI_Model
 {
   public function getNama()
   {
-    $query = $this->db->get_where('user', ['nama' => $this->session->userdata('nama')]);
+    $query = $this->db->get_where('tb_user', ['nama' => $this->session->userdata('nama')]);
     return $query;
+  }
+
+  public function getFakultas()
+  {
+    $query = $this->db->get('tb_fakultas');
+    return $query->result_array();
   }
 
   public function TambahFakultas($data)
@@ -13,11 +19,37 @@ class Admin_Model extends CI_Model
     $this->db->insert('tb_fakultas', $data);
   }
 
+  function getIdFakultas($where, $table)
+  {
+    return $this->db->get_where($table, $where)->result_array();
+  }
+
+  public function ProdiOnMahasiswa()
+  {
+    $query = "SELECT * FROM tb_prodi INNER JOIN tb_fakultas
+      ON tb_prodi.id_prodi = tb_fakultas.id_fakultas
+      ORDER BY id_prodi ";
+    return $this->db->query($query)->result_array();
+  }
+
+  public function getMahasiswa()
+  {
+    $query = "SELECT `tb_mahasiswa`.*, `tb_fakultas`.`nama_fakultas`, `tb_prodi`.`nama_prodi`
+    FROM `tb_mahasiswa` 
+    JOIN `tb_fakultas`
+    ON `tb_fakultas`.`id_fakultas` = `tb_mahasiswa`.`id_fakultas`
+    JOIN `tb_prodi`
+    ON `tb_prodi`.`id_prodi` = `tb_mahasiswa`.`id_prodi`
+    ";
+    return $this->db->query($query)->result_array();
+  }
+
   public function getBeasiswa()
   {
     $query = $this->db->get('beasiswa')->result_array();
     return $query;
   }
+
 
   public function getProdi()
   {
@@ -114,16 +146,6 @@ class Admin_Model extends CI_Model
     return $this->db->get()->result_array();
   }
 
-  // public function countTotalDataLatih()
-  // {
-  //   $query = $this->db->get('tb_latih');
-  //   if ($query->num_rows() > 0) {
-  //     return $query->num_rows();
-  //   } else {
-  //     return 0;
-  //   }
-  // }
-
   public function countTotalDataLatih()
   {
     $query = $this->db->query("SELECT * FROM tb_latih");
@@ -142,4 +164,15 @@ class Admin_Model extends CI_Model
     $query = $this->db->query("SELECT * FROM tb_latih WHERE hasil = '1' ");
     return $query->num_rows();
   }
+
+  // public function getAdmin()
+  // {
+  //   $query = $this->db->query("SELECT * FROM tb_user WHERE role = 1 ")->result_array();
+  //   return $query;
+  // }
+
+  // public function AksiTambahAdmin($data)
+  // {
+  //   $this->db->insert('tb_user', $data);
+  // }
 }

@@ -9,21 +9,16 @@
                 <p class="login-box-msg">Selamat Datang para calon penerima Beasiswa</p>
 
                 <form action="<?= base_url('Auth/Login') ?>" method="post">
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Email" id="email" name="email">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-envelope"></span>
-                            </div>
-                        </div>
+                    <div class="form-group mb-3">
+                        <label for="email">Email</label>
+                        <input type="text" class="form-control" id="email" name="email">
+                        <?= form_error('email', '<small class="text-danger pl-3">', '</small>') ?>
                     </div>
-                    <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Password" id="password" name="password">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
-                            </div>
-                        </div>
+
+                    <div class="form-group mb-3">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" name="password">
+                        <?= form_error('password', '<small class="text-danger pl-3">', '</small>') ?>
                     </div>
                     <div class="row">
                         <div class="col-8">

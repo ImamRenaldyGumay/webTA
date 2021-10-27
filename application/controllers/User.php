@@ -15,7 +15,7 @@ class User extends CI_Controller
   public function index()
   {
     $data = array(
-      'user' =>  $this->db->get_where('user', ['nama' => $this->session->userdata('nama')])->row_array(),
+      'user' =>  $this->db->get_where('tb_user', ['nama' => $this->session->userdata('nama')])->row_array(),
       'title' => 'User'
     );
     $this->load->view('templates/Header', $data);

@@ -55,7 +55,10 @@ $route['translate_uri_dashes'] = FALSE;
 
 // Admin
 $route['Admin'] = 'Admin/index';
-$route['DataFakultas'] = 'DataFakultas/index';
+$route['DataFakultas'] = 'Admin/DataFakultas';
+$route['TambahDataFakultas'] = 'Admin/TambahDataFakultas';
+$route['HapusDataFakultas'] = 'Admin/HapusDataFakultas/';
+$route['EditDataFakultas'] = 'Admin/EditDataFakultas/';
 $route['DataProdi'] = 'DataProdi/index';
 $route['DataMahasiswa'] = 'DataMahasiswa/index';
 $route['DataBeasiswa'] = 'DataBeasiswa/index';
@@ -66,6 +69,8 @@ $route['Atribut'] = 'Atribut/index';
 $route['Parameter'] = 'Parameter/index';
 $route['Latih'] = 'Latih/index';
 $route['Coba'] = 'Coba/index';
+
+$route['TambahAdmin'] = 'Admin/TambahAdmin';
 
 // Untuk User
 $route['User'] = 'User/index';

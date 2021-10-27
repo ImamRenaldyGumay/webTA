@@ -35,7 +35,7 @@ class Auth extends CI_Controller
       $user = $this->Auth->cek_login($data)->result();
       foreach ($user as $userakun) {
         $userakun = array(
-          'idakun' => $userakun->id,
+          'idakun' => $userakun->id_user,
           'status' => 'SUKSES',
           'nama' => $userakun->nama,
           'role' => $userakun->role
@@ -52,15 +52,21 @@ class Auth extends CI_Controller
         }
       }
     } else {
-      // $this->fungsiPeringatan("Username & Password salah");
-      $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Username & Password salah</div>');
-      redirect('Home');
+      redirect('Auth/ErrorLogin');
     }
+  }
+
+  public function ErrorLogin()
+  {
+    $data['title'] = 'Gagal Login';
+    $this->load->view('templates/Auth_Header');
+    $this->load->view('Auth/ErrorLogin');
+    $this->load->view('templates/Auth_Footer');
   }
   public function Register()
   {
     $this->form_validation->set_rules('nama', 'nama', 'trim|required|min_length[3]');
-    $this->form_validation->set_rules('email', 'email', 'trim|valid_email|required|min_length[4]|is_unique[user.email]');
+    $this->form_validation->set_rules('email', 'email', 'trim|valid_email|required|min_length[4]|is_unique[tb_user.email]');
     $this->form_validation->set_rules('password1', 'password', 'trim|required|min_length[4]|matches[password2]');
     $this->form_validation->set_rules('password2', 'Password', 'required|trim|matches[password1]');
 
@@ -79,7 +85,10 @@ class Auth extends CI_Controller
         'nama' => $this->input->post('nama'),
         'email' => $this->input->post('email'),
         'password' => md5($this->input->post('password1')),
-        'role' => 2
+        'role' => 2,
+        'image' => 'pic.jpg',
+        'is_active' => 1,
+        'date_created' => time()
       ];
       $this->Auth->prosesRegistrasi($data);
       $this->fungsiPeringatan("Your account was active, please Login");

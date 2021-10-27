@@ -16,7 +16,7 @@ class DataLatih extends CI_Controller
   public function index()
   {
     $data = array(
-      'user' => $this->db->get_where('user', ['nama' => $this->session->userdata('nama')])->row_array(),
+      'user' => $this->db->get_where('tb_user', ['nama' => $this->session->userdata('nama')])->row_array(),
       'title' => 'Data Latih',
       'latih' => $this->Admin->getLatih(),
       'fakultas' => $this->db->get('tb_fakultas')->result_array(),

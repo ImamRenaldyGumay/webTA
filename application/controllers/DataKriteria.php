@@ -16,7 +16,7 @@ class DataKriteria extends CI_Controller
   public function index()
   {
     $data = array(
-      'user' => $this->db->get_where('user', ['nama' => $this->session->userdata('nama')])->row_array(),
+      'user' => $this->db->get_where('tb_user', ['nama' => $this->session->userdata('nama')])->row_array(),
       'title' => 'Data Kriteria',
       'kriteria' => $this->Admin->getKriteria(),
       'beasiswa' => $this->db->get('tb_beasiswa')->result_array()

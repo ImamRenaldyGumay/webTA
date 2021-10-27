@@ -48,7 +48,12 @@
                   <p>Data Prodi</p>
                 </a>
               </li>
-
+              <li class="nav-item">
+                <a href="<?= base_url('DataMahasiswa') ?>" class="nav-link <?= ($this->uri->uri_string() == 'DataMahasiswa') ? 'active' : '' ?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Data Mahasiswa</p>
+                </a>
+              </li>
               <li class="nav-item">
                 <a href="<?= base_url('DataBeasiswa') ?>" class="nav-link <?= ($this->uri->uri_string() == 'DataBeasiswa') ? 'active' : '' ?>">
                   <i class="far fa-circle nav-icon"></i>
@@ -90,6 +95,32 @@
               <i class="nav-icon fas fa-database"></i>
               <p>
                 Coba
+              </p>
+            </a>
+          </li>
+          <li class="nav-header">Tambah User</li>
+          <li class="nav-item">
+            <a href="<?= base_url('Coba') ?>" class="nav-link <?= ($this->uri->uri_string() == 'Coba') ? 'active' : '' ?>">
+              <i class="nav-icon fas fa-user-tie"></i>
+              <p>
+                Tambah Instruktur
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="<?= base_url('TambahAdmin') ?>" class="nav-link <?= ($this->uri->uri_string() == 'TambahAdmin') ? 'active' : '' ?>">
+              <i class="nav-icon fas fa-user-plus"></i>
+              <p>
+                Tambah Admin
+              </p>
+            </a>
+          </li>
+          <li class="nav-header">User</li>
+          <li class="nav-item">
+            <a href="<?= base_url('') ?>" class="nav-link <?= ($this->uri->uri_string() == '') ? 'active' : '' ?>">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                Profile - Ku
               </p>
             </a>
           </li>

@@ -23,7 +23,7 @@
     <!-- Default box -->
     <div class="card">
       <div class="card-header">
-        <button class="btn btn-primary card-title" data-toggle="modal" data-target="#TambahFakultas">Tambah <?= $title ?></button>
+        <button class="btn btn-primary" data-toggle="modal" data-target="#TambahFakultas">Tambah <?= $title ?></button>
       </div>
       <div class="card-body">
         <table class="table table-bordered table-hover" id="example3">

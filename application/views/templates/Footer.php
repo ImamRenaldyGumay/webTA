@@ -65,7 +65,9 @@
     });
   }, 5000);
 
-  $('.swalDefaultSuccess').click(function() {
+  $("#id_prodi").chained("#id_fakultas");
+
+  $('.submit').click(function() {
     Swal.fire({
       icon: 'success',
       title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
