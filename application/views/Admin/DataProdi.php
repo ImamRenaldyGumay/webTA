@@ -113,7 +113,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form action="<?= base_url('DataProdi/Edit') ?>" method="POST">
+        <form action="<?= base_url('EditDataProdi') ?>" method="POST">
           <div class="modal-body">
             <div class="form-group">
               <label for="id_prodi">Id Prodi</label>

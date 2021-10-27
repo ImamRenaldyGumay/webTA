@@ -64,7 +64,7 @@ $route['EditDataFakultas'] = 'Admin/EditDataFakultas/';
 // Route DataProdi
 $route['DataProdi'] = 'Admin/DataProdi';
 $route['TambahDataProdi'] = 'Admin/TambahDataProdi';
-
+$route['EditDataProdi'] = 'Admin/EditDataProdi';
 
 
 $route['DataMahasiswa'] = 'DataMahasiswa/index';
