@@ -14,9 +14,39 @@ class Admin_Model extends CI_Model
     return $query->result_array();
   }
 
-  public function TambahFakultas($data)
+  public function TambahFakultas()
   {
-    $this->db->insert('tb_fakultas', $data);
+    $nama_fakultas =  $this->input->post('nama_fakultas');
+    $data = [
+      'nama_fakultas' => $nama_fakultas
+    ];
+    $query = $this->db->insert('tb_fakultas', $data);
+    return $query;
+  }
+
+  public function HapusDataFakultas($id_fakultas)
+  {
+    $where = array('id_fakultas' => $id_fakultas);
+    $query =  $this->db->delete('tb_fakultas', $where);
+    return $query;
+  }
+
+  public function detail_dataFakultas($id_fakultas)
+  {
+    $query = $this->db->get_where('tb_fakultas', ['id_fakultas' => $id_fakultas]);
+    return $query->row_array();
+  }
+
+  public function EditDataFakultas()
+  {
+    $id_fakultas = $this->input->post('id_fakultas');
+    $nama_fakultas = $this->input->post('nama_fakultas');
+    $data = [
+      'nama_fakultas' => $nama_fakultas
+    ];
+    $this->db->where('id_fakultas', $id_fakultas);
+    $query = $this->db->update('tb_fakultas', $data);
+    return $query;
   }
 
   function getIdFakultas($where, $table)

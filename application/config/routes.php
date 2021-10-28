@@ -59,18 +59,23 @@ $route['Admin'] = 'Admin/index';
 // Route DataFakultas
 $route['DataFakultas'] = 'Admin/DataFakultas';
 $route['TambahDataFakultas'] = 'Admin/TambahDataFakultas';
+$route['AksiTambahDataFakultas'] = 'Admin/AksiTambahDataFakultas';
 $route['EditDataFakultas'] = 'Admin/EditDataFakultas/';
-
+$route['AksiEditDataFakultas'] = 'Admin/AksiEditDataFakultas/';
 // Route DataProdi
 $route['DataProdi'] = 'Admin/DataProdi';
 $route['TambahDataProdi'] = 'Admin/TambahDataProdi';
 $route['EditDataProdi'] = 'Admin/EditDataProdi';
-
-
+// Route DataMahasiswa
 $route['DataMahasiswa'] = 'DataMahasiswa/index';
+// Route DataBeasiswa
 $route['DataBeasiswa'] = 'DataBeasiswa/index';
+// Route DataKriteria
 $route['DataKriteria'] = 'DataKriteria/index';
+// Route Data Latih
 $route['DataLatih'] = 'DataLatih/index';
+// Route DataHitung
+$route['DataHitung'] = 'DataHitung/index';
 
 $route['Atribut'] = 'Atribut/index';
 $route['Parameter'] = 'Parameter/index';

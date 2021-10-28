@@ -22,7 +22,7 @@
     <!-- Default box -->
     <div class="card">
       <div class="card-header border-0">
-        <button data-toggle="modal" data-target="#TambahFakultas" class="btn btn-primary col-12 mt-3">Tambah <?= $title ?></button>
+        <a href="<?= base_url('TambahDataFakultas') ?>" class="btn btn-primary col-12 mt-3">Tambah <?= $title ?></a>
       </div>
       <div class="card-body">
         <table class="table table-bordered table-hover" id="example3">
@@ -41,7 +41,8 @@
                 <td><?= $no++ ?></td>
                 <td><?= $f['nama_fakultas'] ?></td>
                 <td>
-                  <a href="<?= base_url('') ?>" class="btn btn-warning" data-toggle="modal" data-target="#EditFakultas<?= $f['id_fakultas'] ?>">Edit</a>
+                  <!-- <a href="<?= base_url() ?>" class="btn btn-warning" data-toggle="modal" data-target="#EditFakultas<?= $f['id_fakultas'] ?>">Edit</a> -->
+                  <a href="<?= base_url('Admin/EditDataFakultas/' . $f['id_fakultas']) ?>" class="btn btn-warning">Edit</a>
                   <a href="<?= base_url('Admin/HapusDataFakultas/' . $f['id_fakultas']) ?>" class="btn btn-danger btn-action" onclick="confirm('Yakin?')">Delete</a>
                 </td>
               </tr>

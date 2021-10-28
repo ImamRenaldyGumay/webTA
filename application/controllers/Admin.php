@@ -41,9 +41,25 @@ class Admin extends CI_Controller
 
     public function TambahDataFakultas()
     {
-        $nama_fakultas =  $this->input->post('nama_fakultas');
-        $data = ['nama_fakultas' => $nama_fakultas];
-        $tambahFakultas =  $this->Admin->TambahFakultas($data);
+        $this->form_validation->set_rules('nama_fakultas', 'Nama Fakultas', 'trim|required');
+        $this->form_validation->set_message('required', '{field} harus di isi!.');
+        $data = array(
+            'user' => $this->Admin->getNama()->row_array(),
+            'title' => 'Tambah Data Fakultas',
+        );
+        $this->load->view('templates/Header', $data);
+        $this->load->view('templates/Navbar', $data);
+        $this->load->view('templates/Sidebar', $data);
+        $this->load->view('Action/TambahDataFakultas', $data);
+        $this->load->view('templates/Footer', $data);
+    }
+
+    public function AksiTambahDataFakultas()
+    {
+        $this->form_validation->set_rules('nama_fakultas', 'Nama Fakultas', 'trim|required');
+        $this->form_validation->set_message('required', '{field} harus di isi!.');
+
+        $tambahFakultas =  $this->Admin->TambahFakultas();
         if ($tambahFakultas) {
             $this->fungsiPeringatan("Data Berhasil di Tambahkan");
             redirect('DataFakultas', 'refresh');
@@ -55,9 +71,8 @@ class Admin extends CI_Controller
 
     public function HapusDataFakultas($id_fakultas)
     {
-        $where = array('id_fakultas' => $id_fakultas);
-        $query =  $this->db->delete('tb_fakultas', $where);
-        if ($query) {
+        $hapusDataFakultas = $this->Admin->HapusDataFakultas($id_fakultas);
+        if ($hapusDataFakultas) {
             $this->fungsiPeringatan("Data Berhasil di Hapus");
             redirect('DataFakultas', 'refresh');
         } else {
@@ -68,14 +83,29 @@ class Admin extends CI_Controller
 
     public function EditDataFakultas($id_fakultas)
     {
-        $id_fakultas = $this->input->post('id_fakultas');
-        $nama_fakultas = $this->input->post('nama_fakultas');
-        $data = ['nama_fakultas' => $nama_fakultas];
-        $where = ['id_fakultas' => $id_fakultas];
-        $this->db->where($where);
-        $this->db->update('tb_fakultas', $data);
-        $this->fungsiPeringatan("Data Berhasil di Edit");
-        redirect('DataFakultas', 'refresh');
+        $data = array(
+            'user' => $this->Admin->getNama()->row_array(),
+            'title' => 'Edit Data Fakultas',
+            'ubah' => $this->Admin->detail_data($id_fakultas)
+        );
+
+        $this->load->view('templates/Header', $data);
+        $this->load->view('templates/Navbar', $data);
+        $this->load->view('templates/Sidebar', $data);
+        $this->load->view('Action/EditDataFakultas', $data);
+        $this->load->view('templates/Footer', $data);
+    }
+
+    public function AksiEditDataFakultas()
+    {
+        $editFakultas =  $this->Admin->EditDataFakultas();
+        if ($editFakultas) {
+            $this->fungsiPeringatan("Data Berhasil di Edit");
+            redirect('DataFakultas', 'refresh');
+        } else {
+            $this->fungsiPeringatan("Data Gagal di Edit");
+            redirect('DataFakultas', 'refresh');
+        }
     }
 
     public function DataProdi()
@@ -142,6 +172,27 @@ class Admin extends CI_Controller
             redirect('DataProdi', 'refresh');
         }
         redirect('DataProdi', 'refresh');
+    }
+
+    public function DataLatih()
+    {
+        $data = array(
+            'user' => $this->db->get_where('tb_user', ['nama' => $this->session->userdata('nama')])->row_array(),
+            'title' => 'Data Latih',
+            'latih' => $this->Admin->getLatih(),
+            'fakultas' => $this->db->get('tb_fakultas')->result_array(),
+            'prodi' => $this->db->get('tb_prodi')->result_array(),
+            'beasiswa' => $this->db->get('tb_beasiswa')->result_array(),
+            'c1' => $this->Admin->getC1(),
+            'c2' => $this->Admin->getC2(),
+            'c3' => $this->Admin->getC3(),
+            'c4' => $this->Admin->getC4(),
+        );
+        $this->load->view('templates/Header', $data);
+        $this->load->view('templates/Navbar', $data);
+        $this->load->view('templates/Sidebar', $data);
+        $this->load->view('Admin/Datalatih', $data);
+        $this->load->view('templates/Footer', $data);
     }
 
     public function fungsiPeringatan($isiPeringatan)
