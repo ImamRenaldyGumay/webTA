@@ -49,7 +49,6 @@
         <!-- /.card-body -->
         <div class="card-footer justify-content-between">
           <button type="submit" class="btn btn-primary">Edit</button>
-          <button type="reset" class="btn btn-default">Reset</button>
         </div>
       </form>
     </div>

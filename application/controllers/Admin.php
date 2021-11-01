@@ -47,25 +47,24 @@ class Admin extends CI_Controller
             'user' => $this->Admin->getNama()->row_array(),
             'title' => 'Tambah Data Fakultas',
         );
-        $this->load->view('templates/Header', $data);
-        $this->load->view('templates/Navbar', $data);
-        $this->load->view('templates/Sidebar', $data);
-        $this->load->view('Action/TambahDataFakultas', $data);
-        $this->load->view('templates/Footer', $data);
-    }
-
-    public function AksiTambahDataFakultas()
-    {
-        $this->form_validation->set_rules('nama_fakultas', 'Nama Fakultas', 'trim|required');
-        $this->form_validation->set_message('required', '{field} harus di isi!.');
-
-        $tambahFakultas =  $this->Admin->TambahFakultas();
-        if ($tambahFakultas) {
-            $this->fungsiPeringatan("Data Berhasil di Tambahkan");
-            redirect('DataFakultas', 'refresh');
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/Header', $data);
+            $this->load->view('templates/Navbar', $data);
+            $this->load->view('templates/Sidebar', $data);
+            $this->load->view('Action/TambahDataFakultas', $data);
+            $this->load->view('templates/Footer', $data);
         } else {
-            $this->fungsiPeringatan("Data Gagal di Tambahkan");
-            redirect('DataFakultas', 'refresh');
+            $data = [
+                'nama_fakultas' => $this->input->post('nama_fakultas')
+            ];
+            $tambahFakultas =  $this->Admin->TambahFakultas($data);
+            if ($tambahFakultas) {
+                $this->fungsiPeringatan("Data Berhasil di Tambahkan");
+                redirect('DataFakultas', 'refresh');
+            } else {
+                $this->fungsiPeringatan("Data Gagal di Tambahkan");
+                redirect('DataFakultas', 'refresh');
+            }
         }
     }
 
@@ -83,12 +82,13 @@ class Admin extends CI_Controller
 
     public function EditDataFakultas($id_fakultas)
     {
+        $this->form_validation->set_rules('nama_prodi', 'Nama Prodi', 'trim|required');
+        $this->form_validation->set_message('required', '{field} harus di isi!.');
         $data = array(
             'user' => $this->Admin->getNama()->row_array(),
             'title' => 'Edit Data Fakultas',
-            'ubah' => $this->Admin->detail_data($id_fakultas)
+            'ubah' => $this->Admin->detail_dataFakultas($id_fakultas)
         );
-
         $this->load->view('templates/Header', $data);
         $this->load->view('templates/Navbar', $data);
         $this->load->view('templates/Sidebar', $data);
@@ -98,6 +98,9 @@ class Admin extends CI_Controller
 
     public function AksiEditDataFakultas()
     {
+        $this->form_validation->set_rules('nama_prodi', 'Nama Prodi', 'trim|required');
+        $this->form_validation->set_message('required', '{field} harus di isi!.');
+
         $editFakultas =  $this->Admin->EditDataFakultas();
         if ($editFakultas) {
             $this->fungsiPeringatan("Data Berhasil di Edit");
@@ -125,13 +128,25 @@ class Admin extends CI_Controller
 
     public function TambahDataProdi()
     {
-        $id_fakultas = $this->input->post('id_fakultas');
-        $nama_prodi = $this->input->post('nama_prodi');
-        $data = [
-            'id_fakultas' => $id_fakultas,
-            'nama_prodi' => $nama_prodi
-        ];
-        $tambahProdi =  $this->db->insert('tb_prodi', $data);
+        $this->form_validation->set_rules('id_fakultas', 'Nama Fakultas', 'trim|required');
+        $this->form_validation->set_rules('nama_prodi', 'Nama Prodi', 'trim|required');
+        $this->form_validation->set_message('required', '{field} harus di isi!.');
+        $data = array(
+            'user' => $this->Admin->getNama()->row_array(),
+            'title' => 'Data Prodi',
+            'prodi' => $this->Admin->getProdi(),
+            'fakultas' => $this->db->get('tb_fakultas')->result_array()
+        );
+        $this->load->view('templates/Header', $data);
+        $this->load->view('templates/Navbar', $data);
+        $this->load->view('templates/Sidebar', $data);
+        $this->load->view('Action/TambahDataProdi', $data);
+        $this->load->view('templates/Footer', $data);
+    }
+
+    public function AksiTambahDataProdi()
+    {
+        $tambahProdi = $this->Admin->TambahDataProdi();
         if ($tambahProdi) {
             $this->fungsiPeringatan("Data Berhasil di Tambahkan");
             redirect('DataProdi', 'refresh');
@@ -155,6 +170,24 @@ class Admin extends CI_Controller
     }
 
     public function EditDataProdi()
+    {
+        $this->form_validation->set_rules('id_fakultas', 'Nama Fakultas', 'trim|required');
+        $this->form_validation->set_rules('nama_prodi', 'Nama Prodi', 'trim|required');
+        $this->form_validation->set_message('required', '{field} harus di isi!.');
+        $data = array(
+            'user' => $this->Admin->getNama()->row_array(),
+            'title' => 'Data Prodi',
+            'prodi' => $this->Admin->getProdi(),
+            'fakultas' => $this->db->get('tb_fakultas')->result_array()
+        );
+        $this->load->view('templates/Header', $data);
+        $this->load->view('templates/Navbar', $data);
+        $this->load->view('templates/Sidebar', $data);
+        $this->load->view('Action/TambahDataProdi', $data);
+        $this->load->view('templates/Footer', $data);
+    }
+
+    public function AksiEditDataProdi()
     {
         $id_prodi = $this->input->post('id_prodi');
         $nama_prodi = $this->input->post('nama_prodi');

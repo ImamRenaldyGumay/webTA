@@ -14,12 +14,8 @@ class Admin_Model extends CI_Model
     return $query->result_array();
   }
 
-  public function TambahFakultas()
+  public function TambahFakultas($data)
   {
-    $nama_fakultas =  $this->input->post('nama_fakultas');
-    $data = [
-      'nama_fakultas' => $nama_fakultas
-    ];
     $query = $this->db->insert('tb_fakultas', $data);
     return $query;
   }
@@ -41,17 +37,35 @@ class Admin_Model extends CI_Model
   {
     $id_fakultas = $this->input->post('id_fakultas');
     $nama_fakultas = $this->input->post('nama_fakultas');
-    $data = [
-      'nama_fakultas' => $nama_fakultas
-    ];
+    $data = ['nama_fakultas' => $nama_fakultas];
     $this->db->where('id_fakultas', $id_fakultas);
     $query = $this->db->update('tb_fakultas', $data);
     return $query;
   }
 
+  public function TambahDataProdi()
+  {
+    $id_fakultas = $this->input->post('id_fakultas');
+    $nama_prodi = $this->input->post('nama_prodi');
+    $data = [
+      'id_fakultas' => $id_fakultas,
+      'nama_prodi' => $nama_prodi
+    ];
+    $tambahProdi =  $this->db->insert('tb_prodi', $data);
+    return $tambahProdi;
+  }
+
   function getIdFakultas($where, $table)
   {
     return $this->db->get_where($table, $where)->result_array();
+  }
+
+  public function getProdi()
+  {
+    $query = "SELECT `tb_prodi`.*, `tb_fakultas`.`nama_fakultas`
+    FROM `tb_prodi` JOIN `tb_fakultas`
+    ON `tb_prodi`.`id_fakultas` = `tb_fakultas`.`id_fakultas`";
+    return $this->db->query($query)->result_array();
   }
 
   public function ProdiOnMahasiswa()
@@ -78,15 +92,6 @@ class Admin_Model extends CI_Model
   {
     $query = $this->db->get('beasiswa')->result_array();
     return $query;
-  }
-
-
-  public function getProdi()
-  {
-    $query = "SELECT `tb_prodi`.*, `tb_fakultas`.`nama_fakultas`
-    FROM `tb_prodi` JOIN `tb_fakultas`
-    ON `tb_prodi`.`id_fakultas` = `tb_fakultas`.`id_fakultas`";
-    return $this->db->query($query)->result_array();
   }
 
   public function getKriteria()
