@@ -27,7 +27,6 @@
                         <!-- /.col -->
                         <div class="col-4">
                             <button type="submit" class="btn btn-primary btn-block">Sign In</button>
-
                         </div>
                         <!-- /.col -->
                     </div>
@@ -36,9 +35,9 @@
                 <!-- <p class="mb-1">
                     <a href="forgot-password.html">I forgot my password</a>
                 </p> -->
-                <p class="mb-0">
+                <!-- <p class="mb-0">
                     <a href="<?= base_url('Auth/Register') ?>" class="text-center">Belum punya Akun? Klik saya</a>
-                </p>
+                </p> -->
             </div>
             <!-- /.card-body -->
         </div>

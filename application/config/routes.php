@@ -74,10 +74,11 @@ $route['DataBeasiswa'] = 'DataBeasiswa/index';
 // Route DataKriteria
 $route['DataKriteria'] = 'DataKriteria/index';
 // Route Data Latih
-$route['DataLatih'] = 'DataLatih/index';
+$route['DataLatih'] = 'Admin/DataLatih';
+$route['TambahDataLatih'] = 'Admin/TambahDataLatih';
 // Route DataHitung
-$route['DataHitung'] = 'DataHitung/index';
-
+$route['DataHitung'] = 'Admin/DataHitung';
+// Coba
 $route['Atribut'] = 'Atribut/index';
 $route['Parameter'] = 'Parameter/index';
 $route['Latih'] = 'Latih/index';

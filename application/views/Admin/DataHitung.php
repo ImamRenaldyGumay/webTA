@@ -22,8 +22,8 @@
 
     <!-- Default box -->
     <div class="card">
-      <div class="card-header">
-        <button class="btn btn-primary" data-toggle="modal" data-target="#TambahFakultas">Tambah <?= $title ?></button>
+      <div class="card-header border-0">
+        <a href="<?= base_url('TambahDataFakultas') ?>" class="btn btn-primary col-12 mt-3">Tambah <?= $title ?></a>
       </div>
       <div class="card-body">
         <table class="table table-bordered table-hover" id="example3">

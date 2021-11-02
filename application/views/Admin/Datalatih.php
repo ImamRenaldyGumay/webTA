@@ -24,8 +24,8 @@
 
     <!-- Default box -->
     <div class="card">
-      <div class="card-header">
-        <button class="btn btn-primary card-title" data-toggle="modal" data-target="#TL">Tambah <?= $title ?></button>
+      <div class="card-header border-0">
+        <a href="<?= base_url('TambahDataFakultas') ?>" class="btn btn-primary col-12 mt-3">Tambah <?= $title ?></a>
       </div>
       <div class="card-body">
         <table class="table table-bordered table-hover" id="example3">
@@ -72,8 +72,8 @@
                   <td>Tidak Layak</td>
                 <?php endif ?>
                 <td>
-                  <a href="<?= base_url('') ?>" class="btn btn-warning" data-toggle="modal" data-target="#EL<?= $l['id_latih'] ?>"><i class="fas fa-pencil-alt"></i> Edit</a>
-                  <a href="<?= base_url('DataLatih/Hapus/' . $l['id_latih']) ?>" class="btn btn-danger btn-action" data-toggle="tooltip" onclick="return confirm('Yakin?')"><i class="fas fa-trash"></i> Hapus</a>
+                  <a href="<?= base_url('') ?>" class="btn btn-warning" data-toggle="modal" data-target="#EL<?= $l['id_latih'] ?>"><i class="fas fa-pencil-alt"></i></a>
+                  <a href="<?= base_url('DataLatih/Hapus/' . $l['id_latih']) ?>" class="btn btn-danger btn-action" data-toggle="tooltip" onclick="return confirm('Yakin?')"><i class="fas fa-trash"></i></a>
                 </td>
               </tr>
             <?php endforeach ?>

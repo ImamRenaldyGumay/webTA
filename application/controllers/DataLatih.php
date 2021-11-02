@@ -15,23 +15,23 @@ class DataLatih extends CI_Controller
 
   public function index()
   {
-    $data = array(
-      'user' => $this->db->get_where('tb_user', ['nama' => $this->session->userdata('nama')])->row_array(),
-      'title' => 'Data Latih',
-      'latih' => $this->Admin->getLatih(),
-      'fakultas' => $this->db->get('tb_fakultas')->result_array(),
-      'prodi' => $this->db->get('tb_prodi')->result_array(),
-      'beasiswa' => $this->db->get('tb_beasiswa')->result_array(),
-      'c1' => $this->Admin->getC1(),
-      'c2' => $this->Admin->getC2(),
-      'c3' => $this->Admin->getC3(),
-      'c4' => $this->Admin->getC4(),
-    );
-    $this->load->view('templates/Header', $data);
-    $this->load->view('templates/Navbar', $data);
-    $this->load->view('templates/Sidebar', $data);
-    $this->load->view('Admin/Datalatih', $data);
-    $this->load->view('templates/Footer', $data);
+    // $data = array(
+    //   'user' => $this->db->get_where('tb_user', ['nama' => $this->session->userdata('nama')])->row_array(),
+    //   'title' => 'Data Latih',
+    //   'latih' => $this->Admin->getLatih(),
+    //   'fakultas' => $this->db->get('tb_fakultas')->result_array(),
+    //   'prodi' => $this->db->get('tb_prodi')->result_array(),
+    //   'beasiswa' => $this->db->get('tb_beasiswa')->result_array(),
+    //   'c1' => $this->Admin->getC1(),
+    //   'c2' => $this->Admin->getC2(),
+    //   'c3' => $this->Admin->getC3(),
+    //   'c4' => $this->Admin->getC4(),
+    // );
+    // $this->load->view('templates/Header', $data);
+    // $this->load->view('templates/Navbar', $data);
+    // $this->load->view('templates/Sidebar', $data);
+    // $this->load->view('Admin/Datalatih', $data);
+    // $this->load->view('templates/Footer', $data);
   }
 
   public function TambahLatih()

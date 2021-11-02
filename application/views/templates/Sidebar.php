@@ -49,18 +49,6 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?= base_url('DataMahasiswa') ?>" class="nav-link <?= ($this->uri->uri_string() == 'DataMahasiswa') ? 'active' : '' ?>">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Data Mahasiswa</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="<?= base_url('DataBeasiswa') ?>" class="nav-link <?= ($this->uri->uri_string() == 'DataBeasiswa') ? 'active' : '' ?>">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Data Beasiswa</p>
-                </a>
-              </li>
-              <li class="nav-item">
                 <a href="<?= base_url('DataKriteria') ?>" class="nav-link <?= ($this->uri->uri_string() == 'DataKriteria') ? 'active' : '' ?>">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Data Kriteria</p>
@@ -98,29 +86,12 @@
               </p>
             </a>
           </li>
-          <li class="nav-header">Tambah User</li>
+          <li class="nav-header">User</li>
           <li class="nav-item">
             <a href="<?= base_url('Coba') ?>" class="nav-link <?= ($this->uri->uri_string() == 'Coba') ? 'active' : '' ?>">
               <i class="nav-icon fas fa-user-tie"></i>
               <p>
-                Tambah Instruktur
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?= base_url('TambahAdmin') ?>" class="nav-link <?= ($this->uri->uri_string() == 'TambahAdmin') ? 'active' : '' ?>">
-              <i class="nav-icon fas fa-user-plus"></i>
-              <p>
-                Tambah Admin
-              </p>
-            </a>
-          </li>
-          <li class="nav-header">User</li>
-          <li class="nav-item">
-            <a href="<?= base_url('') ?>" class="nav-link <?= ($this->uri->uri_string() == '') ? 'active' : '' ?>">
-              <i class="nav-icon fas fa-user"></i>
-              <p>
-                Profile - Ku
+                Tambah User
               </p>
             </a>
           </li>
@@ -154,17 +125,7 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item">
-            <a href="../widgets.html" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Widgets
-                <span class="right badge badge-danger">New</span>
-              </p>
-            </a>
-          </li>
         </ul>
-
       </nav>
       <!-- /.sidebar-menu -->
     </div>

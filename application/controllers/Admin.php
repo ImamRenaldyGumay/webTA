@@ -210,7 +210,7 @@ class Admin extends CI_Controller
     public function DataLatih()
     {
         $data = array(
-            'user' => $this->db->get_where('tb_user', ['nama' => $this->session->userdata('nama')])->row_array(),
+            'user' =>  $this->Admin->getNama()->row_array(),
             'title' => 'Data Latih',
             'latih' => $this->Admin->getLatih(),
             'fakultas' => $this->db->get('tb_fakultas')->result_array(),
@@ -225,6 +225,25 @@ class Admin extends CI_Controller
         $this->load->view('templates/Navbar', $data);
         $this->load->view('templates/Sidebar', $data);
         $this->load->view('Admin/Datalatih', $data);
+        $this->load->view('templates/Footer', $data);
+    }
+
+    public function TambahDataLatih()
+    {
+        # code...
+    }
+
+    public function DataHitung()
+    {
+        $data = array(
+            'user' => $this->Admin->getNama()->row_array(),
+            'title' => 'Data Hitung',
+            'hitung' => $this->db->get('tb_hitung')->result_array()
+        );
+        $this->load->view('templates/Header', $data);
+        $this->load->view('templates/Navbar', $data);
+        $this->load->view('templates/Sidebar', $data);
+        $this->load->view('Admin/DataHitung', $data);
         $this->load->view('templates/Footer', $data);
     }
 
