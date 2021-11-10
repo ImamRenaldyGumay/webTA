@@ -10,11 +10,9 @@
     </a>
 
     <!-- Sidebar -->
-    <div class="sidebar mb-2">
-
+    <div class="sidebar">
       <!-- Sidebar Menu -->
       <nav class="mt-2 ">
-
         <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
@@ -96,8 +94,8 @@
             </a>
           </li>
           <li class="nav-header">Uji Coba</li>
-          <li class="nav-item <?= ($this->uri->uri_string() == 'Atribut') || ($this->uri->uri_string() == 'Parameter') || ($this->uri->uri_string() == 'Latih')  ? 'menu-open' : '' ?>">
-            <a href="#" class="nav-link <?= ($this->uri->uri_string() == 'Atribut') || ($this->uri->uri_string() == 'Parameter') || ($this->uri->uri_string() == 'Latih')   ? 'active' : '' ?>">
+          <li class="nav-item <?= ($this->uri->uri_string() == 'Atribut') || ($this->uri->uri_string() == 'Parameter') || ($this->uri->uri_string() == 'Latih') || ($this->uri->uri_string() == 'Training') ? 'menu-open' : '' ?>">
+            <a href="#" class="nav-link <?= ($this->uri->uri_string() == 'Atribut') || ($this->uri->uri_string() == 'Parameter') || ($this->uri->uri_string() == 'Latih') || ($this->uri->uri_string() == 'Training')  ? 'active' : '' ?>">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Data Uji Coba
@@ -121,6 +119,12 @@
                 <a href="<?= base_url('Latih') ?>" class="nav-link <?= ($this->uri->uri_string() == 'Latih') ? 'active' : '' ?>">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Latih</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url('Training') ?>" class="nav-link <?= ($this->uri->uri_string() == 'Training') ? 'active' : '' ?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Training</p>
                 </a>
               </li>
             </ul>

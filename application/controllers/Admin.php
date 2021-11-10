@@ -207,6 +207,80 @@ class Admin extends CI_Controller
         redirect('DataProdi', 'refresh');
     }
 
+    public function DataKriteria()
+    {
+        $data = array(
+            'user' => $this->Admin->getNama()->row_array(),
+            'title' => 'Data Kriteria',
+            'kriteria' => $this->Admin->getKriteria()
+        );
+        $this->load->view('templates/Header', $data);
+        $this->load->view('templates/Navbar', $data);
+        $this->load->view('templates/Sidebar', $data);
+        $this->load->view('Admin/DataKriteria', $data);
+        $this->load->view('templates/Footer', $data);
+    }
+
+    public function TambahDataKriteria()
+    {
+        $this->form_validation->set_rules('nama_kriteria', 'Nama Kriteria', 'required');
+        $this->form_validation->set_message('required', '{field} harus di isi!.');
+
+        $data = array(
+            'user' => $this->Admin->getNama()->row_array(),
+            'title' => 'Tambah Data Kriteria'
+        );
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/Header', $data);
+            $this->load->view('templates/Navbar', $data);
+            $this->load->view('templates/Sidebar', $data);
+            $this->load->view('Action/TambahDataKriteria', $data);
+            $this->load->view('templates/Footer', $data);
+        } else {
+            $nama_kriteria = $this->input->post('nama_kriteria');
+            $data = ['nama_kriteria' => $nama_kriteria];
+            $tambahKriteria = $this->Admin->tambahKriteria($data);
+            if ($tambahKriteria) {
+                $this->fungsiPeringatan("Data Berhasil di Tambahkan");
+                redirect('DataKriteria', 'refresh');
+            } else {
+                $this->fungsiPeringatan("Data Gagal di Tambahkan");
+                redirect('DataKriteria', 'refresh');
+            }
+        }
+    }
+
+    public function HapusDataKriteria($id_kriteria)
+    {
+        $where = array('id_kriteria' => $id_kriteria);
+        $hapusKriteria = $this->db->delete('tb_kriteria', $where);
+        if ($hapusKriteria) {
+            $this->fungsiPeringatan("Data Berhasil di Hapus");
+            redirect('DataKriteria', 'refresh');
+        } else {
+            $this->fungsiPeringatan("Data Gagal di Hapus");
+            redirect('DataKriteria', 'refresh');
+        }
+    }
+
+    public function EditDataKriteria($id_kriteria)
+    {
+        $this->form_validation->set_rules('id_fakultas', 'Nama Fakultas', 'trim|required');
+        $this->form_validation->set_rules('nama_prodi', 'Nama Prodi', 'trim|required');
+        $this->form_validation->set_message('required', '{field} harus di isi!.');
+
+        $data = array(
+            'user' => $this->Admin->getNama()->row_array(),
+            'title' => 'Edit Data Kriteria',
+            'kriteria' => $this->Admin->detail_dataKriteria($id_kriteria)
+        );
+        $this->load->view('templates/Header', $data);
+        $this->load->view('templates/Navbar', $data);
+        $this->load->view('templates/Sidebar', $data);
+        $this->load->view('Admin/EditDataKriteria', $data);
+        $this->load->view('templates/Footer', $data);
+    }
+
     public function DataLatih()
     {
         $data = array(
@@ -247,47 +321,28 @@ class Admin extends CI_Controller
         $this->load->view('templates/Footer', $data);
     }
 
+    public function Training()
+    {
+        $CountTanggungBanyak = $this->Admin->CountTanggungBanyak();
+        $CountPln450 = $this->Admin->CountPln450();
+        $CountLayakLayak = $this->Admin->CountLayakLayak();
+        $data = array(
+            'user' => $this->Admin->getNama()->row_array(),
+            'title' => 'Data Training',
+            'training' => $this->db->get('training')->result_array(),
+            'CountTanggungBanyak' => $CountTanggungBanyak,
+            'CountPln450' => $CountPln450,
+            'CountLayakLayak' => $CountLayakLayak
+        );
+        $this->load->view('templates/Header', $data);
+        $this->load->view('templates/Navbar', $data);
+        $this->load->view('templates/Sidebar', $data);
+        $this->load->view('Admin/Training', $data);
+        $this->load->view('templates/Footer', $data);
+    }
+
     public function fungsiPeringatan($isiPeringatan)
     {
         echo "<script>alert('" . $isiPeringatan . "');</script>";
     }
-
-    // public function TambahAdmin()
-    // {
-    //     $this->form_validation->set_rules('nama', 'Nama', 'trim|required|valid_email');
-    //     $this->form_validation->set_rules('email', 'email', 'trim|valid_email|required|min_length[4]|is_unique[tb_user.email]');
-
-    //     $this->form_validation->set_message('min_length', '{field} minimal {param} karakter.');
-    //     $this->form_validation->set_message('required', '{field} harus di isi!.');
-    //     $this->form_validation->set_message('valid_email', 'Harus berupa {field}!.');
-    //     $this->form_validation->set_message('min_length', '{field} minimal {param} karakter.');
-    //     $this->form_validation->set_message('is_unique', '{field} ini sudah ada yang punya');
-
-    //     $getAdmin = $this->Admin->getAdmin();
-    //     $data = array(
-    //         'user' => $this->Admin->getNama()->row_array(),
-    //         'title' => 'Tambah Admin',
-    //         'admin' => $getAdmin
-    //     );
-    //     if ($this->form_validation->run() == false) {
-    //         $this->load->view('templates/Header', $data);
-    //         $this->load->view('templates/Navbar', $data);
-    //         $this->load->view('templates/Sidebar', $data);
-    //         $this->load->view('Admin/TambahAdmin', $data);
-    //         $this->load->view('templates/Footer', $data);
-    //     } else {
-    //         $data = [
-    //             'nama' => $this->input->post('nama'),
-    //             'email' => $this->input->post('email'),
-    //             'password' => md5($this->input->post('password')),
-    //             'role' => 2,
-    //             'image' => 'pic.jpg',
-    //             'is_active' => 1,
-    //             'date_created' => time()
-    //         ];
-    //         $this->Admin->AksiTambahAdmin($data);
-    //         $this->fungsiPeringatan("Data Berhasil di Tambah");
-    //         redirect('Admin/TambahAdmin', 'refresh');
-    //     }
-    // }
 }

@@ -43,6 +43,18 @@ class Admin_Model extends CI_Model
     return $query;
   }
 
+  public function getProdi()
+  {
+    $this->db->select('tb_prodi.*, tb_fakultas.nama_fakultas');
+    $this->db->from('tb_prodi');
+    $this->db->join('tb_fakultas', 'tb_prodi.id_fakultas = tb_fakultas.id_fakultas');
+    $hasil = $this->db->get();
+    // $query = "SELECT `tb_prodi`.*, `tb_fakultas`.`nama_fakultas`
+    // FROM `tb_prodi` JOIN `tb_fakultas`
+    // ON `tb_prodi`.`id_fakultas` = `tb_fakultas`.`id_fakultas`";
+    return $hasil->result_array();
+  }
+
   public function TambahDataProdi()
   {
     $id_fakultas = $this->input->post('id_fakultas');
@@ -60,56 +72,35 @@ class Admin_Model extends CI_Model
     return $this->db->get_where($table, $where)->result_array();
   }
 
-  public function getProdi()
-  {
-    $query = "SELECT `tb_prodi`.*, `tb_fakultas`.`nama_fakultas`
-    FROM `tb_prodi` JOIN `tb_fakultas`
-    ON `tb_prodi`.`id_fakultas` = `tb_fakultas`.`id_fakultas`";
-    return $this->db->query($query)->result_array();
-  }
-
-  public function ProdiOnMahasiswa()
-  {
-    $query = "SELECT * FROM tb_prodi INNER JOIN tb_fakultas
-      ON tb_prodi.id_prodi = tb_fakultas.id_fakultas
-      ORDER BY id_prodi ";
-    return $this->db->query($query)->result_array();
-  }
-
-  public function getMahasiswa()
-  {
-    $query = "SELECT `tb_mahasiswa`.*, `tb_fakultas`.`nama_fakultas`, `tb_prodi`.`nama_prodi`
-    FROM `tb_mahasiswa` 
-    JOIN `tb_fakultas`
-    ON `tb_fakultas`.`id_fakultas` = `tb_mahasiswa`.`id_fakultas`
-    JOIN `tb_prodi`
-    ON `tb_prodi`.`id_prodi` = `tb_mahasiswa`.`id_prodi`
-    ";
-    return $this->db->query($query)->result_array();
-  }
-
-  public function getBeasiswa()
-  {
-    $query = $this->db->get('beasiswa')->result_array();
-    return $query;
-  }
-
   public function getKriteria()
   {
-    $query = "SELECT `tb_kriteria`.*, `tb_beasiswa`.`nama_beasiswa`
-    FROM `tb_kriteria` JOIN `tb_beasiswa`
-    ON `tb_kriteria`.`id_beasiswa` = `tb_beasiswa`.`id_beasiswa`";
-    return $this->db->query($query)->result_array();
+    $hasil = $this->db->get('tb_kriteria');
+    return $hasil->result_array();
+  }
+
+  public function tambahKriteria($data)
+  {
+    $hasil = $this->db->insert('tb_kriteria', $data);
+    return $hasil;
+  }
+
+  public function hapusKriteria()
+  {
+    # code...
+  }
+
+  public function detail_dataKriteria($id_kriteria)
+  {
+    $query = $this->db->get_where('tb_kriteria', ['id_kriteria' => $id_kriteria]);
+    return $query->row_array();
   }
 
   public function getParameter()
   {
-    $query = "SELECT `tb_parameter`.*, `tb_beasiswa`.`nama_beasiswa`, `tb_kriteria`.`nama_kriteria`
+    $query = "SELECT `tb_parameter`.*, `tb_kriteria`.`nama_kriteria`
     FROM `tb_kriteria` 
     JOIN `tb_parameter`
     ON `tb_parameter`.`id_kriteria` = `tb_kriteria`.`id_kriteria`
-    JOIN `tb_beasiswa`
-    ON `tb_parameter`.`id_beasiswa` = `tb_beasiswa`.`id_beasiswa`
     ";
     return $this->db->query($query)->result_array();
   }
@@ -198,6 +189,24 @@ class Admin_Model extends CI_Model
   {
     $query = $this->db->query("SELECT * FROM tb_latih WHERE hasil = '1' ");
     return $query->num_rows();
+  }
+
+  public function CountTanggungBanyak()
+  {
+    $hasil = $this->db->query("SELECT * FROM training WHERE tanggung = 'Banyak' ");
+    return $hasil->num_rows();
+  }
+
+  public function CountPln450()
+  {
+    $hasil = $this->db->query("SELECT * FROM training WHERE pln = '450' ");
+    return $hasil->num_rows();
+  }
+
+  public function CountLayakLayak()
+  {
+    $hasil = $this->db->query("SELECT * FROM training WHERE layak = 'layak' ");
+    return $hasil->num_rows();
   }
 
   // public function getAdmin()

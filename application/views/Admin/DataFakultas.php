@@ -74,7 +74,7 @@
         <div class="modal-body">
           <div class="form-group">
             <label for="nama_fakultas">Nama Fakultas</label>
-            <input type="text" class="form-control" id="nama_fakultas" name="nama_fakultas">
+            <input type="text" class="form-control" id="nama_fakultas" name="nama_fakultas" required>
             <?= form_error('email', '<small class="text-danger pl-3">', '</small>') ?>
           </div>
         </div>

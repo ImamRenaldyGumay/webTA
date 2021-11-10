@@ -23,15 +23,14 @@
 
     <!-- Default box -->
     <div class="card">
-      <div class="card-header">
-        <button class="btn btn-primary card-title" data-toggle="modal" data-target="#TP">Tambah <?= $title ?></button>
+      <div class="card-header border-0">
+        <a href="<?= base_url('TambahDataKriteria') ?>" class="btn btn-primary col-12 mt-3" data-toggle="modal" data-target="#TP">Tambah <?= $title ?></a>
       </div>
       <div class="card-body">
         <table class="table table-bordered table-hover" id="example3">
           <thead>
             <tr>
               <th>No.</th>
-              <th>Beasiswa</th>
               <th>Kriteria</th>
               <th>Keterangan</th>
               <th>Bobot</th>
@@ -44,7 +43,6 @@
             foreach ($parameter as $p) : ?>
               <tr>
                 <td><?= $no++ ?></td>
-                <td><?= $p['nama_beasiswa'] ?></td>
                 <td><?= $p['nama_kriteria'] ?></td>
                 <td><?= $p['keterangan'] ?></td>
                 <td><?= $p['bobot'] ?></td>

@@ -67,9 +67,9 @@
                 <td><?= $l['c3'] ?></td>
                 <td><?= $l['c4'] ?></td>
                 <?php if ($l['hasil'] == '1') : ?>
-                  <td>Layak</td>
+                  <td><span class="badge bg-primary">Layak</span></td>
                 <?php elseif ($l['hasil'] == '0') : ?>
-                  <td>Tidak Layak</td>
+                  <td><span class="badge bg-danger">Tidak Layak</span></td>
                 <?php endif ?>
                 <td>
                   <a href="<?= base_url('') ?>" class="btn btn-warning" data-toggle="modal" data-target="#EL<?= $l['id_latih'] ?>"><i class="fas fa-pencil-alt"></i></a>

@@ -72,7 +72,8 @@ $route['DataMahasiswa'] = 'DataMahasiswa/index';
 // Route DataBeasiswa
 $route['DataBeasiswa'] = 'DataBeasiswa/index';
 // Route DataKriteria
-$route['DataKriteria'] = 'DataKriteria/index';
+$route['DataKriteria'] = 'Admin/DataKriteria';
+$route['TambahDataKriteria'] = 'Admin/TambahDataKriteria';
 // Route Data Latih
 $route['DataLatih'] = 'Admin/DataLatih';
 $route['TambahDataLatih'] = 'Admin/TambahDataLatih';
@@ -83,6 +84,7 @@ $route['Atribut'] = 'Atribut/index';
 $route['Parameter'] = 'Parameter/index';
 $route['Latih'] = 'Latih/index';
 $route['Coba'] = 'Coba/index';
+$route['Training'] = 'Admin/Training';
 
 $route['TambahAdmin'] = 'Admin/TambahAdmin';
 
