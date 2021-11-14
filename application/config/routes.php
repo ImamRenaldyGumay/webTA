@@ -68,20 +68,20 @@ $route['TambahDataProdi'] = 'Admin/TambahDataProdi';
 $route['AksiTambahDataProdi'] = 'Admin/AksiTambahDataProdi';
 $route['EditDataProdi'] = 'Admin/EditDataProdi';
 // Route DataMahasiswa
-$route['DataMahasiswa'] = 'DataMahasiswa/index';
+$route['DataMahasiswa'] = 'Admin/DataMahasiswa';
 // Route DataBeasiswa
 $route['DataBeasiswa'] = 'DataBeasiswa/index';
 // Route DataKriteria
 $route['DataKriteria'] = 'Admin/DataKriteria';
 $route['TambahDataKriteria'] = 'Admin/TambahDataKriteria';
+$route['DataKrit'] = 'Admin/DataKrit';
 // Route Data Latih
+$route['DataMahasiswaLatih'] = 'Admin/DataMahasiswaLatih';
 $route['DataLatih'] = 'Admin/DataLatih';
 $route['TambahDataLatih'] = 'Admin/TambahDataLatih';
 // Route DataHitung
 $route['DataHitung'] = 'Admin/DataHitung';
 // Coba
-$route['Atribut'] = 'Atribut/index';
-$route['Parameter'] = 'Parameter/index';
 $route['Latih'] = 'Latih/index';
 $route['Coba'] = 'Coba/index';
 $route['Training'] = 'Admin/Training';

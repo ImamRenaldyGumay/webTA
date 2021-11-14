@@ -12,7 +12,7 @@
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="<?= base_url('Admin') ?>">Dashboard</a></li>
-            <li class="breadcrumb-item"><a href="<?= base_url('DataFakultas') ?>">Data Fakultas</a></li>
+            <li class="breadcrumb-item"><a href="<?= base_url('DataLatih') ?>">Data Latih</a></li>
             <li class="breadcrumb-item active">Halaman <?= $title ?></li>
           </ol>
         </div>
@@ -23,30 +23,41 @@
   <!-- Main content -->
   <section class="content">
     <!-- Default box -->
-    <div class="card">
-      <div class="card-header border-0">
-        <a href="<?= base_url('DataLatih') ?>" class="btn btn-primary float-right">
-          <i class="fas fa-undo-alt"></i>
-          Back
-        </a>
-      </div>
-      <form action="<?= base_url('TambahDataFakultas') ?>" method="POST">
-        <div class="card-body">
-          <div class="col-md-10">
+    <div class="col-md-9">
+      <div class="card card-success card-outline">
+        <div class="card-header">
+          <h3 class="card-title">Halaman <?= $title ?></h3>
+        </div>
+        <form action="<?= base_url('') ?>" method="POST">
+          <div class="card-body">
+
             <div class="form-group">
-              <label for="nama_fakultas">Nama Fakultas</label>
-              <input type="text" class="form-control" id="nama_fakultas" name="nama_fakultas">
-              <?= form_error('nama_fakultas', '<small class="text-danger pl-3">', '</small>') ?>
+              <label for="nim_mahasiswa">Nomor Induk Mahasiswa (NIM) </label>
+              <input type="text" class="form-control" id="nim_mahasiswa" name="nim_mahasiswa">
+              <?= form_error('nim_mahasiswa', '<small class="text-danger pl-3">', '</small>') ?>
             </div>
+            <div class="form-group">
+              <label for="nama_mahasiswa">Nama Mahasiswa</label>
+              <input type="text" class="form-control" id="nama_mahasiswa" name="nama_mahasiswa">
+              <?= form_error('nama_mahasiswa', '<small class="text-danger pl-3">', '</small>') ?>
+            </div>
+            <div class="form-group">
+              <label for="nim_mahasiswa">Jenis Kelamin</label>
+              <input type="text" class="form-control" id="nim_mahasiswa" name="nim_mahasiswa">
+              <?= form_error('nim_mahasiswa', '<small class="text-danger pl-3">', '</small>') ?>
+            </div>
+
           </div>
-        </div>
-        <!-- /.card-body -->
-        <div class="card-footer justify-content-between">
-          <button type="submit" class="btn btn-primary">Tambah</button>
-        </div>
-      </form>
+          <!-- /.card-body -->
+          <div class="card-footer justify-content-between">
+            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Tambah</button>
+            <a href="<?= base_url('DataLatih') ?>" class="btn btn-primary">Kembali</a>
+          </div>
+        </form>
+      </div>
+      <!-- /.card -->
     </div>
-    <!-- /.card -->
+
 
   </section>
   <!-- /.content -->

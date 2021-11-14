@@ -49,9 +49,6 @@ class Admin_Model extends CI_Model
     $this->db->from('tb_prodi');
     $this->db->join('tb_fakultas', 'tb_prodi.id_fakultas = tb_fakultas.id_fakultas');
     $hasil = $this->db->get();
-    // $query = "SELECT `tb_prodi`.*, `tb_fakultas`.`nama_fakultas`
-    // FROM `tb_prodi` JOIN `tb_fakultas`
-    // ON `tb_prodi`.`id_fakultas` = `tb_fakultas`.`id_fakultas`";
     return $hasil->result_array();
   }
 
@@ -97,26 +94,24 @@ class Admin_Model extends CI_Model
 
   public function getParameter()
   {
-    $query = "SELECT `tb_parameter`.*, `tb_kriteria`.`nama_kriteria`
-    FROM `tb_kriteria` 
-    JOIN `tb_parameter`
-    ON `tb_parameter`.`id_kriteria` = `tb_kriteria`.`id_kriteria`
-    ";
-    return $this->db->query($query)->result_array();
+    $this->db->select('tb_parameter.* , tb_kriteria.nama_kriteria');
+    $this->db->from('tb_parameter');
+    $this->db->join('tb_kriteria', 'tb_parameter.id_kriteria = tb_kriteria.id_kriteria');
+    $query = $this->db->get();
+    return $query->result_array();
+
+    // $query = "SELECT `tb_parameter`.*, `tb_kriteria`.`nama_kriteria`
+    // FROM `tb_kriteria` 
+    // JOIN `tb_parameter`
+    // ON `tb_parameter`.`id_kriteria` = `tb_kriteria`.`id_kriteria`
+    // ";
+    // return $this->db->query($query)->result_array();
   }
 
   public function getLatih()
   {
-    $query = "SELECT `tb_latih`.*, `tb_beasiswa`.`nama_beasiswa`, `tb_fakultas`.`nama_fakultas`, `tb_prodi`.`nama_prodi`
-    FROM `tb_latih` 
-    JOIN `tb_beasiswa`
-    ON `tb_latih`.`id_beasiswa` = `tb_beasiswa`.`id_beasiswa`
-    JOIN `tb_prodi`
-    ON `tb_latih`.`id_prodi` = `tb_prodi`.`id_prodi`
-    JOIN `tb_fakultas`
-    ON `tb_latih`.`id_fakultas` = `tb_fakultas`.`id_fakultas`
-    ";
-    return $this->db->query($query)->result_array();
+    $hasil = $this->db->get('tb_latih');
+    return $hasil->result_array();
   }
 
   public function get_param()

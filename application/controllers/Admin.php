@@ -281,15 +281,43 @@ class Admin extends CI_Controller
         $this->load->view('templates/Footer', $data);
     }
 
+    public function DataKrit()
+    {
+        $data = array(
+            'user' => $this->Admin->getNama()->row_array(),
+            'title' => 'Data Krit',
+            'IPK' => $this->db->get('tb_ipk')->result_array(),
+            'Pekerjaan' => $this->db->get('tb_pekerjaan')->result_array(),
+            'Gaji' => $this->db->get('tb_gaji')->result_array(),
+            'Tanggung' => $this->db->get('tb_tanggungan')->result_array()
+        );
+        $this->load->view('templates/Header', $data);
+        $this->load->view('templates/Navbar', $data);
+        $this->load->view('templates/Sidebar', $data);
+        $this->load->view('Admin/DataKrit', $data);
+        $this->load->view('templates/Footer', $data);
+    }
+
+    public function DataMahasiswaLatih()
+    {
+        $data = array(
+            'user' =>  $this->Admin->getNama()->row_array(),
+            'title' => 'Data Mahasiswa Latih',
+            'mahasiswa' => $this->db->get('tb_mahasiswa')
+        );
+        $this->load->view('templates/Header', $data);
+        $this->load->view('templates/Navbar', $data);
+        $this->load->view('templates/Sidebar', $data);
+        $this->load->view('Admin/DataMahasiswaLatih', $data);
+        $this->load->view('templates/Footer', $data);
+    }
+
     public function DataLatih()
     {
         $data = array(
             'user' =>  $this->Admin->getNama()->row_array(),
             'title' => 'Data Latih',
             'latih' => $this->Admin->getLatih(),
-            'fakultas' => $this->db->get('tb_fakultas')->result_array(),
-            'prodi' => $this->db->get('tb_prodi')->result_array(),
-            'beasiswa' => $this->db->get('tb_beasiswa')->result_array(),
             'c1' => $this->Admin->getC1(),
             'c2' => $this->Admin->getC2(),
             'c3' => $this->Admin->getC3(),
@@ -304,7 +332,15 @@ class Admin extends CI_Controller
 
     public function TambahDataLatih()
     {
-        # code...
+        $data = array(
+            'user' =>  $this->Admin->getNama()->row_array(),
+            'title' => 'Tambah Data Latih'
+        );
+        $this->load->view('templates/Header', $data);
+        $this->load->view('templates/Navbar', $data);
+        $this->load->view('templates/Sidebar', $data);
+        $this->load->view('Action/TambahDataLatih', $data);
+        $this->load->view('templates/Footer', $data);
     }
 
     public function DataHitung()

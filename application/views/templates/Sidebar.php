@@ -25,8 +25,8 @@
               </p>
             </a>
           </li>
-          <li class="nav-item <?= ($this->uri->uri_string() == 'DataFakultas') || ($this->uri->uri_string() == 'DataProdi') || ($this->uri->uri_string() == 'DataBeasiswa') || ($this->uri->uri_string() == 'DataKriteria') || ($this->uri->uri_string() == 'DataParameter') || ($this->uri->uri_string() == 'DataMahasiswa') ? 'menu-open' : '' ?>">
-            <a href="#" class="nav-link <?= ($this->uri->uri_string() == 'DataFakultas') || ($this->uri->uri_string() == 'DataProdi') || ($this->uri->uri_string() == 'DataBeasiswa') || ($this->uri->uri_string() == 'DataKriteria') || ($this->uri->uri_string() == 'DataParameter') || ($this->uri->uri_string() == 'DataMahasiswa') ? 'active' : '' ?> ">
+          <li class="nav-item <?= ($this->uri->uri_string() == 'DataFakultas') || ($this->uri->uri_string() == 'DataProdi') || ($this->uri->uri_string() == 'DataBeasiswa') || ($this->uri->uri_string() == 'DataKriteria') || ($this->uri->uri_string() == 'DataParameter') || ($this->uri->uri_string() == 'DataKrit') ? 'menu-open' : '' ?>">
+            <a href="#" class="nav-link <?= ($this->uri->uri_string() == 'DataFakultas') || ($this->uri->uri_string() == 'DataProdi') || ($this->uri->uri_string() == 'DataBeasiswa') || ($this->uri->uri_string() == 'DataKriteria') || ($this->uri->uri_string() == 'DataParameter') || ($this->uri->uri_string() == 'DataKrit') ? 'active' : '' ?> ">
               <i class="nav-icon fas fa-folder"></i>
               <p>
                 Data Master
@@ -49,7 +49,13 @@
               <li class="nav-item">
                 <a href="<?= base_url('DataKriteria') ?>" class="nav-link <?= ($this->uri->uri_string() == 'DataKriteria') ? 'active' : '' ?>">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Data Kriteria</p>
+                  <p>Kriteria & Parameter</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url('DataKrit') ?>" class="nav-link <?= ($this->uri->uri_string() == 'DataKrit') ? 'active' : '' ?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Kriteria & Parameter 2</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -60,13 +66,29 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item">
-            <a href="<?= base_url('DataLatih') ?>" class="nav-link <?= ($this->uri->uri_string() == 'DataLatih') ? 'active' : '' ?>">
-              <i class="nav-icon fas fa-database"></i>
+          <li class="nav-header">Peritungan</li>
+          <li class="nav-item <?= ($this->uri->uri_string() == 'DataMahasiswaLatih') || ($this->uri->uri_string() == 'DataLatih') ? 'menu-open' : '' ?>">
+            <a href="#" class="nav-link <?= ($this->uri->uri_string() == 'DataMahasiswaLatih') || ($this->uri->uri_string() == 'DataLatih')  ? 'active' : '' ?>">
+              <i class="nav-icon fas fa-calculator"></i>
               <p>
                 Data Latih
+                <i class="right fas fa-angle-left"></i>
               </p>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?= base_url('DataMahasiswaLatih') ?>" class="nav-link <?= ($this->uri->uri_string() == 'DataMahasiswaLatih') ? 'active' : '' ?>">
+                  <i class="fas fa-user-graduate nav-icon"></i>
+                  <p>Mahasiswa Latih</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url('DataLatih') ?>" class="nav-link <?= ($this->uri->uri_string() == 'DataLatih') ? 'active' : '' ?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Data Latih</p>
+                </a>
+              </li>
+            </ul>
           </li>
           <li class="nav-item">
             <a href="<?= base_url('DataHitung') ?>" class="nav-link <?= ($this->uri->uri_string() == 'DataHitung') ? 'active' : '' ?>">
@@ -87,15 +109,15 @@
           <li class="nav-header">User</li>
           <li class="nav-item">
             <a href="<?= base_url('Coba') ?>" class="nav-link <?= ($this->uri->uri_string() == 'Coba') ? 'active' : '' ?>">
-              <i class="nav-icon fas fa-user-tie"></i>
+              <i class="nav-icon fas fa-users"></i>
               <p>
-                Tambah User
+                Users
               </p>
             </a>
           </li>
           <li class="nav-header">Uji Coba</li>
-          <li class="nav-item <?= ($this->uri->uri_string() == 'Atribut') || ($this->uri->uri_string() == 'Parameter') || ($this->uri->uri_string() == 'Latih') || ($this->uri->uri_string() == 'Training') ? 'menu-open' : '' ?>">
-            <a href="#" class="nav-link <?= ($this->uri->uri_string() == 'Atribut') || ($this->uri->uri_string() == 'Parameter') || ($this->uri->uri_string() == 'Latih') || ($this->uri->uri_string() == 'Training')  ? 'active' : '' ?>">
+          <li class="nav-item <?= ($this->uri->uri_string() == 'Latih') || ($this->uri->uri_string() == 'Training') ? 'menu-open' : '' ?>">
+            <a href="#" class="nav-link <?= ($this->uri->uri_string() == 'Latih') || ($this->uri->uri_string() == 'Training')  ? 'active' : '' ?>">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Data Uji Coba
@@ -103,18 +125,6 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="<?= base_url('Atribut') ?>" class="nav-link <?= ($this->uri->uri_string() == 'Atribut') ? 'active' : '' ?>">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Atribut</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="<?= base_url('Parameter') ?>" class="nav-link <?= ($this->uri->uri_string() == 'Parameter') ? 'active' : '' ?>">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Parameter</p>
-                </a>
-              </li>
               <li class="nav-item">
                 <a href="<?= base_url('Latih') ?>" class="nav-link <?= ($this->uri->uri_string() == 'Latih') ? 'active' : '' ?>">
                   <i class="far fa-circle nav-icon"></i>
