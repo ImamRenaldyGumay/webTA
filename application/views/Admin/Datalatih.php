@@ -49,19 +49,19 @@
               <tr>
                 <td><?= $no++ ?></td>
                 <td><?= $l['nama_mahasiswa'] ?></td>
-                <td><?= $l['nim'] ?></td>
-                <td><?= $l['c1'] ?></td>
-                <td><?= $l['c2'] ?></td>
-                <td><?= $l['c3'] ?></td>
-                <td><?= $l['c4'] ?></td>
-                <?php if ($l['hasil'] == '1') : ?>
+                <td><?= $l['nim_mahasiswa'] ?></td>
+                <td><?= $l['rangeawal_ipk'] ?> - <?= $l['rangeakhir_ipk'] ?></td>
+                <td><?= $l['keterangan_pekerjaan'] ?></td>
+                <td><?= $l['keterangan_gaji'] ?></td>
+                <td><?= $l['keterangan_tanggungan'] ?></td>
+                <?php if ($l['hasil'] == 'Layak') : ?>
                   <td><span class="badge bg-primary">Layak</span></td>
-                <?php elseif ($l['hasil'] == '0') : ?>
+                <?php elseif ($l['hasil'] == 'Tidak Layak') : ?>
                   <td><span class="badge bg-danger">Tidak Layak</span></td>
                 <?php endif ?>
                 <td>
-                  <a href="<?= base_url('') ?>" class="btn btn-warning" data-toggle="modal" data-target="#EL<?= $l['id_latih'] ?>"><i class="fas fa-pencil-alt"></i></a>
-                  <a href="<?= base_url('DataLatih/Hapus/' . $l['id_latih']) ?>" class="btn btn-danger btn-action" data-toggle="tooltip" onclick="return confirm('Yakin?')"><i class="fas fa-trash"></i></a>
+                  <a href="<?= base_url('Admin/EditDataLatih/' . $l['id_latih']) ?>" class="btn btn-warning"><i class=" fas fa-pencil-alt"></i></a>
+                  <a href="<?= base_url('Admin/HapusDataLatih/' . $l['id_latih']) ?>" class="btn btn-danger btn-action" onclick="return confirm('Yakin?')"><i class="fas fa-trash"></i></a>
                 </td>
               </tr>
             <?php endforeach ?>

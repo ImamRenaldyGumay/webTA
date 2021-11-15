@@ -76,10 +76,11 @@ $route['DataKriteria'] = 'Admin/DataKriteria';
 $route['TambahDataKriteria'] = 'Admin/TambahDataKriteria';
 $route['DataKrit'] = 'Admin/DataKrit';
 // Route Data Latih
-$route['DataMahasiswaLatih'] = 'Admin/DataMahasiswaLatih';
 $route['DataLatih'] = 'Admin/DataLatih';
 $route['TambahDataLatih'] = 'Admin/TambahDataLatih';
+$route['AksiEditDataLatih'] = 'Admin/AksiEditDataLatih';
 // Route DataHitung
+$route['DataMahasiswaHitung'] = 'Admin/DataMahasiswaHitung';
 $route['DataHitung'] = 'Admin/DataHitung';
 // Coba
 $route['Latih'] = 'Latih/index';

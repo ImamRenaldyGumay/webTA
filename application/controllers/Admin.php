@@ -281,6 +281,9 @@ class Admin extends CI_Controller
         $this->load->view('templates/Footer', $data);
     }
 
+    // ===========================================================================================================================
+    // Aksi Data Krit
+
     public function DataKrit()
     {
         $data = array(
@@ -297,31 +300,16 @@ class Admin extends CI_Controller
         $this->load->view('Admin/DataKrit', $data);
         $this->load->view('templates/Footer', $data);
     }
+    // ==============================================================================================================================
 
-    public function DataMahasiswaLatih()
-    {
-        $data = array(
-            'user' =>  $this->Admin->getNama()->row_array(),
-            'title' => 'Data Mahasiswa Latih',
-            'mahasiswa' => $this->db->get('tb_mahasiswa')
-        );
-        $this->load->view('templates/Header', $data);
-        $this->load->view('templates/Navbar', $data);
-        $this->load->view('templates/Sidebar', $data);
-        $this->load->view('Admin/DataMahasiswaLatih', $data);
-        $this->load->view('templates/Footer', $data);
-    }
-
+    // ===================================================================================================================================
+    // Aksi Data Latih
     public function DataLatih()
     {
         $data = array(
             'user' =>  $this->Admin->getNama()->row_array(),
             'title' => 'Data Latih',
             'latih' => $this->Admin->getLatih(),
-            'c1' => $this->Admin->getC1(),
-            'c2' => $this->Admin->getC2(),
-            'c3' => $this->Admin->getC3(),
-            'c4' => $this->Admin->getC4(),
         );
         $this->load->view('templates/Header', $data);
         $this->load->view('templates/Navbar', $data);
@@ -332,14 +320,141 @@ class Admin extends CI_Controller
 
     public function TambahDataLatih()
     {
+        $nama_mahasiswa = $this->input->post('nama_mahasiswa');
+        $nim_mahasiswa = $this->input->post('nim_mahasiswa');
+        $C1 = $this->input->post('C1');
+        $C2 = $this->input->post('C2');
+        $C3 = $this->input->post('C3');
+        $C4 = $this->input->post('C4');
+        $hasil = $this->input->post('hasil');
+
+        $this->form_validation->set_rules('nama_mahasiswa', 'Nama Mahasiswa', 'required|is_unique[tb_latih.nama_mahasiswa]');
+        $this->form_validation->set_rules('nim_mahasiswa', 'NIM Mahasiswa', 'required|is_unique[tb_latih.nim_mahasiswa]|numeric');
+        $this->form_validation->set_message('required', '{field} harus di isi!.');
+        $this->form_validation->set_message('is_unique', '{field} Harus berbeda.');
+        $this->form_validation->set_message('numeric', '{field} Harus Berupa angka.');
+        if ($C1 == 0 && $C2 == 0 && $C3 == 0 && $C4 == 0 && $hasil == 0) {
+            $this->form_validation->set_rules('C1', 'IPK Mahasiswa', 'required');
+            $this->form_validation->set_rules('C2', 'Pekerjaan Orang Tua', 'required');
+            $this->form_validation->set_rules('C3', 'Pengasilan Orang Tua', 'required');
+            $this->form_validation->set_rules('C4', 'Tanggungan Orang Tua', 'required');
+            $this->form_validation->set_rules('hasil', 'Hasil', 'required');
+        }
+
         $data = array(
             'user' =>  $this->Admin->getNama()->row_array(),
-            'title' => 'Tambah Data Latih'
+            'title' => 'Tambah Data Latih',
+            'ipk' => $this->db->get('tb_ipk')->result_array(),
+            'pekerjaan' => $this->db->get('tb_pekerjaan')->result_array(),
+            'gaji' => $this->db->get('tb_gaji')->result_array(),
+            'tanggung' => $this->db->get('tb_tanggungan')->result_array()
+        );
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/Header', $data);
+            $this->load->view('templates/Navbar', $data);
+            $this->load->view('templates/Sidebar', $data);
+            $this->load->view('Action/TambahDataLatih', $data);
+            $this->load->view('templates/Footer', $data);
+        } else {
+            $data = [
+                'nama_mahasiswa' => $nama_mahasiswa,
+                'nim_mahasiswa' => $nim_mahasiswa,
+                'c1' => $C1,
+                'c2' => $C2,
+                'c3' => $C3,
+                'c4' => $C4,
+                'hasil' => $hasil
+            ];
+            $tambahDataLatih = $this->Admin->aksiTambahDataLatih($data);
+            if ($tambahDataLatih) {
+                $this->fungsiPeringatan("Data Berhasil di Tambahkan");
+                redirect('DataLatih', 'refresh');
+            } else {
+                $this->fungsiPeringatan("Data Gagal di Tambahkan");
+                redirect('DataLatih', 'refresh');
+            }
+        }
+    }
+    public function HapusDataLatih($id_latih)
+    {
+        $where = array('id_latih' => $id_latih);
+        $hapusKriteria = $this->Admin->AksiHapusDataLatih($where);
+        if ($hapusKriteria) {
+            $this->fungsiPeringatan("Data Berhasil di Hapus");
+            redirect('DataLatih', 'refresh');
+        } else {
+            $this->fungsiPeringatan("Data Gagal di Hapus");
+            redirect('DataLatih', 'refresh');
+        }
+    }
+
+    public function EditDataLatih($id_latih)
+    {
+        $this->form_validation->set_rules('nama_mahasiswa', 'Nama Mahasiswa', 'required|is_unique[tb_latih.nama_mahasiswa]');
+        $this->form_validation->set_rules('nim_mahasiswa', 'NIM Mahasiswa', 'required|is_unique[tb_latih.nim_mahasiswa]|numeric');
+        $this->form_validation->set_message('required', '{field} harus di isi!.');
+        $this->form_validation->set_message('is_unique', '{field} Harus berbeda.');
+        $this->form_validation->set_message('numeric', '{field} Harus Berupa angka.');
+
+        $data = array(
+            'user' => $this->Admin->getNama()->row_array(),
+            'title' => 'Edit Data Latih',
+            'latih' => $this->Admin->detail_dataLatih($id_latih),
+            'ipk' => $this->db->get('tb_ipk')->result_array(),
+            'pekerjaan' => $this->db->get('tb_pekerjaan')->result_array(),
+            'gaji' => $this->db->get('tb_gaji')->result_array(),
+            'tanggung' => $this->db->get('tb_tanggungan')->result_array()
         );
         $this->load->view('templates/Header', $data);
         $this->load->view('templates/Navbar', $data);
         $this->load->view('templates/Sidebar', $data);
-        $this->load->view('Action/TambahDataLatih', $data);
+        $this->load->view('Action/EditDataLatih', $data);
+        $this->load->view('templates/Footer', $data);
+    }
+
+    function AksiEditDataLatih()
+    {
+        $id_latih = $this->input->post('id_latih');
+        $nama_mahasiswa = $this->input->post('nama_mahasiswa');
+        $nim_mahasiswa = $this->input->post('nim_mahasiswa');
+        $C1 = $this->input->post('C1');
+        $C2 = $this->input->post('C2');
+        $C3 = $this->input->post('C3');
+        $C4 = $this->input->post('C4');
+        $hasil = $this->input->post('hasil');
+        $data = [
+            'nama_mahasiswa' => $nama_mahasiswa,
+            'nim_mahasiswa' => $nim_mahasiswa,
+            'c1' => $C1,
+            'c2' => $C2,
+            'c3' => $C3,
+            'c4' => $C4,
+            'hasil' => $hasil
+        ];
+        $where = ['id_latih' => $id_latih];
+        $this->db->where($where);
+        $editLatih = $this->db->update('tb_latih', $data);
+        if ($editLatih) {
+            $this->fungsiPeringatan("Data Berhasil di Edit");
+            redirect('DataLatih', 'refresh');
+        } else {
+            $this->fungsiPeringatan("Data Gagal di Edit");
+            redirect('DataLatih', 'refresh');
+        }
+    }
+    // =======================================================================================================================
+
+    public function DataMahasiswaHitung()
+    {
+        $data = array(
+            'user' =>  $this->Admin->getNama()->row_array(),
+            'title' => 'Data Mahasiswa Hitung',
+            'mahasiswa' => $this->db->get('tb_mahasiswa')
+        );
+        $this->load->view('templates/Header', $data);
+        $this->load->view('templates/Navbar', $data);
+        $this->load->view('templates/Sidebar', $data);
+        $this->load->view('Admin/DataMahasiswaLatih', $data);
         $this->load->view('templates/Footer', $data);
     }
 

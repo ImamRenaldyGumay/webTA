@@ -2,12 +2,17 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 class Admin_Model extends CI_Model
 {
+  // ==========================================================================================================================
+  // Aksi Ambil Nama
   public function getNama()
   {
     $query = $this->db->get_where('tb_user', ['nama' => $this->session->userdata('nama')]);
     return $query;
   }
+  // ==========================================================================================================================
 
+  // ===========================================================================================================================
+  // Aksi Data Fakultas
   public function getFakultas()
   {
     $query = $this->db->get('tb_fakultas');
@@ -42,7 +47,10 @@ class Admin_Model extends CI_Model
     $query = $this->db->update('tb_fakultas', $data);
     return $query;
   }
+  // ==============================================================================================================
 
+  // ==============================================================================================================
+  // Aksi Data Prodi
   public function getProdi()
   {
     $this->db->select('tb_prodi.*, tb_fakultas.nama_fakultas');
@@ -99,20 +107,39 @@ class Admin_Model extends CI_Model
     $this->db->join('tb_kriteria', 'tb_parameter.id_kriteria = tb_kriteria.id_kriteria');
     $query = $this->db->get();
     return $query->result_array();
-
-    // $query = "SELECT `tb_parameter`.*, `tb_kriteria`.`nama_kriteria`
-    // FROM `tb_kriteria` 
-    // JOIN `tb_parameter`
-    // ON `tb_parameter`.`id_kriteria` = `tb_kriteria`.`id_kriteria`
-    // ";
-    // return $this->db->query($query)->result_array();
   }
-
+  // =======================================================================================
+  // Aksi DataLatih
   public function getLatih()
   {
-    $hasil = $this->db->get('tb_latih');
+    $this->db->select('tb_latih.* , tb_ipk.* , tb_pekerjaan.*, tb_gaji.*, tb_tanggungan.*');
+    $this->db->from('tb_latih');
+    $this->db->join('tb_ipk', 'tb_latih.c1 = tb_ipk.nilai_ipk');
+    $this->db->join('tb_pekerjaan', 'tb_latih.c2 = tb_pekerjaan.nilai_pekerjaan');
+    $this->db->join('tb_gaji', 'tb_latih.c3 = tb_gaji.nilai_gaji');
+    $this->db->join('tb_tanggungan', 'tb_latih.c4 = tb_tanggungan.nilai_tanggungan');
+    $hasil = $this->db->get();
     return $hasil->result_array();
   }
+
+  function AksiTambahDataLatih($data)
+  {
+    $hasil = $this->db->insert('tb_latih', $data);
+    return $hasil;
+  }
+
+  function AksiHapusDataLatih($where)
+  {
+    $hapus = $this->db->delete('tb_latih', $where);
+    return $hapus;
+  }
+
+  function detail_dataLatih($id_latih)
+  {
+    $query = $this->db->get_where('tb_latih', ['id_latih' => $id_latih]);
+    return $query->row_array();
+  }
+  // ========================================================================================
 
   public function get_param()
   {
@@ -133,38 +160,6 @@ class Admin_Model extends CI_Model
     ON `latih`.`id_mahasiswa` = `tb_mahasiswa`.`id_mahasiswa`
     ";
     return $this->db->query($query)->result_array();
-  }
-
-  public function getC1()
-  {
-    $this->db->select('*');
-    $this->db->from('tb_parameter');
-    $this->db->where('id_kriteria', '1');
-    return $this->db->get()->result_array();
-  }
-
-  public function getC2()
-  {
-    $this->db->select('*');
-    $this->db->from('tb_parameter');
-    $this->db->where('id_kriteria', '3');
-    return $this->db->get()->result_array();
-  }
-
-  public function getC3()
-  {
-    $this->db->select('*');
-    $this->db->from('tb_parameter');
-    $this->db->where('id_kriteria', '7');
-    return $this->db->get()->result_array();
-  }
-
-  public function getC4()
-  {
-    $this->db->select('*');
-    $this->db->from('tb_parameter');
-    $this->db->where('id_kriteria', '8');
-    return $this->db->get()->result_array();
   }
 
   public function countTotalDataLatih()
@@ -203,15 +198,4 @@ class Admin_Model extends CI_Model
     $hasil = $this->db->query("SELECT * FROM training WHERE layak = 'layak' ");
     return $hasil->num_rows();
   }
-
-  // public function getAdmin()
-  // {
-  //   $query = $this->db->query("SELECT * FROM tb_user WHERE role = 1 ")->result_array();
-  //   return $query;
-  // }
-
-  // public function AksiTambahAdmin($data)
-  // {
-  //   $this->db->insert('tb_user', $data);
-  // }
 }

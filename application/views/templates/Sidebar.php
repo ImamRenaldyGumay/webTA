@@ -67,11 +67,19 @@
             </ul>
           </li>
           <li class="nav-header">Peritungan</li>
-          <li class="nav-item <?= ($this->uri->uri_string() == 'DataMahasiswaLatih') || ($this->uri->uri_string() == 'DataLatih') ? 'menu-open' : '' ?>">
-            <a href="#" class="nav-link <?= ($this->uri->uri_string() == 'DataMahasiswaLatih') || ($this->uri->uri_string() == 'DataLatih')  ? 'active' : '' ?>">
-              <i class="nav-icon fas fa-calculator"></i>
+          <li class="nav-item">
+            <a href="<?= base_url('DataLatih') ?>" class="nav-link <?= ($this->uri->uri_string() == 'DataLatih') ? 'active' : '' ?>">
+              <i class="nav-icon fas fa-database"></i>
               <p>
                 Data Latih
+              </p>
+            </a>
+          </li>
+          <li class="nav-item <?= ($this->uri->uri_string() == 'DataMahasiswaLatih') || ($this->uri->uri_string() == 'DataHitung') ? 'menu-open' : '' ?>">
+            <a href="#" class="nav-link <?= ($this->uri->uri_string() == 'DataMahasiswaLatih') || ($this->uri->uri_string() == 'DataHitung')  ? 'active' : '' ?>">
+              <i class="nav-icon fas fa-calculator"></i>
+              <p>
+                Data Hitung
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -83,20 +91,12 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?= base_url('DataLatih') ?>" class="nav-link <?= ($this->uri->uri_string() == 'DataLatih') ? 'active' : '' ?>">
+                <a href="<?= base_url('DataHitung') ?>" class="nav-link <?= ($this->uri->uri_string() == 'DataHitung') ? 'active' : '' ?>">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Data Latih</p>
+                  <p>Data Hitung</p>
                 </a>
               </li>
             </ul>
-          </li>
-          <li class="nav-item">
-            <a href="<?= base_url('DataHitung') ?>" class="nav-link <?= ($this->uri->uri_string() == 'DataHitung') ? 'active' : '' ?>">
-              <i class="nav-icon fas fa-database"></i>
-              <p>
-                Data Hitung
-              </p>
-            </a>
           </li>
           <li class="nav-item">
             <a href="<?= base_url('Coba') ?>" class="nav-link <?= ($this->uri->uri_string() == 'Coba') ? 'active' : '' ?>">
