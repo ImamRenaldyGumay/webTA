@@ -289,10 +289,10 @@ class Admin extends CI_Controller
         $data = array(
             'user' => $this->Admin->getNama()->row_array(),
             'title' => 'Data Krit',
-            'IPK' => $this->db->get('tb_ipk')->result_array(),
-            'Pekerjaan' => $this->db->get('tb_pekerjaan')->result_array(),
-            'Gaji' => $this->db->get('tb_gaji')->result_array(),
-            'Tanggung' => $this->db->get('tb_tanggungan')->result_array()
+            'IPK' => $this->Admin->getIPK(),
+            'Pekerjaan' => $this->Admin->getPekerjaan(),
+            'Gaji' => $this->Admin->getGaji(),
+            'Tanggung' => $this->Admin->getTanggungan()
         );
         $this->load->view('templates/Header', $data);
         $this->load->view('templates/Navbar', $data);
@@ -444,18 +444,118 @@ class Admin extends CI_Controller
     }
     // =======================================================================================================================
 
+    // =======================================================================================================================
+    // Aksi Data Hitung
     public function DataMahasiswaHitung()
     {
         $data = array(
             'user' =>  $this->Admin->getNama()->row_array(),
             'title' => 'Data Mahasiswa Hitung',
-            'mahasiswa' => $this->db->get('tb_mahasiswa')
+            'mahasiswa' => $this->Admin->getMahasiswaDataHitung(),
+            'hitungAwal' => $this->Admin->getHitungAwalOnDataMahasiswa()
         );
         $this->load->view('templates/Header', $data);
         $this->load->view('templates/Navbar', $data);
         $this->load->view('templates/Sidebar', $data);
-        $this->load->view('Admin/DataMahasiswaLatih', $data);
+        $this->load->view('Admin/DataMahasiswaHitung', $data);
         $this->load->view('templates/Footer', $data);
+    }
+
+    function TambahDataMahasiswaHitung()
+    {
+        $nama_mahasiswa = $this->input->post('nama_mahasiswa');
+        $nim_mahasiswa = $this->input->post('nim_mahasiswa');
+        $jenis_kelamin = $this->input->post('jenis_kelamin');
+        $id_fakultas = $this->input->post('id_fakultas');
+        $id_prodi = $this->input->post('id_prodi');
+        $tahun_pengajuan = date('Y');
+
+        $C1 = $this->input->post('C1');
+        $C2 = $this->input->post('C2');
+        $C3 = $this->input->post('C3');
+        $C4 = $this->input->post('C4');
+
+        $this->form_validation->set_rules('nama_mahasiswa', 'Nama Mahasiswa', 'required|is_unique[tb_latih.nama_mahasiswa]');
+        $this->form_validation->set_rules('nim_mahasiswa', 'NIM Mahasiswa', 'required|is_unique[tb_latih.nim_mahasiswa]|numeric');
+        $this->form_validation->set_rules('C1', 'IPK Mahasiswa', 'required');
+        $this->form_validation->set_message('required', '{field} harus di isi!.');
+        $this->form_validation->set_message('is_unique', '{field} Harus berbeda.');
+        $this->form_validation->set_message('numeric', '{field} Harus Berupa angka.');
+        if ($C2 == 0 && $C3 == 0 && $C4 == 0 && $jenis_kelamin == 0 && $id_fakultas == 0 && $id_prodi == 0) {
+            $this->form_validation->set_rules('C2', 'Pekerjaan Orang Tua', 'required');
+            $this->form_validation->set_rules('C3', 'Pengasilan Orang Tua', 'required');
+            $this->form_validation->set_rules('C4', 'Tanggungan Orang Tua', 'required');
+            $this->form_validation->set_rules('jenis_kelamin', 'Jenis Kelamin', 'required');
+            $this->form_validation->set_rules('id_fakultas', 'Fakultas', 'required');
+            $this->form_validation->set_rules('id_prodi', 'Program Studi', 'required');
+        }
+
+        $data = array(
+            'user' =>  $this->Admin->getNama()->row_array(),
+            'title' => 'Data Mahasiswa Hitung',
+            'fakultas' => $this->Admin->getFakultas(),
+            'prodi' => $this->Admin->getProdi(),
+            'data_pekerjaan' => $this->Admin->getPekerjaan(),
+            'data_gaji' => $this->Admin->getGaji(),
+            'data_tanggungan' => $this->Admin->getTanggungan()
+        );
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/Header', $data);
+            $this->load->view('templates/Navbar', $data);
+            $this->load->view('templates/Sidebar', $data);
+            $this->load->view('Action/TambahDataMahasiswaHitung', $data);
+            $this->load->view('templates/Footer', $data);
+        } else {
+            $dataMahasiswa = [
+                'nama_mahasiswa' => $nama_mahasiswa,
+                'nim_mahasiswa' => $nim_mahasiswa,
+                'jenis_kelamin' => $jenis_kelamin,
+                'id_fakultas' => $id_fakultas,
+                'id_prodi' => $id_prodi,
+                'tahun_pengajuan' => $tahun_pengajuan,
+                'c1' => $C1,
+                'c2' => $C2,
+                'c3' => $C3,
+                'c4' => $C4
+            ];
+            $dataIPK = $this->Admin->getIPK();
+            $nilaiIPK = 0;
+            foreach ($dataIPK as $data) {
+                if ($C1 >= $data['rangeawal_ipk'] && $C1 <= $data['rangeakhir_ipk']) {
+                    $nilaiIPK = $data['nilai_ipk'];
+                }
+            }
+            $dataHitungAkhir = [
+                'nim_mahasiswa' => $nim_mahasiswa,
+                'c1_akhir' => $nilaiIPK,
+                'c2_akhir' => $C2,
+                'c3_akhir' => $C3,
+                'c4_akhir' => $C4,
+                'hasil_akhir' => '0'
+            ];
+            $tambahDataMahasiswaHitung = $this->Admin->AksiTambahDataMahasiswaHitung($dataMahasiswa);
+            $tambahDataHitungaAkhir = $this->Admin->AksiTambahDataHitungaAkhir($dataHitungAkhir);
+            if ($tambahDataMahasiswaHitung && $tambahDataHitungaAkhir) {
+                $this->fungsiPeringatan("Data Berhasil di Tambahkan");
+                redirect('DataMahasiswaHitung', 'refresh');
+            } else {
+                $this->fungsiPeringatan("Data Gagal di Tambahkan");
+                redirect('DataMahasiswaHitung', 'refresh');
+            }
+        }
+    }
+
+    function HapusDataHitungMahasiswaHitung($nim_mahasiswa)
+    {
+        $where = array('nim_mahasiswa' => $nim_mahasiswa);
+        $hapusMahasiswa = $this->Admin->AksiHapusDataMahasiswaHitung($where);
+        if ($hapusMahasiswa) {
+            $this->fungsiPeringatan("Data Berhasil di Hapus");
+            redirect('DataMahasiswaHitung', 'refresh');
+        } else {
+            $this->fungsiPeringatan("Data Gagal di Hapus");
+            redirect('DataMahasiswaHitung', 'refresh');
+        }
     }
 
     public function DataHitung()
@@ -463,7 +563,7 @@ class Admin extends CI_Controller
         $data = array(
             'user' => $this->Admin->getNama()->row_array(),
             'title' => 'Data Hitung',
-            'hitung' => $this->db->get('tb_hitung')->result_array()
+            'hitung' => $this->Admin->getDataHitungAkhir()
         );
         $this->load->view('templates/Header', $data);
         $this->load->view('templates/Navbar', $data);
@@ -471,6 +571,7 @@ class Admin extends CI_Controller
         $this->load->view('Admin/DataHitung', $data);
         $this->load->view('templates/Footer', $data);
     }
+    // ============================================================================================================================
 
     public function Training()
     {

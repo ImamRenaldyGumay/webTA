@@ -71,6 +71,34 @@ class Admin_Model extends CI_Model
     $tambahProdi =  $this->db->insert('tb_prodi', $data);
     return $tambahProdi;
   }
+  // ========================================================================================================
+
+  // =========================================================================================================
+  // Model Untuk Krit
+  function getIPK()
+  {
+    $hasil = $this->db->get('tb_ipk');
+    return $hasil->result_array();
+  }
+
+  function getPekerjaan()
+  {
+    $hasil = $this->db->get('tb_pekerjaan');
+    return $hasil->result_array();
+  }
+
+  function getGaji()
+  {
+    $hasil = $this->db->get('tb_gaji');
+    return $hasil->result_array();
+  }
+
+  function getTanggungan()
+  {
+    $hasil = $this->db->get('tb_tanggungan');
+    return $hasil->result_array();
+  }
+  // =========================================================================================================
 
   function getIdFakultas($where, $table)
   {
@@ -109,7 +137,7 @@ class Admin_Model extends CI_Model
     return $query->result_array();
   }
   // =======================================================================================
-  // Aksi DataLatih
+  // Aksi Data Latih
   public function getLatih()
   {
     $this->db->select('tb_latih.* , tb_ipk.* , tb_pekerjaan.*, tb_gaji.*, tb_tanggungan.*');
@@ -141,6 +169,67 @@ class Admin_Model extends CI_Model
   }
   // ========================================================================================
 
+  // =================================================================================================================
+  // Model Data Hitung
+  function getMahasiswaDataHitung()
+  {
+    $this->db->select('tb_mahasiswa.*, tb_fakultas.*, tb_prodi.*, tb_pekerjaan.*, tb_gaji.*, tb_tanggungan.*');
+    $this->db->from('tb_mahasiswa');
+    $this->db->join('tb_fakultas', 'tb_mahasiswa.id_fakultas = tb_fakultas.id_fakultas');
+    $this->db->join('tb_prodi', 'tb_mahasiswa.id_prodi = tb_prodi.id_prodi');
+    $this->db->join('tb_pekerjaan', 'tb_mahasiswa.c2 = tb_pekerjaan.nilai_pekerjaan');
+    $this->db->join('tb_gaji', 'tb_mahasiswa.c3 = tb_gaji.nilai_gaji');
+    $this->db->join('tb_tanggungan', 'tb_mahasiswa.c4 = tb_tanggungan.nilai_tanggungan');
+    $hasil = $this->db->get();
+    return $hasil->result_array();
+  }
+
+  function getHitungAwalOnDataMahasiswa()
+  {
+    $this->db->select('tb_hitungawal.* , tb_pekerjaan.*, tb_gaji.*, tb_tanggungan.*, tb_mahasiswa.*');
+    $this->db->from('tb_hitungawal');
+    $this->db->join('tb_pekerjaan', 'tb_hitungawal.c2_awal = tb_pekerjaan.nilai_pekerjaan');
+    $this->db->join('tb_gaji', 'tb_hitungawal.c3_awal = tb_gaji.nilai_gaji');
+    $this->db->join('tb_tanggungan', 'tb_hitungawal.c4_awal = tb_tanggungan.nilai_tanggungan');
+    $this->db->join('tb_mahasiswa', 'tb_hitungawal.nim_mahasiswa = tb_mahasiswa.nim_mahasiswa');
+    $hasil = $this->db->get();
+    return $hasil->result_array();
+  }
+
+  function AksiTambahDataMahasiswaHitung($data)
+  {
+    $hasil =  $this->db->insert('tb_mahasiswa', $data);
+    return $hasil;
+  }
+
+  function AksiHapusDataMahasiswaHitung($where)
+  {
+    $this->db->delete('tb_hitungakhir', $where);
+    $hapus = $this->db->delete('tb_mahasiswa', $where);
+    return $hapus;
+  }
+
+  function AksiTambahDataHitungaAkhir($data)
+  {
+    $hasil = $this->db->insert('tb_hitungakhir', $data);
+    return $hasil;
+  }
+
+  function getDataHitungAkhir()
+  {
+    $hasil = $this->db->get('tb_hitungakhir');
+    return $hasil->result_array();
+  }
+
+  function getProdiByFakultasOnTambaDataMahasiswaHitung($id_prodi)
+  {
+    $this->db->select('*');
+    $this->db->from();
+    $hasil = $this->db->get_where('tb_prodi', array('id_prodi' => 'id_prodi'));
+    return $hasil->result();
+  }
+  // =================================================================================================================
+
   public function get_param()
   {
     $query = "SELECT `parameter`.*, `atribut`.`nama_atribut`
@@ -171,13 +260,16 @@ class Admin_Model extends CI_Model
 
   public function countTidakLayak()
   {
-    $query = $this->db->query("SELECT * FROM tb_latih WHERE hasil = '0' ");
+    $query = $this->db->get_where('tb_latih', array('Hasil' => 'Tidak Layak'));
+    // $query = $this->db->query("SELECT * FROM tb_latih WHERE hasil = '0' ");
     return $query->num_rows();
   }
 
   public function countLayak()
   {
-    $query = $this->db->query("SELECT * FROM tb_latih WHERE hasil = '1' ");
+
+    $query = $this->db->get_where('tb_latih', array('Hasil' => 'Layak'));
+    // $query = $this->db->query("SELECT * FROM tb_latih WHERE hasil = '1' ");
     return $query->num_rows();
   }
 

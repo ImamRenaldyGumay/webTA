@@ -75,8 +75,8 @@
               </p>
             </a>
           </li>
-          <li class="nav-item <?= ($this->uri->uri_string() == 'DataMahasiswaLatih') || ($this->uri->uri_string() == 'DataHitung') ? 'menu-open' : '' ?>">
-            <a href="#" class="nav-link <?= ($this->uri->uri_string() == 'DataMahasiswaLatih') || ($this->uri->uri_string() == 'DataHitung')  ? 'active' : '' ?>">
+          <li class="nav-item <?= ($this->uri->uri_string() == 'DataMahasiswaHitung') || ($this->uri->uri_string() == 'DataHitung') ? 'menu-open' : '' ?>">
+            <a href="#" class="nav-link <?= ($this->uri->uri_string() == 'DataMahasiswaHitung') || ($this->uri->uri_string() == 'DataHitung')  ? 'active' : '' ?>">
               <i class="nav-icon fas fa-calculator"></i>
               <p>
                 Data Hitung
@@ -85,7 +85,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="<?= base_url('DataMahasiswaLatih') ?>" class="nav-link <?= ($this->uri->uri_string() == 'DataMahasiswaLatih') ? 'active' : '' ?>">
+                <a href="<?= base_url('DataMahasiswaHitung') ?>" class="nav-link <?= ($this->uri->uri_string() == 'DataMahasiswaHitung') ? 'active' : '' ?>">
                   <i class="fas fa-user-graduate nav-icon"></i>
                   <p>Mahasiswa Latih</p>
                 </a>

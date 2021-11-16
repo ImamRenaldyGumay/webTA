@@ -81,6 +81,8 @@ $route['TambahDataLatih'] = 'Admin/TambahDataLatih';
 $route['AksiEditDataLatih'] = 'Admin/AksiEditDataLatih';
 // Route DataHitung
 $route['DataMahasiswaHitung'] = 'Admin/DataMahasiswaHitung';
+$route['TambahDataMahasiswaHitung'] = 'Admin/TambahDataMahasiswaHitung';
+$route['AksiTambahDataMahasiswaHitung'] = 'Admin/AksiTambahDataMahasiswaHitung';
 $route['DataHitung'] = 'Admin/DataHitung';
 // Coba
 $route['Latih'] = 'Latih/index';

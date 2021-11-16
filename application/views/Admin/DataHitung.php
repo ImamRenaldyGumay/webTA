@@ -22,24 +22,20 @@
 
     <!-- Default box -->
     <div class="card">
-      <div class="card-header border-0">
+      <!-- <div class="card-header border-0">
         <a href="<?= base_url('TambahDataFakultas') ?>" class="btn btn-primary col-12 mt-3">Tambah <?= $title ?></a>
-      </div>
+      </div> -->
       <div class="card-body">
         <table class="table table-bordered table-hover" id="example3">
           <thead>
             <tr>
               <th>No.</th>
-              <th>Nama Mahasiswa</th>
               <th>NIM</th>
-              <th>Jenis Kelamin</th>
-              <th>Fakultas</th>
-              <th>Prodi</th>
-              <th>Beasiswa</th>
               <th>C1</th>
               <th>C2</th>
               <th>C3</th>
               <th>C4</th>
+              <th>Hasil</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -49,19 +45,14 @@
             foreach ($hitung as $h) : ?>
               <tr>
                 <td><?= $no++ ?></td>
-                <td><?= $h['nama_mahasiswa'] ?></td>
-                <td><?= $h['nim'] ?></td>
-                <td><?= $h['jenis_kelamin'] ?></td>
-                <td><?= $h['id_fakultas'] ?></td>
-                <td><?= $h['id_prodi'] ?></td>
-                <td><?= $h['id_beasiswa'] ?></td>
-                <td><?= $h['c1'] ?></td>
-                <td><?= $h['c2'] ?></td>
-                <td><?= $h['c3'] ?></td>
-                <td><?= $h['c4'] ?></td>
+                <td><?= $h['nim_mahasiswa'] ?></td>
+                <td><?= $h['c1_akhir'] ?></td>
+                <td><?= $h['c2_akhir'] ?></td>
+                <td><?= $h['c3_akhir'] ?></td>
+                <td><?= $h['c4_akhir'] ?></td>
+                <td><?= $h['hasil_akhir'] ?></td>
                 <td>
-                  <a href="<?= base_url('') ?>" class="btn btn-warning" data-toggle="modal" data-target="#EditFakultas<?= $h['id_hitung'] ?>"><i class="fas fa-pencil-alt"></i> Edit</a>
-                  <a href="<?= base_url('DataFakultas/Hapus/' . $h['id_hitung']) ?>" class="btn btn-danger btn-action" data-toggle="tooltip" onclick="return confirm('Yakin?')"><i class="fas fa-trash"></i> Hapus</a>
+                  <a href="<?= base_url('') ?>" class="btn btn-primary" title="Hitung"><i class="fas fa-pencil-alt"></i></a>
                 </td>
               </tr>
             <?php endforeach ?>
