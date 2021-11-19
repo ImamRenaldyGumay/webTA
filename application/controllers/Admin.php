@@ -452,7 +452,6 @@ class Admin extends CI_Controller
             'user' =>  $this->Admin->getNama()->row_array(),
             'title' => 'Data Mahasiswa Hitung',
             'mahasiswa' => $this->Admin->getMahasiswaDataHitung(),
-            'hitungAwal' => $this->Admin->getHitungAwalOnDataMahasiswa()
         );
         $this->load->view('templates/Header', $data);
         $this->load->view('templates/Navbar', $data);
@@ -468,7 +467,6 @@ class Admin extends CI_Controller
         $jenis_kelamin = $this->input->post('jenis_kelamin');
         $id_fakultas = $this->input->post('id_fakultas');
         $id_prodi = $this->input->post('id_prodi');
-        $tahun_pengajuan = date('Y');
 
         $C1 = $this->input->post('C1');
         $C2 = $this->input->post('C2');
@@ -512,7 +510,6 @@ class Admin extends CI_Controller
                 'jenis_kelamin' => $jenis_kelamin,
                 'id_fakultas' => $id_fakultas,
                 'id_prodi' => $id_prodi,
-                'tahun_pengajuan' => $tahun_pengajuan,
                 'c1' => $C1,
                 'c2' => $C2,
                 'c3' => $C3,
@@ -525,13 +522,30 @@ class Admin extends CI_Controller
                     $nilaiIPK = $data['nilai_ipk'];
                 }
             }
+
+            $jumlahLayak = $this->Admin->countLayak();
+            $jumlahTidakLayak = $this->Admin->countTidakLayak();
+            $totalLatih = $jumlahLayak + $jumlahTidakLayak;
+            $status_ipk = $this->Admin->status_ipk($nilaiIPK);
+            $status_pekerjaan = $this->Admin->status_pekerjaan($C2);
+            $status_gaji = $this->Admin->status_gaji($C3);
+            $status_tanggungan = $this->Admin->status_tanggungan($C4);
+            $PC1 = $jumlahLayak / $totalLatih;
+            $PC0 = $jumlahTidakLayak / $totalLatih;
+            $kelas_layak = $status_ipk['Layak'] * $status_pekerjaan['Layak'] * $status_gaji['Layak'] * $status_tanggungan['Layak'] * $PC1;
+            $kelas_tidak_layak = $status_ipk['Tidak Layak'] * $status_pekerjaan['Tidak Layak'] * $status_gaji['Tidak Layak'] * $status_tanggungan['Tidak Layak'] * $PC0;
+            if ($kelas_layak >= $kelas_tidak_layak) {
+                $kesimpulan = "Layak";
+            } else {
+                $kesimpulan = "Tidak Layak";
+            }
             $dataHitungAkhir = [
                 'nim_mahasiswa' => $nim_mahasiswa,
                 'c1_akhir' => $nilaiIPK,
                 'c2_akhir' => $C2,
                 'c3_akhir' => $C3,
                 'c4_akhir' => $C4,
-                'hasil_akhir' => '0'
+                'hasil_akhir' => $kesimpulan
             ];
             $tambahDataMahasiswaHitung = $this->Admin->AksiTambahDataMahasiswaHitung($dataMahasiswa);
             $tambahDataHitungaAkhir = $this->Admin->AksiTambahDataHitungaAkhir($dataHitungAkhir);

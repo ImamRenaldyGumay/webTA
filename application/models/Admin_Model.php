@@ -9,8 +9,7 @@ class Admin_Model extends CI_Model
     $query = $this->db->get_where('tb_user', ['nama' => $this->session->userdata('nama')]);
     return $query;
   }
-  // ==========================================================================================================================
-
+  // ===========================================================================================================================
   // ===========================================================================================================================
   // Aksi Data Fakultas
   public function getFakultas()
@@ -184,18 +183,6 @@ class Admin_Model extends CI_Model
     return $hasil->result_array();
   }
 
-  function getHitungAwalOnDataMahasiswa()
-  {
-    $this->db->select('tb_hitungawal.* , tb_pekerjaan.*, tb_gaji.*, tb_tanggungan.*, tb_mahasiswa.*');
-    $this->db->from('tb_hitungawal');
-    $this->db->join('tb_pekerjaan', 'tb_hitungawal.c2_awal = tb_pekerjaan.nilai_pekerjaan');
-    $this->db->join('tb_gaji', 'tb_hitungawal.c3_awal = tb_gaji.nilai_gaji');
-    $this->db->join('tb_tanggungan', 'tb_hitungawal.c4_awal = tb_tanggungan.nilai_tanggungan');
-    $this->db->join('tb_mahasiswa', 'tb_hitungawal.nim_mahasiswa = tb_mahasiswa.nim_mahasiswa');
-    $hasil = $this->db->get();
-    return $hasil->result_array();
-  }
-
   function AksiTambahDataMahasiswaHitung($data)
   {
     $hasil =  $this->db->insert('tb_mahasiswa', $data);
@@ -217,7 +204,10 @@ class Admin_Model extends CI_Model
 
   function getDataHitungAkhir()
   {
-    $hasil = $this->db->get('tb_hitungakhir');
+    $this->db->select('tb_hitungakhir.*, tb_mahasiswa.*');
+    $this->db->from('tb_hitungakhir');
+    $this->db->join('tb_mahasiswa', 'tb_hitungakhir.nim_mahasiswa = tb_mahasiswa.nim_mahasiswa');
+    $hasil = $this->db->get();
     return $hasil->result_array();
   }
 
@@ -250,28 +240,209 @@ class Admin_Model extends CI_Model
     ";
     return $this->db->query($query)->result_array();
   }
+  //==========================================================================================================================
 
   public function countTotalDataLatih()
   {
-    $query = $this->db->query("SELECT * FROM tb_latih");
-    $total = $query->num_rows();
-    return $total;
+    $this->db->from('tb_latih');
+    return $this->db->count_all_results();
+    // $query = $this->db->query("SELECT * FROM tb_latih");
+    // $total = $query->num_rows();
+    // return $total;
   }
 
   public function countTidakLayak()
   {
-    $query = $this->db->get_where('tb_latih', array('Hasil' => 'Tidak Layak'));
-    // $query = $this->db->query("SELECT * FROM tb_latih WHERE hasil = '0' ");
-    return $query->num_rows();
+    $this->db->where('hasil', 'Tidak Layak');
+    $this->db->from('tb_latih');
+    return $this->db->count_all_results();
+    // $query = $this->db->get_where('tb_latih', array('Hasil' => 'Tidak Layak'));
+    // return $query->num_rows();
   }
 
   public function countLayak()
   {
-
-    $query = $this->db->get_where('tb_latih', array('Hasil' => 'Layak'));
-    // $query = $this->db->query("SELECT * FROM tb_latih WHERE hasil = '1' ");
-    return $query->num_rows();
+    $this->db->where('hasil', 'Layak');
+    $this->db->from('tb_latih');
+    return $this->db->count_all_results();
   }
+  function getJumlahIPK1()
+  {
+    $this->db->where('c1', '1');
+    $this->db->from('tb_latih');
+    return $this->db->count_all_results();
+  }
+
+  function getJumlahIPK2()
+  {
+    $this->db->where('c1', '2');
+    $this->db->from('tb_latih');
+    return $this->db->count_all_results();
+  }
+
+  function getJumlahIPK3()
+  {
+    $this->db->where('c1', '3');
+    $this->db->from('tb_latih');
+    return $this->db->count_all_results();
+  }
+
+  function getJumlahPekerjaan1()
+  {
+    $this->db->where('c2', '1');
+    $this->db->from('tb_latih');
+    return $this->db->count_all_results();
+  }
+
+  function getJumlahPekerjaan2()
+  {
+    $this->db->where('c2', '2');
+    $this->db->from('tb_latih');
+    return $this->db->count_all_results();
+  }
+
+  function getJumlahPekerjaan3()
+  {
+    $this->db->where('c2', '3');
+    $this->db->from('tb_latih');
+    return $this->db->count_all_results();
+  }
+
+  function getJumlahGaji1()
+  {
+    $this->db->where('c3', '1');
+    $this->db->from('tb_latih');
+    return $this->db->count_all_results();
+  }
+
+  function getJumlahGaji2()
+  {
+    $this->db->where('c3', '2');
+    $this->db->from('tb_latih');
+    return $this->db->count_all_results();
+  }
+
+  function getJumlahGaji3()
+  {
+    $this->db->where('c3', '3');
+    $this->db->from('tb_latih');
+    return $this->db->count_all_results();
+  }
+
+  function getJumlahGaji4()
+  {
+    $this->db->where('c3', '4');
+    $this->db->from('tb_latih');
+    return $this->db->count_all_results();
+  }
+
+  function getJumlahTanggung1()
+  {
+    $this->db->where('c4', '1');
+    $this->db->from('tb_latih');
+    return $this->db->count_all_results();
+  }
+
+  function getJumlahTanggung2()
+  {
+    $this->db->where('c4', '2');
+    $this->db->from('tb_latih');
+    return $this->db->count_all_results();
+  }
+
+  function getJumlahTanggung3()
+  {
+    $this->db->where('c4', '3');
+    $this->db->from('tb_latih');
+    return $this->db->count_all_results();
+  }
+
+  function ipk_akhir()
+  {
+    $this->db->where('');
+  }
+
+  function status_ipk($status)
+  {
+    // Status Layak
+    $this->db->where('c1', $status);
+    $this->db->where('hasil', 'Layak');
+    $this->db->from('tb_latih');
+    $layak = $this->db->count_all_results() / $this->countLayak();
+    // Status Tidak Layak
+    $this->db->where('c1', $status);
+    $this->db->where('hasil', 'Tidak Layak');
+    $this->db->from('tb_latih');
+    $tidak = $this->db->count_all_results() / $this->countTidakLayak();
+    return array('Layak' => $layak, 'Tidak Layak' => $tidak);
+  }
+
+  function status_pekerjaan($status)
+  {
+    // Status Layak
+    $this->db->where('c2', $status);
+    $this->db->where('hasil', 'Layak');
+    $this->db->from('tb_latih');
+    $layak = $this->db->count_all_results() / $this->countLayak();
+    // Status Tidak Layak
+    $this->db->where('c2', $status);
+    $this->db->where('hasil', 'Tidak Layak');
+    $this->db->from('tb_latih');
+    $tidak = $this->db->count_all_results() / $this->countTidakLayak();
+    return array('Layak' => $layak, 'Tidak Layak' => $tidak);
+  }
+
+  function status_gaji($status)
+  {
+    // Status Layak
+    $this->db->where('c3', $status);
+    $this->db->where('hasil', 'Layak');
+    $this->db->from('tb_latih');
+    $layak = $this->db->count_all_results() / $this->countLayak();
+    // Status Tidak Layak
+    $this->db->where('c3', $status);
+    $this->db->where('hasil', 'Tidak Layak');
+    $this->db->from('tb_latih');
+    $tidak = $this->db->count_all_results() / $this->countTidakLayak();
+    return array('Layak' => $layak, 'Tidak Layak' => $tidak);
+  }
+
+  function status_tanggungan($status)
+  {
+    // Status Layak
+    $this->db->where('c3', $status);
+    $this->db->where('hasil', 'Layak');
+    $this->db->from('tb_latih');
+    $layak = $this->db->count_all_results() / $this->countLayak();
+    // Status Tidak Layak
+    $this->db->where('c3', $status);
+    $this->db->where('hasil', 'Tidak Layak');
+    $this->db->from('tb_latih');
+    $tidak = $this->db->count_all_results() / $this->countTidakLayak();
+    return array('Layak' => $layak, 'Tidak Layak' => $tidak);
+  }
+
+  function ProbLayak()
+  {
+    $hasil = $this->countLayak() / $this->countTotalDataLatih();
+    return $hasil;
+  }
+
+  function ProbTidaLayak()
+  {
+    $hasil = $this->countTidakLayak() / $this->countTotalDataLatih();
+    return $hasil;
+  }
+  // ========================================================================================================================
+
+  function IPK($status)
+  {
+    // Status "Layak"
+    $this->db->where('IPK');
+    // Status "Tidak Layak"
+  }
+
+  // =========================================================================================================================
 
   public function CountTanggungBanyak()
   {
