@@ -43,16 +43,20 @@ class Auth extends CI_Controller
         $this->session->set_userdata($userakun);
 
         if ($userakun['role'] == '1') {
-          $this->fungsiPeringatan("Selamat Datang");
-          redirect('Admin');
+          $this->fungsiPeringatan("Berhasil Sign In");
+          redirect('Admin', 'refresh');
         } else if ($userakun['role'] == '2') {
-          redirect('User');
+          $this->fungsiPeringatan("Berhasil Sign In");
+          redirect('User', 'refresh');
         } else {
-          echo "hai";
+          $this->fungsiPeringatan("Berhasil Sign In");
+          redirect('Instruktur', 'refresh');
         }
       }
     } else {
-      redirect('Auth/ErrorLogin');
+      // redirect('Auth/ErrorLogin');
+      $this->fungsiPeringatan("Pastikan Password benar");
+      redirect('Login', 'refresh');
     }
   }
 

@@ -67,6 +67,7 @@
         </div>
       </div>
       <div class="card-body">
+        Selamat datang, <?= $this->session->userdata('nama') ?><br>
         Check the Header part you can find Legacy vesion of style.
         <br>
         Start creating your amazing application! <br>

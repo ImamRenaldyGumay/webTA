@@ -7,6 +7,7 @@ class Admin extends CI_Controller
         parent::__construct();
         if ($this->session->userdata('idakun') == '' or $this->session->userdata('role') != '1' or $this->session->userdata('status') == '') {
             $this->session->sess_destroy();
+            $this->fungsiPeringatan("Pastikan Sudah Melakukan Sign In");
             redirect('Home', 'refresh');
         } else {
             $this->load->model('Admin_Model', 'Admin');

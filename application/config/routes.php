@@ -53,6 +53,10 @@ $route['default_controller'] = 'Home';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+// Login
+$route['Login'] = 'Auth/Login';
+$route['Register'] = 'Auth/Register';
+
 // Admin
 $route['Admin'] = 'Admin/index';
 
@@ -93,3 +97,8 @@ $route['TambahAdmin'] = 'Admin/TambahAdmin';
 
 // Untuk User
 $route['User'] = 'User/index';
+
+// Untuk Instruktur
+$route['Instruktur'] = 'Instruktur/index';
+$route['DataBeasiswa'] = 'Instruktur/DataBeasiswa';
+$route['ExportData'] = 'Instruktur/ExportDataBeasiswa';
