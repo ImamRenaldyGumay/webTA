@@ -25,6 +25,18 @@ class Instruktur  extends CI_Controller
     $this->load->view('Instruktur/Index', $data);
     $this->load->view('templates/Footer', $data);
   }
+  function DetailUserInstruktur()
+  {
+    $data = array(
+      'user' => $this->Instruktur->getNama()->row_array(),
+      'title' => 'My Profile',
+    );
+    $this->load->view('templates/Header', $data);
+    $this->load->view('templates/Navbar', $data);
+    $this->load->view('templates/Sidebar', $data);
+    $this->load->view('Instruktur/DetailUser', $data);
+    $this->load->view('templates/Footer', $data);
+  }
   public function DataBeasiswa()
   {
     $data = array(
@@ -37,6 +49,15 @@ class Instruktur  extends CI_Controller
     $this->load->view('templates/Sidebar', $data);
     $this->load->view('Instruktur/DataBeasiswa', $data);
     $this->load->view('templates/Footer', $data);
+  }
+
+  public function export_excel()
+  {
+    $data = array(
+      'title' => 'Laporan Excel',
+      'user' => $this->Instruktur->listing()
+    );
+    $this->load->view('Instruktur/laporan_excel', $data);
   }
 
   function ExportDataBeasiswa()

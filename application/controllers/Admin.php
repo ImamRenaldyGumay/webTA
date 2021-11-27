@@ -607,9 +607,25 @@ class Admin extends CI_Controller
         $this->load->view('Admin/Training', $data);
         $this->load->view('templates/Footer', $data);
     }
-
+    // =====================================================================================================
+    // ======================================================================================================
+    function DetailUser()
+    {
+        $data = array(
+            'user' => $this->Admin->getNama()->row_array(),
+            'title' => 'My Profile',
+        );
+        $this->load->view('templates/Header', $data);
+        $this->load->view('templates/Navbar', $data);
+        $this->load->view('templates/Sidebar', $data);
+        $this->load->view('Admin/DetailUser', $data);
+        $this->load->view('templates/Footer', $data);
+    }
+    // ======================================================================================================
+    // ======================================================================================================
     public function fungsiPeringatan($isiPeringatan)
     {
         echo "<script>alert('" . $isiPeringatan . "');</script>";
     }
+    // ========================================================================================================
 }

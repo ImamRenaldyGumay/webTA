@@ -23,30 +23,29 @@
             <!-- User image -->
             <li class="user-header bg-primary">
               <img src="<?= base_url('assets') ?>/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-
               <p>
                 <?= $user['nama'] ?>
-                <small>Member since Nov. 2012</small>
+                <!-- <small>Member since Nov. 2012</small> -->
               </p>
             </li>
             <!-- Menu Body -->
-            <li class="user-body">
-              <div class="row">
-                <div class="col-4 text-center">
+            <!-- <li class="user-body"> -->
+            <!-- <div class="row"> -->
+            <!-- <div class="col-4 text-center">
                   <a href="#">Followers</a>
-                </div>
-                <div class="col-4 text-center">
+                </div> -->
+            <!-- <div class="col-4 text-center">
                   <a href="#">Sales</a>
                 </div>
                 <div class="col-4 text-center">
                   <a href="#">Friends</a>
-                </div>
-              </div>
-              <!-- /.row -->
-            </li>
+                </div> -->
+            <!-- </div> -->
+            <!-- /.row -->
+            <!-- </li> -->
             <!-- Menu Footer-->
             <li class="user-footer">
-              <a href="#" class="btn btn-default btn-flat">Profile</a>
+              <!-- <a href="#" class="btn btn-default btn-flat">Profile</a> -->
               <a href="<?= base_url('Auth/Logout') ?>" class="btn btn-default btn-flat float-right">Sign out</a>
             </li>
           </ul>

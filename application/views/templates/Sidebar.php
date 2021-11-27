@@ -108,10 +108,10 @@
           </li>
           <li class="nav-header">User</li>
           <li class="nav-item">
-            <a href="<?= base_url('Coba') ?>" class="nav-link <?= ($this->uri->uri_string() == 'Coba') ? 'active' : '' ?>">
+            <a href="<?= base_url('DetailUser') ?>" class="nav-link <?= ($this->uri->uri_string() == 'DetailUser') ? 'active' : '' ?>">
               <i class="nav-icon fas fa-users"></i>
               <p>
-                Users
+                Detail User
               </p>
             </a>
           </li>
@@ -257,6 +257,14 @@
               </p>
             </a>
           </li>
+          <!-- <li class="nav-item">
+            <a href="<?= base_url('DetailUserInstruktur') ?>" class="nav-link <?= ($this->uri->uri_string() == 'DetailUserInstruktur') ? 'active' : '' ?>">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                Detail User
+              </p>
+            </a>
+          </li> -->
           <li class="nav-item">
             <a href="<?= base_url('Instruktur') ?>" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -284,14 +292,13 @@
             </a>
           </li>
         </ul>
-        <li class="nav-header my-3">Dashboard</li>
+        <li class="nav-header my-3">Detail User</li>
         <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
-            <a href="../widgets.html" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+            <a href="<?= base_url('DetailUserInstruktur') ?>" class="nav-link <?= ($this->uri->uri_string() == 'DetailUserInstruktur') ? 'active' : '' ?>">
+              <i class="nav-icon fas fa-user"></i>
               <p>
-                Widgets
-                <span class="right badge badge-danger">New</span>
+                My Profile
               </p>
             </a>
           </li>

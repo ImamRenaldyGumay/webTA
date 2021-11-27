@@ -59,7 +59,7 @@ $route['Register'] = 'Auth/Register';
 
 // Admin
 $route['Admin'] = 'Admin/index';
-
+$route['DetailUser'] = 'Admin/DetailUser';
 // Route DataFakultas
 $route['DataFakultas'] = 'Admin/DataFakultas';
 $route['TambahDataFakultas'] = 'Admin/TambahDataFakultas';
@@ -101,4 +101,6 @@ $route['User'] = 'User/index';
 // Untuk Instruktur
 $route['Instruktur'] = 'Instruktur/index';
 $route['DataBeasiswa'] = 'Instruktur/DataBeasiswa';
+$route['export_excel'] = 'Instruktur/export_excel';
 $route['ExportData'] = 'Instruktur/ExportDataBeasiswa';
+$route['DetailUserInstruktur'] = 'Instruktur/DetailUserInstruktur';

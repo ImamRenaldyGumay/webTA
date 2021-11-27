@@ -23,18 +23,18 @@
       <div class="card-header border-0">
         <div class="d-flex justify-content-between">
           <h3 class="card-title"><?= $title ?></h3>
-          <a href="<?= base_url('ExportData') ?>">Export <?= $title ?></a>
+          <a href="<?= base_url('export_excel') ?>">Export <?= $title ?></a>
         </div>
       </div>
       <div class="card-body">
-        <table class="table table-bordered table-hover" id="example3">
+        <table class="table table-bordered table-hover" id="myTable">
           <thead>
             <th>No.</th>
             <th>Nama</th>
             <th>NIM</th>
             <th>Fakultas</th>
             <th>Prodi</th>
-            <th>Hasil Kelayakan</th>
+            <th>IPK</th>
           </thead>
           <tbody>
             <?php

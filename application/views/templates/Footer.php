@@ -57,6 +57,33 @@
       "autoWidth": false,
       "responsive": true,
     });
+
+  });
+
+  $(document).ready(function() {
+    $('#myTable').DataTable({
+      "searching": false,
+      dom: 'Bfrtip',
+      buttons: [{
+        extend: 'excelHtml5',
+        filename: 'Laporan',
+        text: 'Export to Excel',
+        exportOptions: {
+          modifier: {
+            pageSize: 'a4',
+            rows: ':visible',
+          }
+        }
+      }]
+    });
+  });
+
+  $(document).ready(function() {
+    $('#table-datatables').DataTable({
+      "searching": false,
+      dom: 'Bfrtip',
+      buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+    });
   });
 
   window.setTimeout(function() {
