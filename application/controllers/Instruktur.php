@@ -37,17 +37,35 @@ class Instruktur  extends CI_Controller
     $this->load->view('Instruktur/DetailUser', $data);
     $this->load->view('templates/Footer', $data);
   }
+
   public function DataBeasiswa()
   {
     $data = array(
       'user' => $this->Instruktur->getNama()->row_array(),
       'title' => 'Data Beasiswa',
-      'hitung' => $this->Instruktur->getDataHitungAkhir()
+      'hitung' => $this->Instruktur->getDataHitungAkhir(),
+      'lis' => $this->Instruktur->getHitungAkhir1(),
+      // 'detail' => $this->Instruktur->detailHitungAkhir()
     );
     $this->load->view('templates/Header', $data);
     $this->load->view('templates/Navbar', $data);
     $this->load->view('templates/Sidebar', $data);
     $this->load->view('Instruktur/DataBeasiswa', $data);
+    $this->load->view('templates/Footer', $data);
+  }
+
+  function DetailPerhitungan($id_hitungakhir)
+  {
+    $data = array(
+      'user' => $this->Instruktur->getNama()->row_array(),
+      'title' => 'Detail Perhitungan',
+      'hitung' => $this->Instruktur->getDataHitungAkhir(),
+      'detail' => $this->Instruktur->detailHitungAkhir($id_hitungakhir)
+    );
+    $this->load->view('templates/Header', $data);
+    $this->load->view('templates/Navbar', $data);
+    $this->load->view('templates/Sidebar', $data);
+    $this->load->view('Instruktur/DetailPerhitungan', $data);
     $this->load->view('templates/Footer', $data);
   }
 

@@ -240,15 +240,71 @@ class Admin_Model extends CI_Model
     ";
     return $this->db->query($query)->result_array();
   }
-  //==========================================================================================================================
+
+  function status_ipk($status)
+  {
+    // Status Layak
+    $this->db->where('c1', $status);
+    $this->db->where('hasil', 'Layak');
+    $this->db->from('tb_latih');
+    $layak = $this->db->count_all_results() / $this->countLayak();
+    // Status Tidak Layak
+    $this->db->where('c1', $status);
+    $this->db->where('hasil', 'Tidak Layak');
+    $this->db->from('tb_latih');
+    $tidak = $this->db->count_all_results() / $this->countTidakLayak();
+    return array('Layak' => $layak, 'Tidak Layak' => $tidak);
+  }
+
+  function status_pekerjaan($status)
+  {
+    // Status Layak
+    $this->db->where('c2', $status);
+    $this->db->where('hasil', 'Layak');
+    $this->db->from('tb_latih');
+    $layak = $this->db->count_all_results() / $this->countLayak();
+    // Status Tidak Layak
+    $this->db->where('c2', $status);
+    $this->db->where('hasil', 'Tidak Layak');
+    $this->db->from('tb_latih');
+    $tidak = $this->db->count_all_results() / $this->countTidakLayak();
+    return array('Layak' => $layak, 'Tidak Layak' => $tidak);
+  }
+
+  function status_gaji($status)
+  {
+    // Status Layak
+    $this->db->where('c3', $status);
+    $this->db->where('hasil', 'Layak');
+    $this->db->from('tb_latih');
+    $layak = $this->db->count_all_results() / $this->countLayak();
+    // Status Tidak Layak
+    $this->db->where('c3', $status);
+    $this->db->where('hasil', 'Tidak Layak');
+    $this->db->from('tb_latih');
+    $tidak = $this->db->count_all_results() / $this->countTidakLayak();
+    return array('Layak' => $layak, 'Tidak Layak' => $tidak);
+  }
+
+  function status_tanggungan($status)
+  {
+    // Status Layak
+    $this->db->where('c3', $status);
+    $this->db->where('hasil', 'Layak');
+    $this->db->from('tb_latih');
+    $layak = $this->db->count_all_results() / $this->countLayak();
+    // Status Tidak Layak
+    $this->db->where('c3', $status);
+    $this->db->where('hasil', 'Tidak Layak');
+    $this->db->from('tb_latih');
+    $tidak = $this->db->count_all_results() / $this->countTidakLayak();
+    return array('Layak' => $layak, 'Tidak Layak' => $tidak);
+  }
 
   public function countTotalDataLatih()
   {
     $this->db->from('tb_latih');
     return $this->db->count_all_results();
-    // $query = $this->db->query("SELECT * FROM tb_latih");
-    // $total = $query->num_rows();
-    // return $total;
   }
 
   public function countTidakLayak()
@@ -256,8 +312,6 @@ class Admin_Model extends CI_Model
     $this->db->where('hasil', 'Tidak Layak');
     $this->db->from('tb_latih');
     return $this->db->count_all_results();
-    // $query = $this->db->get_where('tb_latih', array('Hasil' => 'Tidak Layak'));
-    // return $query->num_rows();
   }
 
   public function countLayak()
@@ -266,6 +320,22 @@ class Admin_Model extends CI_Model
     $this->db->from('tb_latih');
     return $this->db->count_all_results();
   }
+
+  function ProbLayak()
+  {
+    $hasil = $this->countLayak() / $this->countTotalDataLatih();
+    return $hasil;
+  }
+
+  function ProbTidaLayak()
+  {
+    $hasil = $this->countTidakLayak() / $this->countTotalDataLatih();
+    return $hasil;
+  }
+  //==========================================================================================================================
+
+
+
   function getJumlahIPK1()
   {
     $this->db->where('c1', '1');
@@ -362,77 +432,7 @@ class Admin_Model extends CI_Model
     $this->db->where('');
   }
 
-  function status_ipk($status)
-  {
-    // Status Layak
-    $this->db->where('c1', $status);
-    $this->db->where('hasil', 'Layak');
-    $this->db->from('tb_latih');
-    $layak = $this->db->count_all_results() / $this->countLayak();
-    // Status Tidak Layak
-    $this->db->where('c1', $status);
-    $this->db->where('hasil', 'Tidak Layak');
-    $this->db->from('tb_latih');
-    $tidak = $this->db->count_all_results() / $this->countTidakLayak();
-    return array('Layak' => $layak, 'Tidak Layak' => $tidak);
-  }
 
-  function status_pekerjaan($status)
-  {
-    // Status Layak
-    $this->db->where('c2', $status);
-    $this->db->where('hasil', 'Layak');
-    $this->db->from('tb_latih');
-    $layak = $this->db->count_all_results() / $this->countLayak();
-    // Status Tidak Layak
-    $this->db->where('c2', $status);
-    $this->db->where('hasil', 'Tidak Layak');
-    $this->db->from('tb_latih');
-    $tidak = $this->db->count_all_results() / $this->countTidakLayak();
-    return array('Layak' => $layak, 'Tidak Layak' => $tidak);
-  }
-
-  function status_gaji($status)
-  {
-    // Status Layak
-    $this->db->where('c3', $status);
-    $this->db->where('hasil', 'Layak');
-    $this->db->from('tb_latih');
-    $layak = $this->db->count_all_results() / $this->countLayak();
-    // Status Tidak Layak
-    $this->db->where('c3', $status);
-    $this->db->where('hasil', 'Tidak Layak');
-    $this->db->from('tb_latih');
-    $tidak = $this->db->count_all_results() / $this->countTidakLayak();
-    return array('Layak' => $layak, 'Tidak Layak' => $tidak);
-  }
-
-  function status_tanggungan($status)
-  {
-    // Status Layak
-    $this->db->where('c3', $status);
-    $this->db->where('hasil', 'Layak');
-    $this->db->from('tb_latih');
-    $layak = $this->db->count_all_results() / $this->countLayak();
-    // Status Tidak Layak
-    $this->db->where('c3', $status);
-    $this->db->where('hasil', 'Tidak Layak');
-    $this->db->from('tb_latih');
-    $tidak = $this->db->count_all_results() / $this->countTidakLayak();
-    return array('Layak' => $layak, 'Tidak Layak' => $tidak);
-  }
-
-  function ProbLayak()
-  {
-    $hasil = $this->countLayak() / $this->countTotalDataLatih();
-    return $hasil;
-  }
-
-  function ProbTidaLayak()
-  {
-    $hasil = $this->countTidakLayak() / $this->countTotalDataLatih();
-    return $hasil;
-  }
   // ========================================================================================================================
 
   function IPK($status)

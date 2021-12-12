@@ -39,7 +39,7 @@
           <tbody>
             <?php
             $no = 1;
-            foreach ($hitung as $h) : ?>
+            foreach ($lis as $h) : ?>
               <tr>
                 <td><?= $no++ ?></td>
                 <td><?= $h['nama_mahasiswa'] ?></td>
@@ -95,6 +95,7 @@
                   <td><span class="badge bg-danger">Tidak Layak</span></td>
                 <?php endif ?>
                 <td>
+                  <a href="<?= base_url('Instruktur/DetailPerhitungan/' . $h['hasil_akhir']) ?>" class="btn btn-danger"><i class="fas fa-eye"></i></a>
                   <a href="<?= base_url('') ?>" class="btn btn-primary" data-toggle="modal" title="Hitung" data-target="#HA<?= $h['id_hitungakhir'] ?>"><i class="fas fa-eye"></i></a>
                 </td>
               </tr>
