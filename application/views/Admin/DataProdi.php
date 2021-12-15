@@ -44,8 +44,8 @@
                 <td><?= $p['nama_fakultas'] ?></td>
                 <td><?= $p['nama_prodi'] ?></td>
                 <td>
-                  <a href="<?= base_url('') ?>" class="btn btn-warning" data-toggle="modal" title="Edit" data-target="#EditProdi<?= $p['id_prodi'] ?>">Edit</a>
-                  <a href="<?= base_url('Admin/HapusDataProdi/' . $p['id_prodi']) ?>" class="btn btn-danger btn-action" onclick="return confirm('Yakin?')">Hapus</a>
+                  <a href="<?= base_url('Admin/EditDataProdi/' . $p['id_prodi']) ?>" class="btn btn-warning" title="Edit">Edit</a>
+                  <a href=" <?= base_url('Admin/HapusDataProdi/' . $p['id_prodi']) ?>" class="btn btn-danger btn-action" onclick="return confirm('Yakin?')">Hapus</a>
                 </td>
               </tr>
             <?php endforeach ?>

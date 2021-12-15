@@ -70,7 +70,8 @@ $route['AksiEditDataFakultas'] = 'Admin/AksiEditDataFakultas/';
 $route['DataProdi'] = 'Admin/DataProdi';
 $route['TambahDataProdi'] = 'Admin/TambahDataProdi';
 $route['AksiTambahDataProdi'] = 'Admin/AksiTambahDataProdi';
-$route['EditDataProdi'] = 'Admin/EditDataProdi';
+$route['EditDataProdi'] = 'Admin/EditDataProdi/';
+// $route['AksiEditDataProdi'] = 'Admin/AksiEditDataProdi/';
 // Route DataMahasiswa
 $route['DataMahasiswa'] = 'Admin/DataMahasiswa';
 // Route DataBeasiswa

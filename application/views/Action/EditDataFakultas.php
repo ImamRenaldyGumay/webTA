@@ -23,39 +23,35 @@
   <!-- Main content -->
   <section class="content">
     <!-- Default box -->
-    <div class="card">
-      <div class="card-header border-0">
-        <a href="<?= base_url('DataFakultas') ?>" class="btn btn-primary float-right">
-          <i class="fas fa-undo-alt"></i>
-          Back
-        </a>
-      </div>
-      <form action="<?= base_url('AksiEditDataFakultas') ?>" method="POST">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-md-10">
-              <div class="form-group">
-                <label for="id_fakultas">Id Fakultas</label>
-                <input name="id_fakultas" id="id_fakultas" type="text" class="form-control" value="<?= $ubah['id_fakultas'] ?>" readonly='readonly'>
-              </div>
-              <div class="form-group">
-                <label for="nama_fakultas">Nama Fakultas</label>
-                <input type="text" class="form-control" id="nama_fakultas" name="nama_fakultas" value="<?= $ubah['nama_fakultas'] ?>">
-                <?= form_error('nama_fakultas', '<small class="text-danger pl-3">', '</small>') ?>
-              </div>
+    <div class="col-md-9">
+      <div class="card card-primary card-outline">
+        <form action="<?= base_url('EditDataFakultas/') ?>" method="POST">
+          <div class="card-body ">
+            <div class="form-group">
+              <label for="id_fakultas">Id Prodi</label>
+              <input name="id_fakultas" id="id_fakultas" type="text" class="form-control" value="<?= $ubah['id_fakultas'] ?>" readonly='readonly'>
+            </div>
+            <div class="form-group">
+              <label for="nama_fakultas">Nama Fakultas</label>
+              <input type="text" class="form-control" id="nama_fakultas" name="nama_fakultas" value="<?= $ubah['nama_fakultas'] ?>">
+              <?= form_error('nama_fakultas', '<small class="text-danger pl-3">', '</small>') ?>
             </div>
           </div>
-        </div>
-        <!-- /.card-body -->
-        <div class="card-footer justify-content-between">
-          <button type="submit" class="btn btn-primary">Edit</button>
-        </div>
-      </form>
+          <div class="card-footer justify-content-between">
+            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Edit</button>
+            <a href="<?= base_url('DataFakultas') ?>" class="btn btn-default">Kembali</a>
+          </div>
+        </form>
+      </div>
+      <!-- /.card-body -->
+
     </div>
     <!-- /.card -->
+</div>
 
-  </section>
-  <!-- /.content -->
+
+</section>
+<!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
 <!-- End Content Edit Data Fakultas -->

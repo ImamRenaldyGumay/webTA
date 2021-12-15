@@ -23,44 +23,46 @@
   <!-- Main content -->
   <section class="content">
     <!-- Default box -->
-    <div class="card">
-      <div class="card-header border-0">
-        <a href="<?= base_url('DataProdi') ?>" class="btn btn-primary float-right">
-          <i class="fas fa-undo-alt"></i>
-          Back
-        </a>
-      </div>
-      <form action="<?= base_url('AksiTambahDataProdi') ?>" method="POST">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-md-10">
-              <div class="form-group">
-                <label for="id_fakultas">Nama Fakultas</label>
-                <select name="id_fakultas" id="id_fakultas" class="form-control">
-                  <option>Select Menu</option>
-                  <?php foreach ($fakultas as $f) : ?>
-                    <option value="<?= $f['id_fakultas']; ?>"><?= $f['nama_fakultas']; ?></option>
-                  <?php endforeach; ?>
-                </select>
-                <?= form_error('id_fakultas', '<small class="text-danger pl-3">', '</small>') ?>
-              </div>
-              <div class="form-group">
-                <label for="nama_prodi">Nama Program Studi</label>
-                <input type="text" class="form-control" id="nama_prodi" name="nama_prodi">
-                <?= form_error('nama_prodi', '<small class="text-danger pl-3">', '</small>') ?>
-              </div>
+    <div class="col-md-9">
+      <div class="card card-primary card-outline">
+        <div class="card-header">
+          <h3 class="card-title">Halaman <?= $title ?></h3>
+        </div>
+        <form action="<?= base_url('EditDataProdi/') ?>" method="POST">
+          <div class="card-body">
+            <div class="form-group">
+              <label for="id_fakultas">Id Prodi</label>
+              <input name="id_prodi" id="id_prodi" type="text" class="form-control" value="<?= $ubah['id_prodi'] ?>" readonly='readonly'>
+            </div>
+            <div class="form-group">
+              <label for="id_fakultas">Nama Fakultas</label>
+              <input name="id_fakultas" id="id_fakultas" type="text" class="form-control" value="<?= $ubah['id_fakultas'] ?>" readonly='readonly'>
+            </div>
+            <!-- <div class="form-group">
+              <label for="id_fakultas">Nama Fakultas</label>
+              <select name="id_fakultas" id="id_fakultas" class="form-control">
+                <option value="<?= $ubah['id_fakultas'] ?>"></option>
+                <?php foreach ($fakultas as $f) : ?>
+                  <option value="<?= $f['id_fakultas']; ?>"><?= $f['nama_fakultas']; ?></option>
+                <?php endforeach; ?>
+              </select>
+              <?= form_error('id_fakultas', '<small class="text-danger pl-3">', '</small>') ?>
+            </div> -->
+            <div class="form-group">
+              <label for="nama_prodi">Nama Program Studi</label>
+              <input type="text" class="form-control" id="nama_prodi" name="nama_prodi" value="<?= $ubah['nama_prodi'] ?>">
+              <?= form_error('nama_prodi', '<small class="text-danger pl-3">', '</small>') ?>
             </div>
           </div>
-        </div>
-        <!-- /.card-body -->
-        <div class="card-footer justify-content-between">
-          <button type="submit" class="btn btn-primary">Tambah</button>
-          <button type="reset" class="btn btn-default">Reset</button>
-        </div>
-      </form>
+          <!-- /.card-body -->
+          <div class="card-footer justify-content-between">
+            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Edit</button>
+            <a href="<?= base_url('DataProdi') ?>" class="btn btn-default">Kembali</a>
+          </div>
+        </form>
+      </div>
+      <!-- /.card -->
     </div>
-    <!-- /.card -->
-
   </section>
   <!-- /.content -->
 </div>

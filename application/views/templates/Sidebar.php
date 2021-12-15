@@ -87,7 +87,7 @@
               <li class="nav-item">
                 <a href="<?= base_url('DataMahasiswaHitung') ?>" class="nav-link <?= ($this->uri->uri_string() == 'DataMahasiswaHitung') ? 'active' : '' ?>">
                   <i class="fas fa-user-graduate nav-icon"></i>
-                  <p>Mahasiswa Latih</p>
+                  <p>Mahasiswa Hitung</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -243,7 +243,7 @@
                with font-awesome or any other icon font library -->
           <li class="nav-item">
             <a href="<?= base_url('Instruktur') ?>" class="nav-link <?= ($this->uri->uri_string() == 'Instruktur') ? 'active' : '' ?>">
-              <i class="nav-icon fas fa-th"></i>
+              <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
               </p>
@@ -251,43 +251,9 @@
           </li>
           <li class="nav-item">
             <a href="<?= base_url('DataBeasiswa') ?>" class="nav-link <?= ($this->uri->uri_string() == 'DataBeasiswa') ? 'active' : '' ?>">
-              <i class="nav-icon fas fa-th"></i>
+              <i class="nav-icon fas fa-users"></i>
               <p>
                 Data Mahasiswa Beasiswa
-              </p>
-            </a>
-          </li>
-          <!-- <li class="nav-item">
-            <a href="<?= base_url('DetailUserInstruktur') ?>" class="nav-link <?= ($this->uri->uri_string() == 'DetailUserInstruktur') ? 'active' : '' ?>">
-              <i class="nav-icon fas fa-user"></i>
-              <p>
-                Detail User
-              </p>
-            </a>
-          </li> -->
-          <li class="nav-item">
-            <a href="<?= base_url('Instruktur') ?>" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                Halo
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="../../index.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v1</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a href="../widgets.html" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Widgets
-                <span class="right badge badge-danger">New</span>
               </p>
             </a>
           </li>

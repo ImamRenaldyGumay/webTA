@@ -70,6 +70,20 @@ class Admin_Model extends CI_Model
     $tambahProdi =  $this->db->insert('tb_prodi', $data);
     return $tambahProdi;
   }
+
+  public function detail_dataProdi($id_prodi)
+  {
+    $query = $this->db->get_where('tb_prodi', ['id_prodi' => $id_prodi]);
+    return $query->row_array();
+  }
+
+  public function EditDataProdi()
+  {
+    $data = ['nama_prodi' => $this->input->post('nama_prodi')];
+    $this->db->where('id_prodi', $this->input->post('id_prodi'));
+    $query =  $this->db->update('tb_prodi', $data);
+    return $query;
+  }
   // ========================================================================================================
 
   // =========================================================================================================
@@ -149,10 +163,26 @@ class Admin_Model extends CI_Model
     return $hasil->result_array();
   }
 
-  function AksiTambahDataLatih($data)
+  function AksiTambahDataLatih()
   {
-    $hasil = $this->db->insert('tb_latih', $data);
-    return $hasil;
+    $nama_mahasiswa = $this->input->post('nama_mahasiswa');
+    $nim_mahasiswa = $this->input->post('nim_mahasiswa');
+    $C1 = $this->input->post('C1');
+    $C2 = $this->input->post('C2');
+    $C3 = $this->input->post('C3');
+    $C4 = $this->input->post('C4');
+    $hasil = $this->input->post('hasil');
+    $data = [
+      'nama_mahasiswa' => $nama_mahasiswa,
+      'nim_mahasiswa' => $nim_mahasiswa,
+      'c1' => $C1,
+      'c2' => $C2,
+      'c3' => $C3,
+      'c4' => $C4,
+      'hasil' => $hasil
+    ];
+    $query = $this->db->insert('tb_latih', $data);
+    return $query;
   }
 
   function AksiHapusDataLatih($where)
