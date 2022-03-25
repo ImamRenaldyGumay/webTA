@@ -56,7 +56,7 @@
                   <td><span class="badge bg-danger">Tidak Layak</span></td>
                 <?php endif ?>
                 <td>
-                  <a href="<?= base_url('') ?>" class="btn btn-primary" data-toggle="modal" title="Hitung" data-target="#HA<?= $h['id_hitungakhir'] ?>"><i class="fas fa-eye"></i></a>
+                  <a href="<?= base_url('') ?>" c1_akhir="<?= $h['c1_akhir'] ?>" class="btn btn-primary" data-toggle="modal" title="Hitung" data-target="#HA<?= $h['id_hitungakhir'] ?>"><i class="fas fa-eye"></i></a>
                 </td>
               </tr>
             <?php endforeach ?>
@@ -80,7 +80,7 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Default Modal</h4>
+          <h4 class="modal-title">Modal Perhitungan</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -100,15 +100,17 @@
               <tr>
                 <td><?= $h['nama_mahasiswa'] ?> - <?= $h['nim_mahasiswa'] ?></td>
                 <td><?= $h['c1'] ?></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td><?= $h['keterangan_pekerjaan'] ?></td>
+                <td><?= $h['keterangan_gaji'] ?></td>
+                <td><?= $h['keterangan_tanggungan'] ?></td>
               </tr>
             </tbody>
           </table>
+          <hr color="red">
+          <p>Lorem Ipsum</p>
         </div>
         <div class="modal-footer justify-content-between">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
 
         </div>
       </div>

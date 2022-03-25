@@ -68,6 +68,8 @@
         <p>-----IPK</p>
         <p>------------------ P(IPK1|tidak Layak) = <?= $IPK1 ?>/<?= $jumlahTidakLayak ?> = <?= $IPK1Tidak ?></p>
         <p>-------------------P(IPK1|Layak) = <?= $IPK1 ?>/<?= $jumlahLayak ?> = <?= $IPK1Layak ?></p>
+        <p>Ipk 1 layak = <?= $ipk1Layaka ?></p>
+        <p>IPK 1 Tidak Layak = <?= $ipk1TL ?></p>
         <p>-------------------P(IPK2|Tidak Layak) = <?= $IPK2 ?>/<?= $jumlahTidakLayak ?> = <?= $IPK2Tidak ?></p>
         <p>-------------------P(IPK2|Layak) = <?= $IPK2 ?> / <?= $jumlahLayak ?> = <?= $IPK2Layak ?></p>
         <p>-------------------P(IPK3|Tidak Layak) = <?= $IPK3 ?> / <?= $jumlahTidakLayak ?> = <?= $IPK3Tidak ?></p>
@@ -76,13 +78,19 @@
         <p>Pekerjaan 1 = <?= $kerja1 ?></p>
         <p>Pekerjaan 2 = <?= $kerja2 ?></p>
         <p>Pekerjaan 3 = <?= $kerja3 ?></p>
+        <p>P(pekerjaan 3 | Layak) = <?= $kerja3L ?> / <?= $jumlahLayak ?></p>
+        <p>P(pekerjaan 3 | Tidak Layak) = <?= $kerja3TL ?>/ <?= $jumlahTidakLayak ?></p>
         <p>Gaji 1 = <?= $gaji1 ?></p>
         <p>Gaji 2 = <?= $gaji2 ?></p>
+        <p>P(Gaji 2 | Layak) = <?= $gaji2L ?>/ <?= $jumlahLayak ?></p>
+        <p>P(Gaji 2 | Tidak Layak) = <?= $gaji2TL ?>/ <?= $jumlahTidakLayak ?></p>
         <p>Gaji 3 = <?= $gaji3 ?></p>
         <p>Gaji 4 = <?= $gaji4 ?></p>
         <p>Tanggungan 1 = <?= $tanggung1 ?></p>
         <p>Tanggungan 2 = <?= $tanggung2 ?></p>
         <p>Tanggungan 3 = <?= $tanggung3 ?></p>
+        <p>P(tanggungan 3 | Layak) = <?= $tanggung3L ?>/<?= $jumlahLayak ?></p>
+        <p>P(tanggungan 3 | Tidak Layak) = <?= $tanggung3TL ?>/<?= $jumlahTidakLayak ?></p>
       </div>
       <!-- /.card-body -->
       <div class="card-footer">

@@ -46,30 +46,30 @@
                   <p>Data Prodi</p>
                 </a>
               </li>
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a href="<?= base_url('DataKriteria') ?>" class="nav-link <?= ($this->uri->uri_string() == 'DataKriteria') ? 'active' : '' ?>">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Kriteria & Parameter</p>
                 </a>
-              </li>
+              </li> -->
               <li class="nav-item">
                 <a href="<?= base_url('DataKrit') ?>" class="nav-link <?= ($this->uri->uri_string() == 'DataKrit') ? 'active' : '' ?>">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Kriteria & Parameter 2</p>
+                  <p>Kriteria & Parameter</p>
                 </a>
               </li>
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a href="<?= base_url('DataParameter') ?>" class="nav-link <?= ($this->uri->uri_string() == 'DataParameter') ? 'active' : '' ?>">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Data Parameter</p>
                 </a>
-              </li>
+              </li> -->
             </ul>
           </li>
           <li class="nav-header">Peritungan</li>
           <li class="nav-item">
             <a href="<?= base_url('DataLatih') ?>" class="nav-link <?= ($this->uri->uri_string() == 'DataLatih') ? 'active' : '' ?>">
-              <i class="nav-icon fas fa-database"></i>
+              <i class="nav-icon fas fa-table"></i>
               <p>
                 Data Latih
               </p>
@@ -77,7 +77,7 @@
           </li>
           <li class="nav-item <?= ($this->uri->uri_string() == 'DataMahasiswaHitung') || ($this->uri->uri_string() == 'DataHitung') ? 'menu-open' : '' ?>">
             <a href="#" class="nav-link <?= ($this->uri->uri_string() == 'DataMahasiswaHitung') || ($this->uri->uri_string() == 'DataHitung')  ? 'active' : '' ?>">
-              <i class="nav-icon fas fa-calculator"></i>
+              <i class="nav-icon fas fa-table"></i>
               <p>
                 Data Hitung
                 <i class="right fas fa-angle-left"></i>

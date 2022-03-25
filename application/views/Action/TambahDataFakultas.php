@@ -36,7 +36,7 @@
           <!-- /.card-body -->
           <div class="card-footer justify-content-between">
             <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Simpan</button>
-            <button href="<?= base_url('DataFakultas') ?>" class="btn btn-default">Kembali</button>
+            <a href="<?= base_url('DataFakultas') ?>" class="btn btn-default">Kembali</a>
           </div>
         </form>
       </div>

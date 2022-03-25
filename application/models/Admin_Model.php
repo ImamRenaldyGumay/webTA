@@ -9,6 +9,12 @@ class Admin_Model extends CI_Model
     $query = $this->db->get_where('tb_user', ['nama' => $this->session->userdata('nama')]);
     return $query;
   }
+
+  function getTotalDataLatih()
+  {
+    $this->db->from('tb_latih');
+    return $this->db->count_all_results();
+  }
   // ===========================================================================================================================
   // ===========================================================================================================================
   // Aksi Data Fakultas
@@ -24,7 +30,7 @@ class Admin_Model extends CI_Model
     return $query;
   }
 
-  public function HapusDataFakultas($id_fakultas)
+  public function HapusFakultas($id_fakultas)
   {
     $where = array('id_fakultas' => $id_fakultas);
     $query =  $this->db->delete('tb_fakultas', $where);
@@ -37,7 +43,7 @@ class Admin_Model extends CI_Model
     return $query->row_array();
   }
 
-  public function EditDataFakultas()
+  public function EditFakultas()
   {
     $id_fakultas = $this->input->post('id_fakultas');
     $nama_fakultas = $this->input->post('nama_fakultas');
@@ -163,7 +169,7 @@ class Admin_Model extends CI_Model
     return $hasil->result_array();
   }
 
-  function AksiTambahDataLatih()
+  function TambahLatih()
   {
     $nama_mahasiswa = $this->input->post('nama_mahasiswa');
     $nim_mahasiswa = $this->input->post('nim_mahasiswa');
@@ -185,7 +191,7 @@ class Admin_Model extends CI_Model
     return $query;
   }
 
-  function AksiHapusDataLatih($where)
+  function HapusLatih($where)
   {
     $hapus = $this->db->delete('tb_latih', $where);
     return $hapus;
@@ -213,7 +219,7 @@ class Admin_Model extends CI_Model
     return $hasil->result_array();
   }
 
-  function AksiTambahDataMahasiswaHitung($data)
+  function TambahMahasiswaHitung($data)
   {
     $hasil =  $this->db->insert('tb_mahasiswa', $data);
     return $hasil;
@@ -226,7 +232,7 @@ class Admin_Model extends CI_Model
     return $hapus;
   }
 
-  function AksiTambahDataHitungaAkhir($data)
+  function TambahHitungAkhir($data)
   {
     $hasil = $this->db->insert('tb_hitungakhir', $data);
     return $hasil;
@@ -235,8 +241,16 @@ class Admin_Model extends CI_Model
   function getDataHitungAkhir()
   {
     $this->db->select('tb_hitungakhir.*, tb_mahasiswa.*');
+    // $this->db->select('tb_hitungakhir.*, tb_ipk.*');
+    $this->db->select('tb_hitungakhir.*, tb_pekerjaan.*');
+    $this->db->select('tb_hitungakhir.*, tb_gaji.*');
+    $this->db->select('tb_hitungakhir.*, tb_tanggungan.*');
     $this->db->from('tb_hitungakhir');
     $this->db->join('tb_mahasiswa', 'tb_hitungakhir.nim_mahasiswa = tb_mahasiswa.nim_mahasiswa');
+    // $this->db->join('tb_ipk', 'tb_hitungakhir.c1_akhir = tb_ipk.id_ipk');
+    $this->db->join('tb_pekerjaan', 'tb_hitungakhir.c2_akhir = tb_pekerjaan.nilai_pekerjaan');
+    $this->db->join('tb_gaji', 'tb_hitungakhir.c3_akhir = tb_gaji.nilai_gaji');
+    $this->db->join('tb_tanggungan', 'tb_hitungakhir.c4_akhir = tb_tanggungan.nilai_tanggungan');
     $hasil = $this->db->get();
     return $hasil->result_array();
   }
@@ -364,7 +378,21 @@ class Admin_Model extends CI_Model
   }
   //==========================================================================================================================
 
+  function ipk1Layak()
+  {
+    $this->db->where('c1', '1');
+    $this->db->where('hasil', 'Layak');
+    $this->db->from('tb_latih');
+    return $this->db->count_all_results();
+  }
 
+  function ipk1TL()
+  {
+    $this->db->where('c1', '1');
+    $this->db->where('hasil', 'Tidak Layak');
+    $this->db->from('tb_latih');
+    return $this->db->count_all_results();
+  }
 
   function getJumlahIPK1()
   {
@@ -408,6 +436,22 @@ class Admin_Model extends CI_Model
     return $this->db->count_all_results();
   }
 
+  function kerja3L()
+  {
+    $this->db->where('c2', '3');
+    $this->db->where('hasil', 'Layak');
+    $this->db->from('tb_latih');
+    return $this->db->count_all_results();
+  }
+
+  function kerja3TL()
+  {
+    $this->db->where('c2', '3');
+    $this->db->where('hasil', 'Tidak Layak');
+    $this->db->from('tb_latih');
+    return $this->db->count_all_results();
+  }
+
   function getJumlahGaji1()
   {
     $this->db->where('c3', '1');
@@ -418,6 +462,22 @@ class Admin_Model extends CI_Model
   function getJumlahGaji2()
   {
     $this->db->where('c3', '2');
+    $this->db->from('tb_latih');
+    return $this->db->count_all_results();
+  }
+
+  function gaji2L()
+  {
+    $this->db->where('c3', '2');
+    $this->db->where('hasil', 'Layak');
+    $this->db->from('tb_latih');
+    return $this->db->count_all_results();
+  }
+
+  function gaji2TL()
+  {
+    $this->db->where('c3', '2');
+    $this->db->where('hasil', 'Tidak Layak');
     $this->db->from('tb_latih');
     return $this->db->count_all_results();
   }
@@ -457,11 +517,26 @@ class Admin_Model extends CI_Model
     return $this->db->count_all_results();
   }
 
+  function tanggung3L()
+  {
+    $this->db->where('c4', '3');
+    $this->db->where('hasil', 'Layak');
+    $this->db->from('tb_latih');
+    return $this->db->count_all_results();
+  }
+
+  function tanggung3TL()
+  {
+    $this->db->where('c4', '3');
+    $this->db->where('hasil', 'Tidak Layak');
+    $this->db->from('tb_latih');
+    return $this->db->count_all_results();
+  }
+
   function ipk_akhir()
   {
     $this->db->where('');
   }
-
 
   // ========================================================================================================================
 

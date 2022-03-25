@@ -19,7 +19,8 @@ class Admin extends CI_Controller
     {
         $data = array(
             'user' => $this->Admin->getNama()->row_array(),
-            'title' => 'Dashboard Admin'
+            'title' => 'Dashboard Admin',
+            'TotalDataLatih' => $this->Admin->getTotalDataLatih()
         );
         $this->load->view('templates/Header', $data);
         $this->load->view('templates/Navbar', $data);
@@ -75,7 +76,7 @@ class Admin extends CI_Controller
 
     public function HapusDataFakultas($id_fakultas)
     {
-        $hapusDataFakultas = $this->Admin->HapusDataFakultas($id_fakultas);
+        $hapusDataFakultas = $this->Admin->HapusFakultas($id_fakultas);
         if ($hapusDataFakultas) {
             $this->fungsiPeringatan("Data Berhasil di Hapus");
             redirect('DataFakultas', 'refresh');
@@ -101,7 +102,7 @@ class Admin extends CI_Controller
             $this->load->view('Action/EditDataFakultas', $data);
             $this->load->view('templates/Footer', $data);
         } else {
-            $editFakultas =  $this->Admin->EditDataFakultas();
+            $editFakultas =  $this->Admin->EditFakultas();
             if ($editFakultas) {
                 $this->fungsiPeringatan("Data Berhasil di Edit");
                 redirect('DataFakultas', 'refresh');
@@ -283,7 +284,7 @@ class Admin extends CI_Controller
     {
         $data = array(
             'user' => $this->Admin->getNama()->row_array(),
-            'title' => 'Data Krit',
+            'title' => 'Kriteria dan Parameter',
             'IPK' => $this->Admin->getIPK(),
             'Pekerjaan' => $this->Admin->getPekerjaan(),
             'Gaji' => $this->Admin->getGaji(),
@@ -351,7 +352,7 @@ class Admin extends CI_Controller
             $this->load->view('Action/TambahDataLatih', $data);
             $this->load->view('templates/Footer', $data);
         } else {
-            $tambahDataLatih = $this->Admin->aksiTambahDataLatih();
+            $tambahDataLatih = $this->Admin->TambahLatih();
             if ($tambahDataLatih) {
                 $this->fungsiPeringatan("Data Berhasil di Tambahkan");
                 redirect('DataLatih', 'refresh');
@@ -364,7 +365,7 @@ class Admin extends CI_Controller
     public function HapusDataLatih($id_latih)
     {
         $where = array('id_latih' => $id_latih);
-        $hapusKriteria = $this->Admin->AksiHapusDataLatih($where);
+        $hapusKriteria = $this->Admin->HapusLatih($where);
         if ($hapusKriteria) {
             $this->fungsiPeringatan("Data Berhasil di Hapus");
             redirect('DataLatih', 'refresh');
@@ -533,8 +534,8 @@ class Admin extends CI_Controller
                 'c4_akhir' => $C4,
                 'hasil_akhir' => $kesimpulan
             ];
-            $tambahDataMahasiswaHitung = $this->Admin->AksiTambahDataMahasiswaHitung($dataMahasiswa);
-            $tambahDataHitungaAkhir = $this->Admin->AksiTambahDataHitungaAkhir($dataHitungAkhir);
+            $tambahDataMahasiswaHitung = $this->Admin->TambahMahasiswaHitung($dataMahasiswa);
+            $tambahDataHitungaAkhir = $this->Admin->TambahHitungAkhir($dataHitungAkhir);
             if ($tambahDataMahasiswaHitung && $tambahDataHitungaAkhir) {
                 $this->fungsiPeringatan("Data Berhasil di Tambahkan");
                 redirect('DataMahasiswaHitung', 'refresh');

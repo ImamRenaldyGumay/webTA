@@ -55,7 +55,7 @@ class Auth extends CI_Controller
       }
     } else {
       // redirect('Auth/ErrorLogin');
-      $this->fungsiPeringatan("Pastikan Password benar");
+      $this->fungsiPeringatan("Pastikan Email dan Password benar");
       redirect('Login', 'refresh');
     }
   }
@@ -104,6 +104,7 @@ class Auth extends CI_Controller
   public function Logout()
   {
     $this->session->sess_destroy();
+    $this->fungsiPeringatan("Terima Kasih");
     redirect('Login');
   }
 

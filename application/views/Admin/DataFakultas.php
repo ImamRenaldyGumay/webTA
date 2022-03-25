@@ -22,10 +22,10 @@
     <!-- Default box -->
     <div class="card">
       <div class="card-header border-0">
-        <!-- <a href="<?= base_url('TambahDataFakultas') ?>" class="btn btn-primary col-12 mt-3">Tambah <?= $title ?></a> -->
-        <button type="button" class="btn btn-primary col-12 mt-3" data-toggle="modal" data-target="#TDF">
+        <a href="<?= base_url('TambahDataFakultas') ?>" class="btn btn-primary col-12 mt-3">Tambah <?= $title ?></a>
+        <!-- <button type="button" class="btn btn-primary col-12 mt-3" data-toggle="modal" data-target="#TDF">
           Tambah <?= $title ?>
-        </button>
+        </button> -->
       </div>
       <div class="card-body">
         <table class="table table-bordered table-hover" id="example3">

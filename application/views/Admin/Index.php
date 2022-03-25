@@ -25,13 +25,13 @@
         <!-- small box -->
         <div class="small-box bg-info">
           <div class="inner">
-            <h3>150</h3>
-            <p>New Orders</p>
+            <h3><?= $TotalDataLatih ?></h3>
+            <p>Data Latih</p>
           </div>
           <div class="icon">
-            <i class="ion ion-bag"></i>
+            <i class="fas fa-portrait"></i>
           </div>
-          <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+          <a href="<?= base_url('DataLatih') ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
         </div>
       </div>
       <!-- ./col -->
@@ -52,34 +52,12 @@
       <!-- ./col -->
     </div>
     <!-- /.row -->
-    <!-- Default box -->
-    <div class="card">
-      <div class="card-header">
-        <h3 class="card-title">Title</h3>
-
-        <div class="card-tools">
-          <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-            <i class="fas fa-minus"></i>
-          </button>
-          <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-            <i class="fas fa-times"></i>
-          </button>
-        </div>
-      </div>
-      <div class="card-body">
-        Selamat datang, <?= $this->session->userdata('nama') ?><br>
-        Check the Header part you can find Legacy vesion of style.
-        <br>
-        Start creating your amazing application! <br>
-        <button class="btn btn-primary swalDefaultSuccess">Hello World!</button>
-      </div>
-      <!-- /.card-body -->
-      <div class="card-footer">
-        Footer
-      </div>
-      <!-- /.card-footer-->
+    <div class="callout callout-info">
+      <h4>Implementasi Naive Bayes Classifier dalam Penetuan Penerima Beasiswa</h4>
     </div>
-    <!-- /.card -->
+    <div class="callout callout-info">
+      <img src="<?= base_url('assets') ?>/dist/img/UNSRI.png" width="250px" height="250px">
+    </div>
 
   </section>
   <!-- /.content -->

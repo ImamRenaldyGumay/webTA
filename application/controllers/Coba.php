@@ -55,6 +55,8 @@ class Coba extends CI_Controller
       'probTidakLayak' => $ProbTidakLayak,
       'totalProb' => $totalProb,
       'IPK1' => $getJumlahIPK1,
+      'ipk1Layaka' => $this->Admin->ipk1Layak(),
+      'ipk1TL' => $this->Admin->ipk1TL(),
       'IPK1Tidak' => $IPK1Tidak,
       'IPK1Layak' => $pIPK1Layak,
       'IPK2' => $IPK2,
@@ -66,13 +68,19 @@ class Coba extends CI_Controller
       'kerja1' => $kerja1,
       'kerja2' => $kerja2,
       'kerja3' => $kerja3,
+      'kerja3L' => $this->Admin->kerja3L(),
+      'kerja3TL' => $this->Admin->kerja3TL(),
       'gaji1' => $gaji1,
       'gaji2' => $gaji2,
+      'gaji2L' => $this->Admin->gaji2L(),
+      'gaji2TL' => $this->Admin->gaji2TL(),
       'gaji3' => $gaji3,
       'gaji4' => $gaji4,
       'tanggung1' => $tanggung1,
       'tanggung2' => $tanggung2,
-      'tanggung3' => $tanggung3
+      'tanggung3' => $tanggung3,
+      'tanggung3L' => $this->Admin->tanggung3L(),
+      'tanggung3TL' => $this->Admin->tanggung3TL()
     );
 
     $this->load->view('templates/Header', $data);
